@@ -5,7 +5,7 @@ public enum OrderStatus {
 	NEW {
 		@Override
 		public String defaultDescription() {
-			return "Order was placed by the customer";
+			return "주문이 접수되었습니다.";
 		}
 		
 	}, 
@@ -13,70 +13,70 @@ public enum OrderStatus {
 	CANCELLED {
 		@Override
 		public String defaultDescription() {
-			return "Order was rejected";
+			return "주문이 거부되었습니다.";
 		}
 	}, 
 	
 	PROCESSING {
 		@Override
 		public String defaultDescription() {
-			return "Order is being processed";
+			return "주문이 진행중입니다.";
 		}
 	},
 	
 	PACKAGED {
 		@Override
 		public String defaultDescription() {
-			return "Products were packaged";
+			return "상품이 포장되었습니다.";
 		}		
 	}, 
 	
 	PICKED {
 		@Override
 		public String defaultDescription() {
-			return "Shipper picked the package";
+			return "배달담당자가 상품을 픽업했습니다.";
 		}		
 	}, 
 	
 	SHIPPING {
 		@Override
 		public String defaultDescription() {
-			return "Shipper is delivering the package";
+			return "배달담당자가 상품을 배송중입니다.";
 		}		
 	},
 	
 	DELIVERED {
 		@Override
 		public String defaultDescription() {
-			return "Customer received products";
+			return "회원이 상품을 수령했습니다.";
 		}		
 	}, 
 	
 	RETURN_REQUESTED {
 		@Override
 		public String defaultDescription() {
-			return "Customer sent request to return purchase";
+			return "회원이 반품을 요청했습니다.";
 		}		
 	},
 	
 	RETURNED {
 		@Override
 		public String defaultDescription() {
-			return "Products were returned";
+			return "상품이 반품되었습니다.";
 		}		
 	}, 
 	
 	PAID {
 		@Override
 		public String defaultDescription() {
-			return "Customer has paid this order";
+			return "회원이 상품을 결제했습니다.d";
 		}		
 	}, 
 	
 	REFUNDED {
 		@Override
 		public String defaultDescription() {
-			return "Customer has been refunded";
+			return "환불이 완료되었습니다.";
 		}		
 	};
 	
