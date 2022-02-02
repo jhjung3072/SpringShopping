@@ -109,7 +109,7 @@ public class ProductService {
 		Long countById = repo.countById(id);
 		
 		if (countById == null || countById == 0) {
-			throw new ProductNotFoundException("Could not find any product with ID " + id);			
+			throw new ProductNotFoundException("해당 상품ID를 찾을 수 없습니다.");			
 		}
 		
 		repo.deleteById(id);
@@ -119,7 +119,7 @@ public class ProductService {
 		try {
 			return repo.findById(id).get();
 		} catch (NoSuchElementException ex) {
-			throw new ProductNotFoundException("Could not find any product with ID " + id);
+			throw new ProductNotFoundException("해당 상품ID를 찾을 수 없습니다.");
 		}
 	}
 }

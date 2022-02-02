@@ -53,7 +53,7 @@ public class ReviewController {
 			Review review = service.get(id);
 			
 			model.addAttribute("review", review);
-			model.addAttribute("pageTitle", String.format("Edit Review (ID: %d)", id));
+			model.addAttribute("pageTitle", String.format("리뷰 수정 (ID: %d)", id));
 			
 			return "reviews/review_form";
 		} catch (ReviewNotFoundException ex) {
@@ -65,7 +65,7 @@ public class ReviewController {
 	@PostMapping("/reviews/save")
 	public String saveReview(Review reviewInForm, RedirectAttributes ra) {
 		service.save(reviewInForm);		
-		ra.addFlashAttribute("message", "The review ID " + reviewInForm.getId() + " has been updated successfully.");
+		ra.addFlashAttribute("message", "리뷰 ID: " + reviewInForm.getId() + "가 수정되었습니다.");
 		return defaultRedirectURL;		
 	}
 	
@@ -73,7 +73,7 @@ public class ReviewController {
 	public String deleteReview(@PathVariable("id") Integer id, RedirectAttributes ra) {
 		try {
 			service.delete(id);
-			ra.addFlashAttribute("message", "The review ID " + id + " has been deleted.");
+			ra.addFlashAttribute("message", "리뷰 ID: " + id + "가 삭제되었습니다.");
 		} catch (ReviewNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 		}

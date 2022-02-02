@@ -35,12 +35,12 @@ public class UserExcelExporter extends AbstractExporter {
 		font.setFontHeight(16);
 		cellStyle.setFont(font);
 		
-		createCell(row, 0, "User Id", cellStyle);
-		createCell(row, 1, "E-mail", cellStyle);
-		createCell(row, 2, "First Name", cellStyle);
-		createCell(row, 3, "Last Name", cellStyle);
-		createCell(row, 4, "Roles", cellStyle);
-		createCell(row, 5, "Enabled", cellStyle);
+		createCell(row, 0, "직원 ID", cellStyle);
+		createCell(row, 1, "이메일", cellStyle);
+		createCell(row, 2, "성", cellStyle);
+		createCell(row, 3, "이름", cellStyle);
+		createCell(row, 4, "권한", cellStyle);
+		createCell(row, 5, "활성화", cellStyle);
 		
 	}
 	
@@ -60,7 +60,7 @@ public class UserExcelExporter extends AbstractExporter {
 	}
 	
 	public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
-		super.setResponseHeader(response, "application/octet-stream", ".xlsx", "users_");
+		super.setResponseHeader(response, "application/octet-stream", ".xlsx", "직원 목록_");
 	
 		writeHeaderLine();
 		writeDataLines(listUsers);
@@ -87,8 +87,8 @@ public class UserExcelExporter extends AbstractExporter {
 			
 			createCell(row, columnIndex++, user.getId(), cellStyle);
 			createCell(row, columnIndex++, user.getEmail(), cellStyle);
-			createCell(row, columnIndex++, user.getFirstName(), cellStyle);
 			createCell(row, columnIndex++, user.getLastName(), cellStyle);
+			createCell(row, columnIndex++, user.getFirstName(), cellStyle);
 			createCell(row, columnIndex++, user.getRoles().toString(), cellStyle);
 			createCell(row, columnIndex++, user.isEnabled(), cellStyle);
 		}

@@ -6,7 +6,7 @@
 	<div th:replace="navigation :: menu">Static Menu</div>
 	
 	<div>
-		<h2>Manage Orders | [[${pageTitle}]]</h2>
+		<h2>주문 관리 폼 | [[${pageTitle}]]</h2>
 	</div>
 		
 	<form th:action="@{/order/save}" th:object="${order}" method="post" onsubmit="return processFormBeforeSubmit();">
@@ -14,16 +14,16 @@
 	<div>
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 		  <li class="nav-item">
-		    <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab">Overview</a>
+		    <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab">오버뷰</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" id="products-tab" data-toggle="tab" href="#products" role="tab">Products</a>
+		    <a class="nav-link" id="products-tab" data-toggle="tab" href="#products" role="tab">상품</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
+		    <a class="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab">배송</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" id="track-tab" data-toggle="tab" href="#track" role="tab">Track</a>
+		    <a class="nav-link" id="track-tab" data-toggle="tab" href="#track" role="tab">배송 추적</a>
 		  </li>		  
 		</ul>
 		<div class="tab-content" id="myTabContent">

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Orders - Shopme Admin', 'none')" />
+<head th:replace="fragments :: page_head('모두의 마켓-주문', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Manage Orders</h2>	
+		<h2>배송 관리</h2>	
 	</div>
 		
 	<div th:replace="fragments :: search_form_and_message" />
@@ -17,7 +17,7 @@
 				<div class="card-header">
 					<div class="row">
 						<div class="col">										
-							<span>Order ID #[[${order.id}]]</span>
+							<span>주문 ID #[[${order.id}]]</span>
 						</div>
 						<div class="col">
 							<div class="float-right">
@@ -43,7 +43,7 @@
 						[[${order.phoneNumber}]]
 					</div>
 					<div th:if="${order.COD}">
-						<span>COD: <b><div th:replace="fragments :: format_currency(${order.total})"></div></b></span>
+						<span>주문금액: <b><div th:replace="fragments :: format_currency(${order.total})"></div></b></span>
 					</div>
 					<div>&nbsp;</div>
 					<div class="row">
@@ -68,7 +68,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">Update Confirmation</h4>
+					<h4 class="modal-title">수정 확인 요청</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				
@@ -77,8 +77,8 @@
 				</div>
 				
 				<div class="modal-footer">
-					<a class="btn btn-success" href="" id="yesButton">Yes</a>
-					<button type="button" class="btn btn-danger" id="noButton" data-dismiss="modal">No</button>
+					<a class="btn btn-success" href="" id="yesButton">네</a>
+					<button type="button" class="btn btn-danger" id="noButton" data-dismiss="modal">아니오</button>
 				</div>
 			</div>
 		</div>
@@ -101,7 +101,7 @@
 	var csrfValue = "[[${_csrf.token}]]";
 	
 	$(document).ready(function() {
-		$("[name='keyword']").attr("placeholder", "Type #number to search by Order ID");
+		$("[name='keyword']").attr("placeholder", "주문검색 키워드를 입력하세요");
 		handleLinkViewOrderDetails();
 	});
 		

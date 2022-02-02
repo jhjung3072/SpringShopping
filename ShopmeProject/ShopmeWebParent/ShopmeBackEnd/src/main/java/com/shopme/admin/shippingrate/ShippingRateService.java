@@ -39,7 +39,7 @@ public class ShippingRateService {
 		boolean foundDifferentExistingRateInEditMode = rateInForm.getId() != null && rateInDB != null && !rateInDB.equals(rateInForm);
 		
 		if (foundExistingRateInNewMode || foundDifferentExistingRateInEditMode) {
-			throw new ShippingRateAlreadyExistsException("There's already a rate for the destination "
+			throw new ShippingRateAlreadyExistsException("해당 배송지의 배송비가 이미 설정되어있습니다: "
 						+ rateInForm.getCountry().getName() + ", " + rateInForm.getState()); 					
 		}
 		shipRepo.save(rateInForm);
@@ -49,14 +49,14 @@ public class ShippingRateService {
 		try {
 			return shipRepo.findById(id).get();
 		} catch (NoSuchElementException ex) {
-			throw new ShippingRateNotFoundException("Could not find shipping rate with ID " + id);
+			throw new ShippingRateNotFoundException("해당 배송비ID를 찾을 수 없습니다.");
 		}
 	}
 	
 	public void updateCODSupport(Integer id, boolean codSupported) throws ShippingRateNotFoundException {
 		Long count = shipRepo.countById(id);
 		if (count == null || count == 0) {
-			throw new ShippingRateNotFoundException("Could not find shipping rate with ID " + id);
+			throw new ShippingRateNotFoundException("해당 배송비ID를 찾을 수 없습니다.");
 		}
 		
 		shipRepo.updateCODSupport(id, codSupported);
@@ -65,7 +65,7 @@ public class ShippingRateService {
 	public void delete(Integer id) throws ShippingRateNotFoundException {
 		Long count = shipRepo.countById(id);
 		if (count == null || count == 0) {
-			throw new ShippingRateNotFoundException("Could not find shipping rate with ID " + id);
+			throw new ShippingRateNotFoundException("해당 배송비ID를 찾을 수 없습니다.");
 			
 		}
 		shipRepo.deleteById(id);
@@ -75,7 +75,7 @@ public class ShippingRateService {
 		ShippingRate shippingRate=shipRepo.findByCountryAndState(countryId, state);
 		
 		if (shippingRate==null) {
-			throw new ShippingRateNotFoundException("No shipping rate found for the given destination. you have to enter shipping cost mannually");
+			throw new ShippingRateNotFoundException("해당 배송지의 배송비 기본값이 없습니다. 직접 입력해주세요.");
 		}
 		
 		Product product=poductRepo.findById(productId).get();

@@ -15,13 +15,13 @@ import com.shopme.common.entity.User;
 public class UserCsvExporter extends AbstractExporter {
 	
 	public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
-		super.setResponseHeader(response, "text/csv", ".csv", "users_");
+		super.setResponseHeader(response, "text/csv", ".csv", "직원 목록_");
 		
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), 
 				CsvPreference.STANDARD_PREFERENCE);
 		
-		String[] csvHeader = {"User ID", "E-mail", "First Name", "Last Name", "Roles", "Enabled"};
-		String[] fieldMapping = {"id", "email", "firstName", "lastName", "roles", "enabled"};
+		String[] csvHeader = {"직원 ID", "이메일","성", "이름",  "권한", "활성화"};
+		String[] fieldMapping = {"id", "email", "lastName", "firstName", "roles", "enabled"};
 		
 		csvWriter.writeHeader(csvHeader);
 		

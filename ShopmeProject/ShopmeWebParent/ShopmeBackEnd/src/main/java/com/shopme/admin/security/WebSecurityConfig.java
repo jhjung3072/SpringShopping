@@ -42,29 +42,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/states/list_by_country/**").hasAnyAuthority("Admin", "Salesperson")
-			.antMatchers("/users/**", "/settings/**", "/countries/**", "/states/**").hasAuthority("Admin")
-			.antMatchers("/categories/**", "/brands/**").hasAnyAuthority("Admin", "Editor")
+			.antMatchers("/states/list_by_country/**").hasAnyAuthority("운영자", "판매관리자")
+			.antMatchers("/users/**", "/settings/**", "/countries/**", "/states/**").hasAuthority("운영자")
+			.antMatchers("/categories/**", "/brands/**").hasAnyAuthority("운영자", "편집자")
 			
-			.antMatchers("/products/new", "/products/delete/**").hasAnyAuthority("Admin", "Editor")
+			.antMatchers("/products/new", "/products/delete/**").hasAnyAuthority("운영자", "편집자")
 			
 			.antMatchers("/products/edit/**", "/products/save", "/products/check_unique")
-				.hasAnyAuthority("Admin", "Editor", "Salesperson")
+				.hasAnyAuthority("운영자", "편집자", "판매관리자")
 				
 			.antMatchers("/products", "/products/", "/products/detail/**", "/products/page/**")
-				.hasAnyAuthority("Admin", "Editor", "Salesperson", "Shipper")
+				.hasAnyAuthority("운영자", "편집자", "판매관리자", "배송관리자")
 				
-			.antMatchers("/products/**").hasAnyAuthority("Admin", "Editor")
+			.antMatchers("/products/**").hasAnyAuthority("운영자", "편집자")
 			
-			.antMatchers("/orders", "/orders/", "/orders/page/**", "/orders/detail/**").hasAnyAuthority("Admin", "Salesperson", "Shipper")
+			.antMatchers("/orders", "/orders/", "/orders/page/**", "/orders/detail/**").hasAnyAuthority("운영자", "판매관리자", "배송관리자")
 			
-			.antMatchers("/products/detail/**", "/customers/detail/**").hasAnyAuthority("Admin", "Editor", "Salesperson", "Assistant")
+			.antMatchers("/products/detail/**", "/customers/detail/**").hasAnyAuthority("운영자", "편집자", "판매관리자", "Q/A담당자")
 
-			.antMatchers("/customers/**", "/orders/**", "/get_shipping_cost", "/reports/**").hasAnyAuthority("Admin", "Salesperson")
+			.antMatchers("/customers/**", "/orders/**", "/get_shipping_cost", "/reports/**").hasAnyAuthority("운영자", "판매관리자")
 			
-			.antMatchers("/orders_shipper/update/**").hasAuthority("Shipper")
+			.antMatchers("/orders_shipper/update/**").hasAuthority("배송관리자")
 			
-			.antMatchers("/reviews/**").hasAnyAuthority("Admin", "Assistant")
+			.antMatchers("/reviews/**").hasAnyAuthority("운영자", "Q/A담당자")
 			
 			.anyRequest().authenticated()
 			.and()

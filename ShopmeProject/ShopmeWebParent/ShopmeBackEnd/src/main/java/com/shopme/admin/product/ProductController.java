@@ -64,7 +64,7 @@ public class ProductController {
 		
 		model.addAttribute("product", product);
 		model.addAttribute("listBrands", listBrands);
-		model.addAttribute("pageTitle", "Create New Product");
+		model.addAttribute("pageTitle", "상품 추가");
 		model.addAttribute("numberOfExistingExtraImages", 0);
 		
 		return "products/product_form";
@@ -82,10 +82,10 @@ public class ProductController {
 			@AuthenticationPrincipal ShopmeUserDetails loggedUser
 			) throws IOException {
 		
-		if (!loggedUser.hasRole("Admin") && !loggedUser.hasRole("Editor")) {
+		if (!loggedUser.hasRole("운영자") && !loggedUser.hasRole("편집자")) {
 			if (loggedUser.hasRole("Salesperson")) {
 				productService.saveProductPrice(product);
-				ra.addFlashAttribute("message", "The product has been saved successfully.");			
+				ra.addFlashAttribute("message", "상품이 저장되었습니다.");			
 				return defaultRedirectURL;
 			}
 		}
@@ -101,7 +101,7 @@ public class ProductController {
 		
 		ProductSaveHelper.deleteExtraImagesWeredRemovedOnForm(product);
 		
-		ra.addFlashAttribute("message", "The product has been saved successfully.");
+		ra.addFlashAttribute("message", "상품이 저장되었습니다.");
 		
 		return defaultRedirectURL;
 	}
@@ -112,7 +112,7 @@ public class ProductController {
 			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
 		productService.updateProductEnabledStatus(id, enabled);
 		String status = enabled ? "enabled" : "disabled";
-		String message = "The Product ID " + id + " has been " + status;
+		String message = "상품 ID: " + id + "가 " + status +"되었습니다.";
 		redirectAttributes.addFlashAttribute("message", message);
 		
 		return defaultRedirectURL;
@@ -130,7 +130,7 @@ public class ProductController {
 			FileUploadUtil.removeDir(productImagesDir);
 			
 			redirectAttributes.addFlashAttribute("message", 
-					"The product ID " + id + " has been deleted successfully");
+					"상품 ID: " + id + "가 삭제되었습니다.");
 		} catch (ProductNotFoundException ex) {
 			redirectAttributes.addFlashAttribute("message", ex.getMessage());
 		}
@@ -148,8 +148,8 @@ public class ProductController {
 			
 			boolean isReadOnlyForSalesperson = false;
 			
-			if (!loggedUser.hasRole("Admin") && !loggedUser.hasRole("Editor")) {
-				if (loggedUser.hasRole("Salesperson")) {
+			if (!loggedUser.hasRole("운영자") && !loggedUser.hasRole("편집자")) {
+				if (loggedUser.hasRole("판매관리자")) {
 					isReadOnlyForSalesperson = true;
 				}
 			}
@@ -157,7 +157,7 @@ public class ProductController {
 			model.addAttribute("isReadOnlyForSalesperson", isReadOnlyForSalesperson);
 			model.addAttribute("product", product);
 			model.addAttribute("listBrands", listBrands);
-			model.addAttribute("pageTitle", "Edit Product (ID: " + id + ")");
+			model.addAttribute("pageTitle", "상품 수정 (ID: " + id + ")");
 			model.addAttribute("numberOfExistingExtraImages", numberOfExistingExtraImages);
 			
 			return "products/product_form";

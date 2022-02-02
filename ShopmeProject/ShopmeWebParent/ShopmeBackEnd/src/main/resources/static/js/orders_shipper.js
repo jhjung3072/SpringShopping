@@ -42,12 +42,12 @@ function sendRequestToUpdateOrderStatus(button) {
 			xhr.setRequestHeader(csrfHeaderName, csrfValue);
 		}
 	}).done(function(response) {
-		showMessageModal("Order updated successfully");
+		showMessageModal("배송상태가 수정되었습니다");
 		updateStatusIconColor(response.orderId, response.status);
 		
 		console.log(response);
 	}).fail(function(err) {
-		showMessageModal("Error updating order status");
+		showMessageModal("배송상태 수정중에 에러가 발생했습니다.");
 	})
 }
 
@@ -57,21 +57,20 @@ function updateStatusIconColor(orderId, status) {
 }
 
 function showUpdateConfirmModal(link) {
-	noButton.text("NO");
+	noButton.text("아니오");
 	yesButton.show();
 		
 	orderId = link.attr("orderId");
 	status = link.attr("status");
 	yesButton.attr("href", link.attr("href"));
 	
-	confirmText.text("Are you sure you want to update status of the order ID #" + orderId
-					 + " to " + status + "?");
+	confirmText.text("해당 주문ID의 배송상태를 " + status + "로 바꾸시겠습니까?");
 					 
 	confirmModalDialog.modal();
 }
 
 function showMessageModal(message) {
-	noButton.text("Close");
+	noButton.text("닫기");
 	yesButton.hide();
 	confirmText.text(message);
 }

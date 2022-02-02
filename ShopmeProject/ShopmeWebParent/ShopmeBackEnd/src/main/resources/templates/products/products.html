@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="fragments :: page_head('Products - Shopme Admin', 'none')" />
+<head th:replace="fragments :: page_head('모두의 마켓-상품', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Manage Products</h2>	
+		<h2>상품 관리 페이지</h2>	
 		
-		<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+		<th:block sec:authorize="hasAnyAuthority('운영자', '편집자')">
 		<a th:href="@{/products/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
-		<a th:href="@{/products/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
 		</th:block>
 		
 	</div>
@@ -20,16 +19,16 @@
 			<input type="hidden" name="sortField" th:value="${sortField}" />
 			<input type="hidden" name="sortDir" th:value="${sortDir}" />
 			
-			Category:&nbsp;
+			카테고리:&nbsp;
 			<select class="form-control" name="categoryId" id="dropdownCategory">
-				<option value="0">All Categories</option>
+				<option value="0">모든 카테고리</option>
 				
 				<th:block th:each="cat : ${listCategories}">
 				<option th:value="${cat.id}" th:selected="(${categoryId} == ${cat.id})">[[${cat.name}]]</option>
 				</th:block>
 			</select>
 			
-			&nbsp;Filter:&nbsp;
+			&nbsp;검색어:&nbsp;
 			<input type="search" name="keyword" th:value="${keyword}" class="form-control" required/>
 			&nbsp;&nbsp;
 			<button type="submit" class="btn btn-primary">
@@ -54,19 +53,19 @@
 					<th th:replace="fragments :: column_link('id', 'ID', 'tag')" />
 					</th>
 					
-					<th>Main Image</th>
-					<th th:replace="fragments :: column_link('name', 'Product Name', 'none')" />
+					<th>메인 이미지</th>
+					<th th:replace="fragments :: column_link('name', '상품명', 'none')" />
 					
 					<th class="hideable-column"> 
-					<th th:replace="fragments :: column_link('brand', 'Brand', 'tag')" />
+					<th th:replace="fragments :: column_link('brand', '브랜드', 'tag')" />
 					</th>
 					
 					<th class="hideable-column">
-					<th th:replace="fragments :: column_link('category', 'Category', 'tag')" />
+					<th th:replace="fragments :: column_link('category', '카테고리', 'tag')" />
 					</th>
 					
-					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-					<th>Enabled</th>
+					<th:block sec:authorize="hasAnyAuthority('운영자', '편집자')">
+					<th>활성화</th>
 					</th:block>
 					
 					<th></th>
@@ -88,7 +87,7 @@
 					<td class="hideable-column">[[${product.brand.name}]]</td>
 					<td class="hideable-column">[[${product.category.name}]]</td>
 					
-					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+					<th:block sec:authorize="hasAnyAuthority('운영자', '편집자')">
 					<td>
 						<div th:replace="fragments :: status(${product.enabled}, 'product', '/products/' + ${product.id})" />
 					</td>
@@ -100,12 +99,12 @@
 							title="View details of this product"
 							></a>
 							
-						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
+						<th:block sec:authorize="hasAnyAuthority('운영자', '편집자', '판매관리자')">
 						&nbsp; 	
 						<div th:replace="fragments :: edit('product', '/products/edit/' + ${product.id})" />
 						</th:block>
 						
-						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+						<th:block sec:authorize="hasAnyAuthority('운영자', '편집자')">
 						&nbsp; 
 						<div th:replace="fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)" />
 						</th:block>						
@@ -129,12 +128,12 @@
 						th:href="@{'/products/detail/' + ${product.id}}"
 						></a>
 						
-					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
+					<th:block sec:authorize="hasAnyAuthority('운영자', '편집자', '판매관리자')">
 					&nbsp; 	
 					<div th:replace="fragments :: edit('product', '/products/edit/' + ${product.id})" />
 					</th:block>
 					
-					<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+					<th:block sec:authorize="hasAnyAuthority('운영자', '편집자')">
 					&nbsp; 
 					<div th:replace="fragments :: delete('product', ${product.id}, '/products/delete/' + ${product.id}, true)" />
 					</th:block>		
@@ -153,7 +152,7 @@
 		</div>
 	</div>
 	
-	<div th:replace="fragments :: pagination('products')"></div>
+	<div th:replace="fragments :: pagination('상품')"></div>
 	
 	<div th:replace="fragments :: footer"></div>
 	

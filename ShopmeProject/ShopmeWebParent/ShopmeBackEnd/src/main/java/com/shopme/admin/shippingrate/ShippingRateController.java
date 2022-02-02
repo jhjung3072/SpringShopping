@@ -40,7 +40,7 @@ public class ShippingRateController {
 		
 		model.addAttribute("rate", new ShippingRate());
 		model.addAttribute("listCountries", listCountries);
-		model.addAttribute("pageTitle", "New Rate");
+		model.addAttribute("pageTitle", "배송비 기본값 추가");
 		
 		return "shipping_rates/shipping_rate_form";		
 	}
@@ -49,7 +49,7 @@ public class ShippingRateController {
 	public String saveRate(ShippingRate rate, RedirectAttributes ra) {
 		try {
 			service.save(rate);
-			ra.addFlashAttribute("message", "The shipping rate has been saved successfully.");
+			ra.addFlashAttribute("message", "배송비가 저장되었습니다.");
 		} catch (ShippingRateAlreadyExistsException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 		}
@@ -65,7 +65,7 @@ public class ShippingRateController {
 			
 			model.addAttribute("listCountries", listCountries);			
 			model.addAttribute("rate", rate);
-			model.addAttribute("pageTitle", "Edit Rate (ID: " + id + ")");
+			model.addAttribute("pageTitle", "배송비 수정 (ID: " + id + ")");
 			
 			return "shipping_rates/shipping_rate_form";
 		} catch (ShippingRateNotFoundException ex) {
@@ -80,7 +80,7 @@ public class ShippingRateController {
 			Model model, RedirectAttributes ra) {
 		try {
 			service.updateCODSupport(id, supported);
-			ra.addFlashAttribute("message", "COD support for shipping rate ID " + id + " has been updated.");
+			ra.addFlashAttribute("message", "착불가능 여부가 수정되었습니다.");
 		} catch (ShippingRateNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 		}
@@ -92,7 +92,7 @@ public class ShippingRateController {
 			Model model, RedirectAttributes ra) {
 		try {
 			service.delete(id);
-			ra.addFlashAttribute("message", "The shipping rate ID " + id + " has been deleted.");
+			ra.addFlashAttribute("message", "배송비 ID: " + id + "가 삭제되었습니다.");
 		} catch (ShippingRateNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 		}

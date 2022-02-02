@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Orders - Shopme Admin', 'none')" />
+<head th:replace="fragments :: page_head('모두의 마켓-주문', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Manage Orders</h2>	
+		<h2>주문 관리 페이지</h2>	
 	</div>
 		
 	<div th:replace="fragments :: search_form_and_message" />
@@ -15,20 +15,20 @@
 			<thead class="thead-dark">
 				<tr>
 					<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
-					<th th:replace="fragments :: column_link('customer', 'Customer', 'none')" />
-					<th th:replace="fragments :: column_link('total', 'Total', 'none')" />
-					<th th:replace="fragments :: column_link('orderTime', 'Order Time', 'none')" />
+					<th th:replace="fragments :: column_link('customer', '회원', 'none')" />
+					<th th:replace="fragments :: column_link('total', '주문금액', 'none')" />
+					<th th:replace="fragments :: column_link('orderTime', '주문 시각', 'none')" />
 					
 					<th class="hideable-column">
-					<th th:replace="fragments :: column_link('destination', 'Destination', 'tag')" />
+					<th th:replace="fragments :: column_link('destination', '배송지', 'tag')" />
 					</th>
 					
 					<th class="hideable-column">
-					<th th:replace="fragments :: column_link('paymentMethod', 'Payment Method', 'tag')" />
+					<th th:replace="fragments :: column_link('paymentMethod', '결제 방법', 'tag')" />
 					</th>
 					
 					<th class="hideable-column">
-					<th th:replace="fragments :: column_link('status', 'Status', 'tag')" />
+					<th th:replace="fragments :: column_link('status', '배송상태', 'tag')" />
 					</th>
 					
 					<th></th>
@@ -76,7 +76,7 @@
 			<div class="col-10">
 				<div>[[${order.customer.fullName}]], [[${order.country}]]</div>
 				<div><small>[[${order.orderTime}]] - [[${order.status}]]</small></div>
-				<div><div th:replace="fragments :: format_currency(${order.total})">Total</div> - [[${order.paymentMethod}]]</div>
+				<div><div th:replace="fragments :: format_currency(${order.total})">주문금액</div> - [[${order.paymentMethod}]]</div>
 				<div>
 					<a class="fas fa-file-alt fa-2x icon-green linkOrderDetail"
 						th:href="@{'/orders/detail/' + ${order.id}}"
@@ -93,7 +93,7 @@
 		</th:block>
 	</div>	
 	
-	<div th:replace="fragments :: pagination('orders')"></div>
+	<div th:replace="fragments :: pagination('주문내역')"></div>
 	
 	<div th:replace="modal_fragments :: confirm_modal"></div>
 	

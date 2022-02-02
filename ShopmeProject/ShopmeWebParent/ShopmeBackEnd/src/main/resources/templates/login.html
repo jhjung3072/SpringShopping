@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0">
 
-	<title>Login - Shopme Admin</title>
+	<title>모두의 마켓-로그인</title>
 	
 	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
 </head>
@@ -20,11 +20,11 @@
 			<p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
 		</div>
 		<div th:if="${param.logout}">
-			<p class="text-warning">You have been logged out.</p>
+			<p class="text-warning">로그아웃을 했습니다.....</p>
 		</div>
 		
 		<div class="border border-secondary rounded p-3">
-			<p>Access to Shopme Control Panel</p>
+			<p>직원페이지로 접근하시려면 로그인해주세요</p>
 			<p>
 				<input type="email" name="email" class="form-control" placeholder="E-mail" required />
 			</p>
@@ -32,16 +32,16 @@
 				<input type="password" name="password" class="form-control" placeholder="Password" required />
 			</p>
 			<p>
-				<input type="checkbox" name="remember-me" />&nbsp;Remember Me
+				<input type="checkbox" name="remember-me" />&nbsp;로그인 유지
 			</p>
 			<p>
-				<input type="submit" value="Login" class="btn btn-primary" />
+				<input type="submit" value="로그인" class="btn btn-primary" />
 			</p>			
 		</div>
 	</form>
 	
 	<div>
-		<p>Shopme Control Panel - Copyright &copy; Shopme</p>
+		<p>© 2022 모두의 마켓 All rights reserved.</p>
 	</div>
 	
 </div>

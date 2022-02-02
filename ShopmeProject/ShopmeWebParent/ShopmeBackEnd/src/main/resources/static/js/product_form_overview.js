@@ -49,13 +49,13 @@ function checkUnique(form) {
 		if (response == "OK") {
 			form.submit();
 		} else if (response == "Duplicate") {
-			showWarningModal("There is another product having the name " + productName);	
+			showWarningModal(productName+"해당 이름의 상품이 이미 존재합니다");	
 		} else {
-			showErrorModal("Unknown response from server");
+			showErrorModal("알 수 없는 서버응답입니다.");
 		}
 		
 	}).fail(function() {
-		showErrorModal("Could not connect to the server");
+		showErrorModal("서버와 연결할 수 없습니다.");
 	});
 	
 	return false;

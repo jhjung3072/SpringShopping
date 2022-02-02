@@ -28,7 +28,7 @@ public class ReviewService {
 		try {
 			return reviewRepo.findById(id).get();
 		} catch (NoSuchElementException ex) {
-			throw new ReviewNotFoundException("Could not find any reviews with ID " + id);
+			throw new ReviewNotFoundException("해당 리뷰ID를 찾을 수 없습니다.");
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class ReviewService {
 	
 	public void delete(Integer id) throws ReviewNotFoundException {
 		if (!reviewRepo.existsById(id)) {
-			throw new ReviewNotFoundException("Could not find any reviews with ID " + id);
+			throw new ReviewNotFoundException("해당 리뷰ID를 찾을 수 없습니다.");
 		}
 		
 		reviewRepo.deleteById(id);

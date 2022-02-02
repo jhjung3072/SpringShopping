@@ -9,7 +9,7 @@
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Manage Products | [[${pageTitle}]]</h2>	
+		<h2>상품 관리 페이지 | [[${pageTitle}]]</h2>	
 	</div>
 			
 	<form th:action="@{/products/save}" method="post" onsubmit="return checkUnique(this)"
@@ -21,19 +21,19 @@
 	<div>
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 		  <li class="nav-item">
-		    <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
+		    <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">오버뷰</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#description" role="tab">Description</a>
+		    <a class="nav-link" data-toggle="tab" href="#description" role="tab">내용</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#images" role="tab">Images</a>
+		    <a class="nav-link" data-toggle="tab" href="#images" role="tab">이미지</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#details" role="tab">Details</a>
+		    <a class="nav-link" data-toggle="tab" href="#details" role="tab">스펙</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
+		    <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">사이즈</a>
 		  </li>		  
 		</ul>
 		

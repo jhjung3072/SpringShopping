@@ -15,12 +15,12 @@ import com.shopme.common.entity.Category;
 public class CategoryCsvExporter extends AbstractExporter {
 	public void export(List<Category> listCategories, HttpServletResponse response) 
 			throws IOException {
-		super.setResponseHeader(response, "text/csv", ".csv", "categories_");
+		super.setResponseHeader(response, "text/csv", ".csv", "카테고리 목록_");
 		
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), 
 				CsvPreference.STANDARD_PREFERENCE);
 		
-		String[] csvHeader = {"Category ID", "Category Name"};
+		String[] csvHeader = {"카테고리 ID", "카테고리명"};
 		String[] fieldMapping = {"id", "name"};
 		
 		csvWriter.writeHeader(csvHeader);

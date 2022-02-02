@@ -52,7 +52,7 @@ public class OrderController {
 		orderService.listByPage(pageNum, helper);
 		loadCurrencySetting(request);
 		
-		if (!loggedUser.hasRole("Admin") && !loggedUser.hasRole("Salesperson") && loggedUser.hasRole("Shipper")) {
+		if (!loggedUser.hasRole("운영자") && !loggedUser.hasRole("판매관리자") && loggedUser.hasRole("배송관리자")) {
 			return "orders/orders_shipper";
 		}
 		
@@ -77,7 +77,7 @@ public class OrderController {
 			
 			boolean isVisibleForAdminOrSalesperson = false;
 			
-			if (loggedUser.hasRole("Admin") || loggedUser.hasRole("Salesperson")) {
+			if (loggedUser.hasRole("운영자") || loggedUser.hasRole("판매관리자")) {
 				isVisibleForAdminOrSalesperson = true;
 			}
 			
@@ -96,7 +96,7 @@ public class OrderController {
 	public String deleteOrder(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
 		try {
 			orderService.delete(id);;
-			ra.addFlashAttribute("message", "The order ID " + id + " has been deleted.");
+			ra.addFlashAttribute("message", "주문 ID: " + id + " 를 삭제했습니다.");
 		} catch (OrderNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 		}
@@ -112,7 +112,7 @@ public class OrderController {
 			
 			List<Country> listCountries = orderService.listAllCountries();
 			
-			model.addAttribute("pageTitle", "Edit Order (ID: " + id + ")");
+			model.addAttribute("pageTitle", "주문 수정 (ID: " + id + ")");
 			model.addAttribute("order", order);
 			model.addAttribute("listCountries", listCountries);
 			
@@ -135,7 +135,7 @@ public class OrderController {
 
 		orderService.save(order);		
 		
-		ra.addFlashAttribute("message", "The order ID " + order.getId() + " has been updated successfully");
+		ra.addFlashAttribute("message", "주문 ID: " + order.getId() + " 가 수정되었습니다.");
 		
 		return defaultRedirectURL;
 	}

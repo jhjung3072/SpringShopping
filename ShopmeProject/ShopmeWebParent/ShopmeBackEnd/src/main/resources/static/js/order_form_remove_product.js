@@ -3,7 +3,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		
 		if (doesOrderHaveOnlyOneProduct()) {
-			showWarningModal("Could not remove product. The order must have eat least one product.");
+			showWarningModal("상품을 삭제할 수 없습니다. 주문내역에 1개 이상의 상품이 있어야합니다.");
 		} else {
 			removeProduct($(this));		
 			updateOrderAmounts();	

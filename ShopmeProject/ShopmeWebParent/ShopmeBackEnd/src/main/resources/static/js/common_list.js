@@ -6,7 +6,6 @@ function showDeleteConfirmModal(link, entityName) {
 	entityId = link.attr("entityId");
 	
 	$("#yesButton").attr("href", link.attr("href"));	
-	$("#confirmText").text("Are you sure you want to delete this "
-							 + entityName + " ID " + entityId + "?");
+	$("#confirmText").text("정말 삭제하시겠습니까?");
 	$("#confirmModal").modal();	
 }

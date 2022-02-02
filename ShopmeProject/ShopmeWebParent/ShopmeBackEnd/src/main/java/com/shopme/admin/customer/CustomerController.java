@@ -42,7 +42,7 @@ public class CustomerController {
 			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
 		service.updateCustomerEnabledStatus(id, enabled);
 		String status = enabled ? "enabled" : "disabled";
-		String message = "The Customer ID " + id + " has been " + status;
+		String message = "회원 ID: " + id + " 가" + status + "되었습니다.";
 		redirectAttributes.addFlashAttribute("message", message);
 		
 		return defaultRedirectURL;
@@ -69,7 +69,7 @@ public class CustomerController {
 			
 			model.addAttribute("listCountries", countries);			
 			model.addAttribute("customer", customer);
-			model.addAttribute("pageTitle", String.format("Edit Customer (ID: %d)", id));
+			model.addAttribute("pageTitle", String.format("회원 수정 (ID: %d)", id));
 			
 			return "customers/customer_form";
 			
@@ -82,7 +82,7 @@ public class CustomerController {
 	@PostMapping("/customers/save")
 	public String saveCustomer(Customer customer, Model model, RedirectAttributes ra) {
 		service.save(customer);
-		ra.addFlashAttribute("message", "The customer ID " + customer.getId() + " has been updated successfully.");
+		ra.addFlashAttribute("message", "회원 ID:" + customer.getId() + " 가 수정되었습니다.");
 		return defaultRedirectURL;
 	}
 
@@ -90,7 +90,7 @@ public class CustomerController {
 	public String deleteCustomer(@PathVariable Integer id, RedirectAttributes ra) {
 		try {
 			service.delete(id);			
-			ra.addFlashAttribute("message", "The customer ID " + id + " has been deleted successfully.");
+			ra.addFlashAttribute("message", "회원 ID: " + id + " 가 삭제되었습니다.");
 			
 		} catch (CustomerNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());

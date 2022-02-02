@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Reviews - Shopme Admin', 'none')" />
+<head th:replace="fragments :: page_head('모두의 마켓-리뷰', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Manage Reviews</h2>	
+		<h2>리뷰 관리 페이지</h2>	
 	</div>
 		
 	<div th:replace="fragments :: search_form_and_message" />
@@ -15,10 +15,10 @@
 			<thead class="thead-dark">
 				<tr>
 					<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
-					<th th:replace="fragments :: column_link('product', 'Product', 'none')" />
-					<th th:replace="fragments :: column_link('customer', 'Customer', 'none')" />
-					<th th:replace="fragments :: column_link('rating', 'Rating', 'none')" />
-					<th th:replace="fragments :: column_link('reviewTime', 'Review Time', 'none')" />
+					<th th:replace="fragments :: column_link('product', '상품', 'none')" />
+					<th th:replace="fragments :: column_link('customer', '회원', 'none')" />
+					<th th:replace="fragments :: column_link('rating', '별점', 'none')" />
+					<th th:replace="fragments :: column_link('reviewTime', '리뷰 시각', 'none')" />
 					<th></th>
 				</tr>								
 			</thead>
@@ -40,7 +40,7 @@
 					<td>
 						<a class="fas fa-file-alt fa-2x icon-green link-detail-review"
 							th:href="@{'/reviews/detail/' + ${review.id}}"
-							title="View details of this review"
+							title="리뷰 자세히"
 							></a>					
 						&nbsp; 
 						<div th:replace="fragments :: edit('review', '/reviews/edit/' + ${review.id})" />
@@ -67,7 +67,7 @@
 					&nbsp;
 					<a class="fas fa-file-alt fa-2x icon-green link-detail-review"
 						th:href="@{'/reviews/detail/' + ${review.id}}"
-						title="View details of this review"
+						title="리뷰 자세히"
 						></a>					
 					&nbsp; 
 					<div th:replace="fragments :: edit('review', '/reviews/edit/' + ${review.id})" />
@@ -79,7 +79,7 @@
 		</div>	
 	</div>		
 	
-	<div th:replace="fragments :: pagination('reviews')"></div>
+	<div th:replace="fragments :: pagination('리뷰')"></div>
 	
 	<div th:replace="modal_fragments :: confirm_modal" />
 	

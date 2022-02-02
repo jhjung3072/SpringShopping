@@ -26,7 +26,7 @@ public class FileUploadUtil {
 			Path filePath = uploadPath.resolve(fileName);
 			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException ex) {
-			throw new IOException("Could not save file: " + fileName, ex);
+			throw new IOException("파일을 저장할 수 없습니다: " + fileName, ex);
 		}
 	}
 	
@@ -39,12 +39,12 @@ public class FileUploadUtil {
 					try {
 						Files.delete(file);
 					} catch (IOException ex) {
-						LOGGER.error("Could not delete file: " + file);
+						LOGGER.error("파일을 삭제할 수 없습니다: " + file);
 					}
 				}
 			});
 		} catch (IOException ex) {
-			LOGGER.error("Could not list directory: " + dirPath);
+			LOGGER.error("디렉토리를 찾을 수 없습니다: " + dirPath);
 		}
 	}
 	
@@ -54,7 +54,7 @@ public class FileUploadUtil {
 		try {
 			Files.delete(Paths.get(dir));
 		} catch (IOException e) {
-			LOGGER.error("Could not remove directory: " + dir);
+			LOGGER.error("디렉터리를 삭제할 수 없습니다.: " + dir);
 		}
 		
 	}

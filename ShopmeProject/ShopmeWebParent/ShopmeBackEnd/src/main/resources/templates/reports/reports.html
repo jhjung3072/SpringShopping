@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Sales Report - Shopme Admin', 'none')" />
+<head th:replace="fragments :: page_head('모두의 마켓-판매통계', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Sales Report</h2>	
+		<h2>주문 통계</h2>	
 	</div>
 	
 	<div>
 		<ul class="nav nav-tabs" id="reportTab" role="tablist">
 		  <li class="nav-item">
-		    <a class="nav-link active" data-toggle="tab" href="#date" role="tab">Sales by Date</a>
+		    <a class="nav-link active" data-toggle="tab" href="#date" role="tab">일별 판매량</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#category" role="tab">Sales by Category</a>
+		    <a class="nav-link" data-toggle="tab" href="#category" role="tab">카테고리별 판매량</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#product" role="tab">Sales by Product</a>
+		    <a class="nav-link" data-toggle="tab" href="#product" role="tab">상품별 판매량</a>
 		  </li>		  		  
 		</ul>
 		

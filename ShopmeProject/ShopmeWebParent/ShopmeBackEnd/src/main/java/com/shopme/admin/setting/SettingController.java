@@ -55,7 +55,7 @@ public class SettingController {
 		
 		updateSettingValuesFromForm(request, settingBag.list());
 		
-		ra.addFlashAttribute("message", "General settings have been saved.");
+		ra.addFlashAttribute("message", "일반 설정이 저장되었습니다.");
 		
 		return "redirect:/settings";
 	}
@@ -98,7 +98,7 @@ public class SettingController {
 		List<Setting> mailServerSettings = service.getMailServerSettings();
 		updateSettingValuesFromForm(request, mailServerSettings);
 		
-		ra.addFlashAttribute("message", "Mail server settings have been saved");
+		ra.addFlashAttribute("message", "메일서버 설정이 저장되었습니다.");
 		
 		return "redirect:/settings#mailServer";
 	}
@@ -108,7 +108,7 @@ public class SettingController {
 		List<Setting> mailTemplateSettings = service.getMailTemplateSettings();
 		updateSettingValuesFromForm(request, mailTemplateSettings);
 		
-		ra.addFlashAttribute("message", "Mail template settings have been saved");
+		ra.addFlashAttribute("message", "메일양식이 저장되었습니다. ");
 		
 		return "redirect:/settings#mailTemplates";
 	}
@@ -118,7 +118,7 @@ public class SettingController {
 		List<Setting> paymentSettings = service.getPaymentSettings();
 		updateSettingValuesFromForm(request, paymentSettings);
 		
-		ra.addFlashAttribute("message", "Payment settings have been saved");
+		ra.addFlashAttribute("message", "결제API가 저장되었습니다.");
 		
 		return "redirect:/settings#payment";
 	}		

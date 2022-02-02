@@ -5,7 +5,7 @@
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Manage Categories | [[${pageTitle}]]</h2>	
+		<h2>카테고리 관리 폼 | [[${pageTitle}]]</h2>	
 	</div>
 			
 	<form th:action="@{/categories/save}" method="post" style="max-width: 500px; margin: 0 auto"
@@ -15,24 +15,24 @@
 		<input type="hidden" th:field="*{id}" />
 	<div class="border border-secondary rounded p-3">
 		<div class="form-group row">
-			<label class="col-sm-4 col-form-label">Category Name:</label>
+			<label class="col-sm-4 col-form-label">카테고리 이름:</label>
 			<div class="col-sm-8">
 				<input type="text" class="form-control" th:field="*{name}" required minlength="3" maxlength="128"  />
 			</div>
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-4 col-form-label">Alias:</label>
+			<label class="col-sm-4 col-form-label">설명:</label>
 			<div class="col-sm-8">
 				<input type="text" class="form-control" th:field="*{alias}" required minlength="3" maxlength="64"  />
 			</div>
 		</div>		
 		
 		<div class="form-group row">
-			<label class="col-sm-4 col-form-label">Parent Category:</label>
+			<label class="col-sm-4 col-form-label">상위 카테고리:</label>
 			<div class="col-sm-8">
 				<select class="form-control" th:field="*{parent}">
-					<option value="0">[No Parent]</option>
+					<option value="0">[상위 없음]</option>
 					
 					<th:block th:each="cat : ${listCategories}">
 					<option th:value="${cat.id}">[[${cat.name}]]</option>
@@ -43,7 +43,7 @@
 		</div>		
 		
 		<div class="form-group row">
-			<label class="col-sm-4 col-form-label">Image:</label>
+			<label class="col-sm-4 col-form-label">이미지:</label>
 			<div class="col-sm-8">
 				<input type="hidden" th:field="*{image}" />
 				<input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg"
@@ -58,7 +58,7 @@
 		</div>						
 				
 		<div class="form-group row">
-			<label class="col-sm-4 col-form-label">Enabled:</label>
+			<label class="col-sm-4 col-form-label">활성화:</label>
 			<div class="col-sm-8">
 				<input type="checkbox" th:field="*{enabled}" />
 			</div>
@@ -95,15 +95,15 @@
 			if (response == "OK") {
 				form.submit();
 			} else if (response == "DuplicateName") {
-				showWarningModal("There is another category having same name " + catName);	
+				showWarningModal("같은 이름의 카테고리가 있습니다. " + catName);	
 			} else if (response == "DuplicateAlias") {
-				showWarningModal("There is another category having same alias " + catAlias);
+				showWarningModal("같은 설명의 카테고리가 있습니다. " + catAlias);
 			} else {
-				showErrorModal("Unknown response from server");
+				showErrorModal("알 수 없는 응답입니다.");
 			}
 			
 		}).fail(function() {
-			showErrorModal("Could not connect to the server");
+			showErrorModal("서버와 연결할 수 없습니다.");
 		});
 		
 		return false;

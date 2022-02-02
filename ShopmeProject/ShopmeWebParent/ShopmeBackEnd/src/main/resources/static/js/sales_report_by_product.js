@@ -21,16 +21,16 @@ function loadSalesReportByDateForProduct(period) {
 		customizeChartForSalesReportByProduct();
 		formatChartData(data, 2, 3);
 		drawChartForSalesReportByProduct(period);
-		setSalesAmount(period, '_product', "Total Products");
+		setSalesAmount(period, '_product', "총 상품갯수");
 	});
 }
 
 function prepareChartDataForSalesReportByProduct(responseJSON) {
 	data = new google.visualization.DataTable();
-	data.addColumn('string', 'Product');
-	data.addColumn('number', 'Quantity');
-	data.addColumn('number', 'Gross Sales');
-	data.addColumn('number', 'Net Sales');
+	data.addColumn('string', '상품명');
+	data.addColumn('number', '수량');
+	data.addColumn('number', '총 매출액');
+	data.addColumn('number', '순이익');
 	
 	totalGrossSales = 0.0;
 	totalNetSales = 0.0;

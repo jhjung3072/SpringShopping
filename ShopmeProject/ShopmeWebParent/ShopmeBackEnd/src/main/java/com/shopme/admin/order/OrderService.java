@@ -57,14 +57,14 @@ public class OrderService {
 		try {
 			return orderRepo.findById(id).get();
 		} catch (NoSuchElementException ex) {
-			throw new OrderNotFoundException("Could not find any orders with ID " + id);
+			throw new OrderNotFoundException("해당 주문ID를 찾을 수 없습니다");
 		}
 	}
 	
 	public void delete(Integer id) throws OrderNotFoundException {
 		Long count = orderRepo.countById(id);
 		if (count == null || count == 0) {
-			throw new OrderNotFoundException("Could not find any orders with ID " + id); 
+			throw new OrderNotFoundException("해당 주문ID를 찾을 수 없습니다"); 
 		}
 		
 		orderRepo.deleteById(id);

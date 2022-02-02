@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Search Product', 'none')" />
+<head th:replace="fragments :: page_head('상품 검색', 'none')" />
 <body>
 <div class="container-fluid">
 	<div>
@@ -8,9 +8,9 @@
 				class="form-inline my-2">
 			<input type="search" required class="form-control mr-sm-2" name="keyword"
 				th:value="${keyword}"
-				placeholder="product name"
+				placeholder="상품 이름"
 				/>
-			<input type="submit" class="btn btn-outline-success" value="Search" />
+			<input type="submit" class="btn btn-outline-success" value="검색" />
 		</form>
 	</div>
 	
@@ -43,7 +43,7 @@
 			productName = $("#pname" + productId).text();
 			
 			if (window.parent.isProductAlreadyAdded(productId)) {
-				showWarningModal("The product '" + productName + "' was already added.");
+				showWarningModal(productName + "' 이 추가되었습니다");
 			} else {				
 				window.parent.addProduct(productId, productName);
 			}

@@ -16,7 +16,7 @@
 <body>
 
 	<div th:fragment="footer" class="text-center m-3">
-		<p>Shopme Control Panel - Copyright &copy; Shopme</p>
+		<p>© 2022 모두의 마켓 All rights reserved.</p>
 	</div>
 	
 	<th th:fragment="column_link(fieldName, columnLabel, removeTag)" th:remove="${removeTag}">
@@ -41,18 +41,18 @@
 	<div th:fragment="status(enabled, entityName, entityURL)" th:remove="tag">
 		<a th:if="${enabled == true}" class="fas fa-check-circle fa-2x icon-green" 
 			th:href="@{${entityURL} + '/enabled/false'}"
-			th:title="'Disable this ' + ${entityName}"
+			th:title="'비활성화하기'"
 			></a>
 			
 		<a th:if="${enabled == false}" class="fas fa-circle fa-2x icon-dark" 
 			th:href="@{${entityURL} + '/enabled/true'}"
-			th:title="'Enable this ' + ${entityName}"
+			th:title="'활성화하기'"
 			></a>	
 	</div>
 	
 	<div th:fragment="edit(entityName, editURL)" th:remove="tag">
 		<a class="fas fa-edit fa-2x icon-green" th:href="@{${editURL}}"
-			th:title="'Edit this ' + ${entityName}"></a>
+			th:title="'수정하기'"></a>
 	</div>
 	
 	<div th:fragment="delete(entityName, entityId, deleteURL, visible)" th:remove="tag">
@@ -60,26 +60,26 @@
 		<a class="fas fa-trash fa-2x icon-dark link-delete" 
 			th:href="@{${deleteURL}}"
 			th:entityId="${entityId}"
-			th:title="'Delete this ' + ${entityName}"></a>
+			th:title="'삭제하기'"></a>
 		</th:block>	
 	</div>
 	
 	<div th:fragment="pagination(entityName)" th:remove="tag">
 	<div class="text-center m-1" th:if="${totalItems > 0}">
-		<span>Showing [[${entityName}]] # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
+		<span>전체 [[${entityName}]] [[${totalItems}]] 중 [[${startCount}]] ~ [[${endCount}]]  </span>
 	</div>
 	<div class="text-center m-1" th:unless="${totalItems > 0}">
-		<span>No [[${entityName}]] found</span>
+		<span>[[${entityName}]]을 찾을 수 없습니다.</span>
 	</div>
 	
 	<div th:if="${totalPages > 1}">
 		<nav>
 		  <ul class="pagination justify-content-center flex-wrap">
 		    <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-		    	<a th:replace="fragments :: page_link(1, 'First')"></a>
+		    	<a th:replace="fragments :: page_link(1, '처음')"></a>
 		    </li>		  
 		    <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-		    	<a th:replace="fragments :: page_link(${currentPage - 1}, 'Previous')"></a>
+		    	<a th:replace="fragments :: page_link(${currentPage - 1}, '이전')"></a>
 		    </li>
 		    
 		    <li th:class="${currentPage != i ? 'page-item': 'page-item active'}" 
@@ -88,11 +88,11 @@
 		    </li>
 		    
 		    <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-		    	<a th:replace="fragments :: page_link(${currentPage + 1}, 'Next')"></a>
+		    	<a th:replace="fragments :: page_link(${currentPage + 1}, '다음')"></a>
 		    </li>
 		    
 		    <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-		    	<a th:replace="fragments :: page_link(${totalPages}, 'Last')"></a>
+		    	<a th:replace="fragments :: page_link(${totalPages}, '끝')"></a>
 		    </li>		    
 		  </ul>
 		</nav>	
@@ -104,7 +104,7 @@
 			<input type="hidden" name="sortField" th:value="${sortField}" />
 			<input type="hidden" name="sortDir" th:value="${sortDir}" />
 			
-			Filter:&nbsp;
+			검색어:&nbsp;
 			<input type="search" name="keyword" th:value="${keyword}" class="form-control" required/>
 			&nbsp;&nbsp;
 			<button type="submit" class="btn btn-primary">

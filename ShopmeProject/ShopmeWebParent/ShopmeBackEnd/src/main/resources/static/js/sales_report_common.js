@@ -35,7 +35,7 @@ function validateDateRange(reportType,callbackFunction) {
 	if (days >= 7 && days <= 30) {
 		callbackFunction("custom");
 	} else {
-		startDateField.setCustomValidity("Dates must be in the range of 7..30 days");
+		startDateField.setCustomValidity("7~30일 이내의 날짜를 지정해야합니다.");
 		startDateField.reportValidity();
 	}
 }
@@ -69,11 +69,11 @@ function formatCurrency(amount) {
 }
 
 function getChartTitle(period) {
-	if (period == "last_7_days") return "Sales in Last 7 Days";
-	if (period == "last_28_days") return "Sales in Last 28 Days";
-	if (period == "last_6_months") return "Sales in Last 6 Months";
-	if (period == "last_year") return "Sales in Last Year";
-	if (period == "custom") return "Custom Date Range";
+	if (period == "last_7_days") return "지난 7일 간의 통계";
+	if (period == "last_28_days") return "지난 28일 간의 통계";
+	if (period == "last_6_months") return "지난 6개월 간의 통계";
+	if (period == "last_year") return "작년의 통계";
+	if (period == "custom") return "통계 범위 지정";
 	
 	return "";
 }

@@ -36,7 +36,7 @@ public class CustomerService {
 		try {
 			return customerRepo.findById(id).get();
 		} catch (NoSuchElementException ex) {
-			throw new CustomerNotFoundException("Could not find any customers with ID " + id);
+			throw new CustomerNotFoundException("회원 ID: " + id +"를 찾을 수 없습니다.");
 		}
 	}
 
@@ -48,7 +48,7 @@ public class CustomerService {
 		Customer existCustomer = customerRepo.findByEmail(email);
 
 		if (existCustomer != null && existCustomer.getId() != id) {
-			// found another customer having the same email
+			// 같은 이메일이 이미 존재한다면 false
 			return false;
 		}
 		
@@ -77,7 +77,7 @@ public class CustomerService {
 	public void delete(Integer id) throws CustomerNotFoundException {
 		Long count = customerRepo.countById(id);
 		if (count == null || count == 0) {
-			throw new CustomerNotFoundException("Could not find any customers with ID " + id);
+			throw new CustomerNotFoundException("회원 ID: " + id +"를 찾을 수 없습니다.");
 		}
 		
 		customerRepo.deleteById(id);

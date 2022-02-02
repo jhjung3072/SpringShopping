@@ -1,93 +1,93 @@
 <div class="modal-header">
-	<h4 class="modal-title">Product Details</h4>
+	<h4 class="modal-title">상품 상세 페이지</h4>
 	<button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 
 <div>
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 	  <li class="nav-item">
-	    <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
+	    <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">오버뷰</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" data-toggle="tab" href="#description" role="tab">Description</a>
+	    <a class="nav-link" data-toggle="tab" href="#description" role="tab">내용</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" data-toggle="tab" href="#images" role="tab">Images</a>
+	    <a class="nav-link" data-toggle="tab" href="#images" role="tab">이미지</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" data-toggle="tab" href="#details" role="tab">Details</a>
+	    <a class="nav-link" data-toggle="tab" href="#details" role="tab">스펙</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
+	    <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">사이즈</a>
 	  </li>		  
 	</ul>
 	
 	<div class="tab-content">
 	  <div class="tab-pane active p-3" id="overview" role="tabpanel">
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Product Name:</label>
+			<label class="col-sm-2 col-form-label">상품명:</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" th:value="${product.name}" readonly />
 			</div>
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Alias:</label>
+			<label class="col-sm-2 col-form-label">별칭:</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" th:value="${product.alias}" readonly />
 			</div>
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Brand:</label>
+			<label class="col-sm-2 col-form-label">브랜드:</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" th:value="${product.brand.name}" readonly />
 			</div>
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Category:</label>
+			<label class="col-sm-2 col-form-label">카테고리:</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" th:value="${product.category.name}" readonly />
 			</div>
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Enabled:</label>
+			<label class="col-sm-2 col-form-label">활성화:</label>
 			<div class="col-sm-10">
 				<input type="checkbox" th:checked="${product.enabled}" onclick="return false;" />
 			</div>
 		</div>
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">In-Stock:</label>
+			<label class="col-sm-2 col-form-label">재고:</label>
 			<div class="col-sm-10">
 				<input type="checkbox" th:checked="${product.inStock}" onclick="return false;" />
 			</div>
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Cost:</label>
+			<label class="col-sm-2 col-form-label">상품 비용:</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" th:value="${product.cost}" readonly />
 			</div>
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Price:</label>
+			<label class="col-sm-2 col-form-label">상품 가격:</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" th:value="${product.price}" readonly />
 			</div>
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Discount:</label>
+			<label class="col-sm-2 col-form-label">할인율:</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" th:value="${product.discountPercent}" readonly />
 			</div>
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label">Updated Time:</label>
+			<label class="col-sm-2 col-form-label">수정된 시간:</label>
 			<div class="col-sm-10">
 				<span th:text="${#dates.format(product.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
 			</div>
@@ -109,5 +109,5 @@
 </div>
 
 <div class="modal-footer">
-	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 </div>

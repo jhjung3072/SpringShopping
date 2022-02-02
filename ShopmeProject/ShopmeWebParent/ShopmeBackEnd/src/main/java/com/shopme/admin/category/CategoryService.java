@@ -158,7 +158,7 @@ public class CategoryService {
 		try {
 			return repo.findById(id).get();
 		} catch (NoSuchElementException ex) {
-			throw new CategoryNotFoundException("Could not find any category with ID " + id);
+			throw new CategoryNotFoundException("카테고리 ID: " + id + "을 찾을 수 없습니다.");
 		}
 	}
 	
@@ -219,7 +219,7 @@ public class CategoryService {
 	public void delete(Integer id) throws CategoryNotFoundException {
 		Long countById = repo.countById(id);
 		if (countById == null || countById == 0) {
-			throw new CategoryNotFoundException("Could not find any category with ID " + id);
+			throw new CategoryNotFoundException("카테고리 ID: " + id + "을 찾을 수 없습니다.");
 		}
 		
 		repo.deleteById(id);

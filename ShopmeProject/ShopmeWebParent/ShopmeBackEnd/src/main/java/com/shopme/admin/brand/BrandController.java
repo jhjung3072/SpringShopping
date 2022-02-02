@@ -48,7 +48,7 @@ public class BrandController {
 		
 		model.addAttribute("listCategories", listCategories);
 		model.addAttribute("brand", new Brand());
-		model.addAttribute("pageTitle", "Create New Brand");
+		model.addAttribute("pageTitle", "브랜드 추가");
 		
 		return "brands/brand_form";		
 	}
@@ -70,7 +70,7 @@ public class BrandController {
 			brandService.save(brand);
 		}
 		
-		ra.addFlashAttribute("message", "The brand has been saved successfully.");
+		ra.addFlashAttribute("message", "해당 브랜드가 저장되었습니다.");
 		return defaultRedirectURL;		
 	}
 	
@@ -83,7 +83,7 @@ public class BrandController {
 			
 			model.addAttribute("brand", brand);
 			model.addAttribute("listCategories", listCategories);
-			model.addAttribute("pageTitle", "Edit Brand (ID: " + id + ")");
+			model.addAttribute("pageTitle", "브랜드 수정 (ID: " + id + ")");
 			
 			return "brands/brand_form";			
 		} catch (BrandNotFoundException ex) {
@@ -102,7 +102,7 @@ public class BrandController {
 			AmazonS3Util.removeFolder(brandDir);
 			
 			redirectAttributes.addFlashAttribute("message", 
-					"The brand ID " + id + " has been deleted successfully");
+					"브랜드 ID " + id + " 가 삭제되었습니다.");
 		} catch (BrandNotFoundException ex) {
 			redirectAttributes.addFlashAttribute("message", ex.getMessage());
 		}

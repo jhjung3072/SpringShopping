@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Users - Shopme Admin', 'none')" />
+<head th:replace="fragments :: page_head('모두의 마켓-직원', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Manage Users</h2>	
+		<h2>직원 관리 페이지</h2>	
 		<a th:href="@{/users/new}" class="fas fa-user-plus fa-2x icon-dark mr-2"></a>
 		
 		<a th:href="@{/users/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
@@ -22,20 +22,18 @@
 			<thead class="thead-dark">
 				<tr>
 					<th class="hideable-column">
-						<th th:replace="fragments :: column_link('id', 'User ID', 'tag')" />
+						<th th:replace="fragments :: column_link('id', '직원 ID', 'tag')" />
 					</th>
 					
-					<th>Photos</th>
+					<th>사진</th>
 					
 					<th class="hideable-column">
-						<th th:replace="fragments :: column_link('email', 'E-mail', 'tag')" />
+						<th th:replace="fragments :: column_link('email', '이메일', 'tag')" />
 					</th>
-					
-					<th th:replace="fragments :: column_link('firstName', 'First Name', 'none')" />
-					<th th:replace="fragments :: column_link('lastName', 'Last Name', 'none')" />
-					
-					<th>Roles</th>
-					<th th:replace="fragments :: column_link('enabled', 'Enabled', 'none')" />
+					<th th:replace="fragments :: column_link('lastName', '성', 'none')" />
+					<th th:replace="fragments :: column_link('firstName', '이름', 'none')" />
+					<th>권한</th>
+					<th th:replace="fragments :: column_link('enabled', '활성화', 'none')" />
 					<th></th>
 				</tr>								
 			</thead>
@@ -46,8 +44,8 @@
 						<div th:replace="fragments :: user_photos" />
 					</td>
 					<td class="hideable-column">[[${user.email}]]</td>
-					<td>[[${user.firstName}]]</td>
 					<td>[[${user.lastName}]]</td>
+					<td>[[${user.firstName}]]</td>
 					<td>[[${user.roles}]]</td>
 					
 					<td>
@@ -84,7 +82,7 @@
 		</div>
 	</div>
 	
-	<div th:replace="fragments :: pagination('users')"></div>
+	<div th:replace="fragments :: pagination('직원')"></div>
 	
 	<div th:replace="modal_fragments :: confirm_modal" />
 		

@@ -71,7 +71,7 @@ public class CategoryController {
 		
 		model.addAttribute("category", new Category());
 		model.addAttribute("listCategories", listCategories);
-		model.addAttribute("pageTitle", "Create New Category");
+		model.addAttribute("pageTitle", "카테고리 추가");
 		
 		return "categories/category_form";
 	}
@@ -93,7 +93,7 @@ public class CategoryController {
 			service.save(category);
 		}
 		
-		ra.addFlashAttribute("message", "The category has been saved successfully.");
+		ra.addFlashAttribute("message", "카테고리가 성공적으로 저장되었습니다.");
 		return "redirect:/categories";
 	}
 	
@@ -106,7 +106,7 @@ public class CategoryController {
 			
 			model.addAttribute("category", category);
 			model.addAttribute("listCategories", listCategories);
-			model.addAttribute("pageTitle", "Edit Category (ID: " + id + ")");
+			model.addAttribute("pageTitle", "카테고리 수정 (ID: " + id + ")");
 			
 			return "categories/category_form";			
 		} catch (CategoryNotFoundException ex) {
@@ -120,7 +120,7 @@ public class CategoryController {
 			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
 		service.updateCategoryEnabledStatus(id, enabled);
 		String status = enabled ? "enabled" : "disabled";
-		String message = "The category ID " + id + " has been " + status;
+		String message = "카테고리 ID : " + id + "가 " + status +"되었습니다.";
 		redirectAttributes.addFlashAttribute("message", message);
 		
 		return "redirect:/categories";
@@ -136,7 +136,7 @@ public class CategoryController {
 			AmazonS3Util.removeFolder(categoryDir);
 			
 			redirectAttributes.addFlashAttribute("message", 
-					"The category ID " + id + " has been deleted successfully");
+					"카테고리 ID " + id + " 가 삭제되었습니다.");
 		} catch (CategoryNotFoundException ex) {
 			redirectAttributes.addFlashAttribute("message", ex.getMessage());
 		}

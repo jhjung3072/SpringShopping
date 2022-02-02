@@ -3,55 +3,55 @@
 <body>
 <div th:fragment="content" th:remove="tag">				
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">Deliver Days:</label>
+			    <label class="col-sm-2 col-form-label">예상 배송 소요일:</label>
 			    <div class="col-sm-10">
 			      <input type="number" step="1" class="form-control" th:field="*{deliverDays}" required />
 			    </div>
 			  </div>		  
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">Expected Deliver Date:</label>
+			    <label class="col-sm-2 col-form-label">예상 배송 도착일:</label>
 			    <div class="col-sm-10">
 			      <input type="date" class="form-control" th:field="*{deliverDateOnForm}" required />
 			    </div>
 			  </div>			  
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">First Name:</label>
+			    <label class="col-sm-2 col-form-label">이름:</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" th:field="*{firstName}" required />
 			    </div>
 			  </div>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">Last Name:</label>
+			    <label class="col-sm-2 col-form-label">성:</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" th:field="*{lastName}" required />
 			    </div>
 			  </div>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">Phone Number:</label>
+			    <label class="col-sm-2 col-form-label">연락처:</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" th:field="*{phoneNumber}" required />
 			    </div>
 			  </div>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">Address Line 1:</label>
+			    <label class="col-sm-2 col-form-label">주소 1:</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" th:field="*{addressLine1}" required />
 			    </div>
 			  </div>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">Address Line 2:</label>
+			    <label class="col-sm-2 col-form-label">주소 2:</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" th:field="*{addressLine2}" />
 			    </div>
 			  </div>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">City:</label>
+			    <label class="col-sm-2 col-form-label">시:</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" th:field="*{city}" required />
 			    </div>
 			  </div>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">Country:</label>
+			    <label class="col-sm-2 col-form-label">국가:</label>
 			    <div class="col-sm-10">
 			    	<input type="hidden" name="countryName" id="countryName" th:value="${order.country}" />
 			      <select class="form-control" id="country">
@@ -60,7 +60,7 @@
 			    </div>
 			  </div>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">State:</label>
+			    <label class="col-sm-2 col-form-label">도:</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" th:field="*{state}" list="listStates"/>
 			      <datalist id="listStates">
@@ -69,7 +69,7 @@
 			    </div>
 			  </div>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">Postal Code:</label>
+			    <label class="col-sm-2 col-form-label">우편번호:</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" th:field="*{postalCode}" required />
 			    </div>

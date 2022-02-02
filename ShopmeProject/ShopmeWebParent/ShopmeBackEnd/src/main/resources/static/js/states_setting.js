@@ -60,9 +60,9 @@ function deleteState() {
 	}).done(function() {
 		$("#dropDownStates option[value='" + stateId + "']").remove();
 		changeFormStateToNew();
-		showToastMessage("The state has been deleted");
+		showToastMessage("해당 도시가 목록에서 삭제되었습니다.");
 	}).fail(function() {
-		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+		showToastMessage("에러 : 서버와 연결을 실패했거나 처리중에 에러가 발생했습니다.");
 	});		
 }
 
@@ -89,10 +89,10 @@ function updateState() {
 		contentType: 'application/json'
 	}).done(function(stateId) {
 		$("#dropDownStates option:selected").text(stateName);
-		showToastMessage("The state has been updated");
+		showToastMessage("해당 도시가 수정되었습니다.");
 		changeFormStateToNew();
 	}).fail(function() {
-		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+		showToastMessage("에러 : 서버와 연결을 실패했거나 처리중에 에러가 발생했습니다.");
 	});	
 }
 
@@ -118,9 +118,9 @@ function addState() {
 		contentType: 'application/json'
 	}).done(function(stateId) {
 		selectNewlyAddedState(stateId, stateName);
-		showToastMessage("The new state has been added");
+		showToastMessage("해당 도시가 추가되었습니다.");
 	}).fail(function() {
-		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+		showToastMessage("에러 : 서버와 연결을 실패했거나 처리중에 에러가 발생했습니다.");
 	});
 		
 }
@@ -144,8 +144,8 @@ function selectNewlyAddedState(stateId, stateName) {
 }
 
 function changeFormStateToNew() {
-	buttonAddState.val("Add");
-	labelStateName.text("State/Province Name:");
+	buttonAddState.val("추가");
+	labelStateName.text("도시명:");
 	
 	buttonUpdateState.prop("disabled", true);
 	buttonDeleteState.prop("disabled", true);
@@ -154,11 +154,11 @@ function changeFormStateToNew() {
 }
 
 function changeFormStateToSelectedState() {
-	buttonAddState.prop("value", "New");
+	buttonAddState.prop("value", "추가");
 	buttonUpdateState.prop("disabled", false);
 	buttonDeleteState.prop("disabled", false);
 	
-	labelStateName.text("Selected State/Province:");
+	labelStateName.text("선택된 도시:");
 	
 	selectedStateName = $("#dropDownStates option:selected").text();
 	fieldStateName.val(selectedStateName);
@@ -179,9 +179,9 @@ function loadStates4Country() {
 		
 	}).done(function() {
 		changeFormStateToNew();
-		showToastMessage("All states have been loaded for country " + selectedCountry.text());
+		showToastMessage("도시목록을 불러왔습니다. " + selectedCountry.text());
 	}).fail(function() {
-		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+		showToastMessage("에러 : 서버와 연결을 실패했거나 처리중에 에러가 발생했습니다.");
 	});	
 }
 
@@ -195,9 +195,9 @@ function loadCountries4States() {
 		});
 		
 	}).done(function() {
-		buttonLoad4States.val("Refresh Country List");
-		showToastMessage("All countries have been loaded");
+		buttonLoad4States.val("목록 새로고침");
+		showToastMessage("국가목록을 불러왔습니다.");
 	}).fail(function() {
-		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+		showToastMessage("에러 : 서버와 연결을 실패했거나 처리중에 에러가 발생했습니다.");
 	});
 }

@@ -57,9 +57,9 @@ function deleteCountry() {
 	}).done(function() {
 		$("#dropDownCountries option[value='" + optionValue + "']").remove();
 		changeFormStateToNewCountry();
-		showToastMessage("The country has been deleted");
+		showToastMessage("해당 국가가 목록에서 삭제되었습니다.");
 	}).fail(function() {
-		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+		showToastMessage("에러 : 서버와 연결을 실패했거나 처리중에 에러가 발생했습니다.");
 	});		
 }
 
@@ -85,11 +85,11 @@ function updateCountry() {
 	}).done(function(countryId) {
 		$("#dropDownCountries option:selected").val(countryId + "-" + countryCode);
 		$("#dropDownCountries option:selected").text(countryName);
-		showToastMessage("The country has been updated");
+		showToastMessage("해당 국가가 수정되었습니다.");
 		
 		changeFormStateToNewCountry();
 	}).fail(function() {
-		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+		showToastMessage("에러 : 서버와 연결을 실패했거나 처리중에 에러가 발생했습니다.");
 	});	
 }
 
@@ -122,9 +122,9 @@ function addCountry() {
 		contentType: 'application/json'
 	}).done(function(countryId) {
 		selectNewlyAddedCountry(countryId, countryCode, countryName);
-		showToastMessage("The new country has been added");
+		showToastMessage("해당 국가가 목록에 추가되었습니다.");
 	}).fail(function() {
-		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+		showToastMessage("에러 : 서버와 연결을 실패했거나 처리중에 에러가 발생했습니다.");
 	});
 		
 }
@@ -140,8 +140,8 @@ function selectNewlyAddedCountry(countryId, countryCode, countryName) {
 }
 
 function changeFormStateToNewCountry() {
-	buttonAddCountry.val("Add");
-	labelCountryName.text("Country Name:");
+	buttonAddCountry.val("추가");
+	labelCountryName.text("국가명:");
 	
 	buttonUpdateCountry.prop("disabled", true);
 	buttonDeleteCountry.prop("disabled", true);
@@ -151,11 +151,11 @@ function changeFormStateToNewCountry() {
 }
 
 function changeFormStateToSelectedCountry() {
-	buttonAddCountry.prop("value", "New");
+	buttonAddCountry.prop("value", "추가");
 	buttonUpdateCountry.prop("disabled", false);
 	buttonDeleteCountry.prop("disabled", false);
 	
-	labelCountryName.text("Selected Country:");
+	labelCountryName.text("선택된 국가명:");
 	
 	selectedCountryName = $("#dropDownCountries option:selected").text();
 	fieldCountryName.val(selectedCountryName);
@@ -176,10 +176,10 @@ function loadCountries() {
 		});
 		
 	}).done(function() {
-		buttonLoad.val("Refresh Country List");
-		showToastMessage("All countries have been loaded");
+		buttonLoad.val("목록 새로고침");
+		showToastMessage("목록을 불러왔습니다.");
 	}).fail(function() {
-		showToastMessage("ERROR: Could not connect to server or server encountered an error");
+		showToastMessage("에러 : 서버와 연결을 실패했거나 처리중에 에러가 발생했습니다.");
 	});
 }
 

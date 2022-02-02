@@ -15,99 +15,99 @@
 		<div class="collapse navbar-collapse" id="topNavbar">
 			<ul class="navbar-nav">
 				
-				<th:block sec:authorize="hasAuthority('Admin')">
+				<th:block sec:authorize="hasAuthority('운영자')">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
-						th:href="@{/users}">Users</a>
+						th:href="@{/users}">직원</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" th:href="@{/users/new}">Create New</a>
-						<a class="dropdown-item" th:href="@{/users}">View All</a>
+						<a class="dropdown-item" th:href="@{/users/new}">추가하기</a>
+						<a class="dropdown-item" th:href="@{/users}">목록보기</a>
 					</div>
 				</li>						
 				</th:block>
 				
-				<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+				<th:block sec:authorize="hasAnyAuthority('운영자', '편집자')">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
-						th:href="@{/categories}">Categories</a>
+						th:href="@{/categories}">카테고리</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" th:href="@{/categories/new}">Create New</a>
-						<a class="dropdown-item" th:href="@{/categories}">View All</a>
+						<a class="dropdown-item" th:href="@{/categories/new}">추가하기</a>
+						<a class="dropdown-item" th:href="@{/categories}">목록보기</a>
 					</div>						
 				</li>		
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
-						 th:href="@{/brands}">Brands</a>
+						 th:href="@{/brands}">브랜드</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" th:href="@{/brands/new}">Create New</a>
-						<a class="dropdown-item" th:href="@{/brands}">View All</a>
+						<a class="dropdown-item" th:href="@{/brands/new}">추가하기</a>
+						<a class="dropdown-item" th:href="@{/brands}">목록보기</a>
 					</div>						 
 				</li>
 				</th:block>
 				
-				<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Editor', 'Shipper')">
+				<th:block sec:authorize="hasAnyAuthority('운영자', '판매관리자', '편집자', '배송관리자')">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
-						th:href="@{/products}">Products</a>
+						th:href="@{/products}">상품</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" th:href="@{/products/new}" 
-							sec:authorize="hasAnyAuthority('Admin', 'Editor')">Create New</a>
-						<a class="dropdown-item" th:href="@{/products}">View All</a>
+							sec:authorize="hasAnyAuthority('운영자', '편집자')">추가하기</a>
+						<a class="dropdown-item" th:href="@{/products}">목록보기</a>
 						
-						<a class="dropdown-item" sec:authorize="hasAuthority('Admin')"
-							th:href="@{/reviews}">Reviews</a>
+						<a class="dropdown-item" sec:authorize="hasAuthority('운영자')"
+							th:href="@{/reviews}">리뷰</a>
 					</div>
 				</li>
 				</th:block>
 
-				<th:block sec:authorize="hasAuthority('Assistant')">
+				<th:block sec:authorize="hasAuthority('Q/A담당자')">
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/reviews}">Reviews</a>
+					<a class="nav-link" th:href="@{/reviews}">리뷰</a>
 				</li>
 				</th:block>
 								
-				<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+				<th:block sec:authorize="hasAnyAuthority('운영자', '판매관리자')">
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/customers}">Customers</a>
+					<a class="nav-link" th:href="@{/customers}">회원</a>
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/shipping_rates}">Shipping Rates</a>
-				</li>
-				</th:block>
-				
-				<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/orders}">Orders</a>
+					<a class="nav-link" th:href="@{/shipping_rates}">배송비</a>
 				</li>
 				</th:block>
 				
-				<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+				<th:block sec:authorize="hasAnyAuthority('운영자', '판매관리자', '배송관리자')">
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/reports}">Sales Report</a>
+					<a class="nav-link" th:href="@{/orders}">주문내역</a>
+				</li>
+				</th:block>
+				
+				<th:block sec:authorize="hasAnyAuthority('운영자', '판매관리자')">
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/reports}">판매량 통계</a>
 				</li>	
 				</th:block>
 				
-				<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+				<th:block sec:authorize="hasAnyAuthority('운영자', '편집자')">
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/articles}">Articles</a>
+					<a class="nav-link" th:href="@{/articles}">기사</a>
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/menus}">Menus</a>
+					<a class="nav-link" th:href="@{/menus}">메뉴</a>
 				</li>
 				</th:block>
 				
-				<li class="nav-item dropdown" sec:authorize="hasAuthority('Admin')">
+				<li class="nav-item dropdown" sec:authorize="hasAuthority('운영자')">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" 
-						th:href="@{/settings}">Settings</a>
+						th:href="@{/settings}">설정</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" th:href="@{/settings#general}">General</a>
-						<a class="dropdown-item" th:href="@{/settings#countries}">Countries</a>
-						<a class="dropdown-item" th:href="@{/settings#states}">States</a>
-						<a class="dropdown-item" th:href="@{/settings#mailServer}">Mail Server</a>
-						<a class="dropdown-item" th:href="@{/settings#mailTemplate}">Mail Templates</a>
-						<a class="dropdown-item" th:href="@{/settings#payment}">Payment</a>
+						<a class="dropdown-item" th:href="@{/settings#general}">일반</a>
+						<a class="dropdown-item" th:href="@{/settings#countries}">국가</a>
+						<a class="dropdown-item" th:href="@{/settings#states}">도시</a>
+						<a class="dropdown-item" th:href="@{/settings#mailServer}">메일서버</a>
+						<a class="dropdown-item" th:href="@{/settings#mailTemplate}">메일양식</a>
+						<a class="dropdown-item" th:href="@{/settings#payment}">결제api</a>
 					</div>
 				</li>		
 				<li>
@@ -118,7 +118,7 @@
 						th:href="@{/account}" 
 						sec:authentication="principal.fullname"></a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" id="logoutLink" href="">Logout</a>
+						<a class="dropdown-item" id="logoutLink" href="">로그아웃</a>
 					</div>
 				</li>										
 			</ul>

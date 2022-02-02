@@ -32,7 +32,7 @@ public class BrandService {
 		try {
 			return repo.findById(id).get();
 		} catch (NoSuchElementException ex) {
-			throw new BrandNotFoundException("Could not find any brand with ID " + id);
+			throw new BrandNotFoundException("해당 브랜드ID를 찾을 수 없습니다. ID : ");
 		}
 	}
 	
@@ -40,7 +40,7 @@ public class BrandService {
 		Long countById = repo.countById(id);
 		
 		if (countById == null || countById == 0) {
-			throw new BrandNotFoundException("Could not find any brand with ID " + id);			
+			throw new BrandNotFoundException("해당 브랜드ID를 찾을 수 없습니다. ID : " + id);			
 		}
 		
 		repo.deleteById(id);

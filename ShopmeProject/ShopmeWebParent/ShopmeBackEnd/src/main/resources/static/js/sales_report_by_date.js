@@ -24,16 +24,16 @@ function loadSalesReportByDate(period) {
 		customizeChartForSalesReportByDate(period);
 		formatChartData(data, 1, 2);
 		drawChartForSalesReportByDate(period);
-		setSalesAmount(period, '_date', "Total Orders");
+		setSalesAmount(period, '_date', "총 주문량");
 	});
 }
 
 function prepareChartDataForSalesReportByDate(responseJSON) {
 	data = new google.visualization.DataTable();
-	data.addColumn('string', 'Date');
-	data.addColumn('number', 'Gross Sales');
-	data.addColumn('number', 'Net Sales');
-	data.addColumn('number', 'Orders');
+	data.addColumn('string', '날짜');
+	data.addColumn('number', '총 매출');
+	data.addColumn('number', '순이익');
+	data.addColumn('number', '주문량');
 	
 	totalGrossSales = 0.0;
 	totalNetSales = 0.0;
@@ -60,8 +60,8 @@ function customizeChartForSalesReportByDate(period) {
 		},
 		
 		vAxes: {
-			0: {title: 'Sales Amount', format: 'currency'},
-			1: {title: 'Number of Orders'}
+			0: {title: '매출액', format: 'currency'},
+			1: {title: '주문량'}
 		}
 	};
 }

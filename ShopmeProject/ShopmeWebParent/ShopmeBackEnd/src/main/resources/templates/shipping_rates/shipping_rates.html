@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Shipping Rates - Shopme Admin', 'none')" />
+<head th:replace="fragments :: page_head('모두의 마켓-배송비', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Manage Shipping Rates</h2>	
+		<h2>배송비 관리 페이지</h2>	
 		
 		<a th:href="@{/shipping_rates/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
 	</div>
@@ -17,11 +17,11 @@
 			<thead class="thead-dark">
 				<tr>
 					<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
-					<th th:replace="fragments :: column_link('country', 'Country', 'none')" />
-					<th th:replace="fragments :: column_link('state', 'State', 'none')" />
-					<th th:replace="fragments :: column_link('rate', 'Rate', 'none')" />
-					<th th:replace="fragments :: column_link('days', 'Days', 'none')" />
-					<th th:replace="fragments :: column_link('codSupported', 'COD Supported', 'none')" />
+					<th th:replace="fragments :: column_link('country', '국가', 'none')" />
+					<th th:replace="fragments :: column_link('state', '도시', 'none')" />
+					<th th:replace="fragments :: column_link('rate', '배송비', 'none')" />
+					<th th:replace="fragments :: column_link('days', '소요일', 'none')" />
+					<th th:replace="fragments :: column_link('codSupported', '착불가능 여부', 'none')" />
 					
 					<th></th>
 				</tr>								
@@ -66,7 +66,7 @@
 		</div>	
 	</div>		
 	
-	<div th:replace="fragments :: pagination('shipping rates')"></div>
+	<div th:replace="fragments :: pagination('배송비')"></div>
 	<div th:replace="modal_fragments :: confirm_modal" />
 	<div th:replace="fragments :: footer"></div>
 	

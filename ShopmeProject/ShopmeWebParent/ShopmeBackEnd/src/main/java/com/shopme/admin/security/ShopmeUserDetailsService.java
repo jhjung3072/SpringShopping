@@ -20,7 +20,7 @@ public class ShopmeUserDetailsService implements UserDetailsService {
 			return new ShopmeUserDetails(user);
 		}
 		
-		throw new UsernameNotFoundException("Could not find user with email: " + email);
+		throw new UsernameNotFoundException("해당 이메일을 가진 직원을 찾을 수 없습니다: " + email);
 	}
 
 }

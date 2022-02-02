@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<head th:replace="fragments :: page_head('Settings - Shopme Admin', 'tag')" />
+	<head th:replace="fragments :: page_head('모두의 마켓-설정', 'tag')" />
 	<link rel="stylesheet" th:href="@{/richtext/richtext.min.css}" />
 	<script th:src="@{/richtext/jquery.richtext.min.js}"></script>
 </head>
@@ -9,7 +9,7 @@
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Site Settings</h2>	
+		<h2>사이트 설정 페이지</h2>	
 	</div>
 			
 	<div th:if="${message != null}" class="alert alert-success text-center">
@@ -19,22 +19,22 @@
 	<div>
 		<ul class="nav nav-tabs" id="settingTab" role="tablist">
 		  <li class="nav-item">
-		    <a class="nav-link active" data-toggle="tab" href="#general" role="tab">General</a>
+		    <a class="nav-link active" data-toggle="tab" href="#general" role="tab">일반</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#countries" role="tab">Countries</a>
+		    <a class="nav-link" data-toggle="tab" href="#countries" role="tab">국가</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#states" role="tab">States</a>
+		    <a class="nav-link" data-toggle="tab" href="#states" role="tab">도시</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#mailServer" role="tab">Mail Server</a>
+		    <a class="nav-link" data-toggle="tab" href="#mailServer" role="tab">메일서버</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#mailTemplates" role="tab">Mail Templates</a>
+		    <a class="nav-link" data-toggle="tab" href="#mailTemplates" role="tab">메일양식</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" data-toggle="tab" href="#payment" role="tab">Payment</a>
+		    <a class="nav-link" data-toggle="tab" href="#payment" role="tab">결제api</a>
 		  </li>		  		  
 		</ul>
 		

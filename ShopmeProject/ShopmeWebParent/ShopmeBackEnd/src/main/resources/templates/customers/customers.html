@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Customers - Shopme Admin', 'none')" />
+<head th:replace="fragments :: page_head('모두의 마켓-회원', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Manage Customers</h2>	
-		
-		<a th:href="@{/customers/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
+		<h2>회원 관리 페이지</h2>	
 	</div>
 		
 	<div th:replace="fragments :: search_form_and_message" />
@@ -17,34 +15,33 @@
 			<thead class="thead-dark">
 				<tr>
 					<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
-					<th th:replace="fragments :: column_link('firstName', 'First Name', 'none')" />
-					<th th:replace="fragments :: column_link('lastName', 'Last Name', 'none')" />
+					<th th:replace="fragments :: column_link('lastName', '성', 'none')" />
+					<th th:replace="fragments :: column_link('firstName', '이름', 'none')" />
 					
 					<th class="hideable-column">
-					<th th:replace="fragments :: column_link('email', 'E-mail', 'tag')" />
+					<th th:replace="fragments :: column_link('email', '이메일', 'tag')" />
 					</th>
 					
 					<th class="hideable-column">
-					<th th:replace="fragments :: column_link('city', 'City', 'tag')" />
-					</th>
+
+					<th th:replace="fragments :: column_link('state', '도', 'tag')" />
 					
-					<th class="hideable-column">
-					<th th:replace="fragments :: column_link('state', 'State', 'tag')" />
+					<th th:replace="fragments :: column_link('city', '시', 'tag')" />
+
 					</th>
-					
-					<th th:replace="fragments :: column_link('country', 'Country', 'none')" />
-					<th th:replace="fragments :: column_link('enabled', 'Enabled', 'none')" />
+					<th th:replace="fragments :: column_link('country', '국가', 'none')" />
+					<th th:replace="fragments :: column_link('enabled', '활성화', 'none')" />
 					<th></th>
 				</tr>								
 			</thead>
 			<tbody>
 				<tr th:each="customer : ${listCustomers}">
 					<td>[[${customer.id}]]</td>
-					<td>[[${customer.firstName}]]</td>
 					<td>[[${customer.lastName}]]</td>
+					<td>[[${customer.firstName}]]</td>
 					<td class="hideable-column">[[${customer.email}]]</td>
-					<td class="hideable-column">[[${customer.city}]]</td>
 					<td class="hideable-column">[[${customer.state}]]</td>
+					<td class="hideable-column">[[${customer.city}]]</td>
 					<td>[[${customer.country.name}]]</td>
 					<td>
 						<div th:replace="fragments :: status(${customer.enabled}, 'customer', '/customers/' + ${customer.id})" />
@@ -78,7 +75,7 @@
 					&nbsp;
 					<a class="fas fa-file-alt fa-2x icon-green link-detail"
 						th:href="@{'/customers/detail/' + ${customer.id}}"
-						title="View details of this customer"
+						title="상세보기"
 						></a>					
 					&nbsp; 
 					<div th:replace="fragments :: edit('customer', '/customers/edit/' + ${customer.id})" />
@@ -90,7 +87,7 @@
 		</div>	
 	</div>		
 	
-	<div th:replace="fragments :: pagination('customers')"></div>
+	<div th:replace="fragments :: pagination('회원')"></div>
 	
 	<div th:replace="modal_fragments :: confirm_modal" />
 	

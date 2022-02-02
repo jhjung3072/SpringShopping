@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Brands - Shopme Admin', 'none')" />
+<head th:replace="fragments :: page_head('모두의 마켓-브랜드', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Manage Brands</h2>	
+		<h2>브랜드 관리 페이지</h2>	
 		
 		<a th:href="@{/brands/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
-		<a th:href="@{/brands/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
+		
 	</div>
 		
 	<div th:replace="fragments :: search_form_and_message" />
@@ -17,10 +17,10 @@
 		<table class="table table-bordered table-striped table-hover table-responsive-xl">
 			<thead class="thead-dark">
 				<tr>
-					<th class="hideable-column">Brand ID</th>
-					<th>Logo</th>
-					<th th:replace="fragments :: column_link('name', 'Brand Name', 'none')" />
-					<th>Categories</th>
+					<th class="hideable-column">브랜드 ID</th>
+					<th>로고</th>
+					<th th:replace="fragments :: column_link('name', '브랜드명', 'none')" />
+					<th>카테고리</th>
 					<th></th>
 				</tr>								
 			</thead>
@@ -64,7 +64,7 @@
 		</div>	
 	</div>	
 	
-	<div th:replace="fragments :: pagination('brands')"></div>
+	<div th:replace="fragments :: pagination('브랜드')"></div>
 	
 	<div th:replace="modal_fragments :: confirm_modal" />
 	

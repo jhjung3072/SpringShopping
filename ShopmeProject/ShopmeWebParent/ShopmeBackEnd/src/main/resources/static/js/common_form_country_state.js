@@ -26,6 +26,6 @@ function loadStates4Country() {
 			$("<option>").val(state.name).text(state.name).appendTo(dropdownStates);
 		});
 	}).fail(function() {
-		showErrorModal("Error loading states/provinces for the selected country.");
+		showErrorModal("도시 목록을 불러오는 중에 에러가 발생했습니다.");
 	})	
 }	

@@ -57,7 +57,7 @@ public class UserController {
 		
 		model.addAttribute("user", user);
 		model.addAttribute("listRoles", listRoles);
-		model.addAttribute("pageTitle", "Create New User");
+		model.addAttribute("pageTitle", "직원 추가");
 		
 		return "users/user_form";
 	}
@@ -82,7 +82,7 @@ public class UserController {
 		}
 		
 		
-		redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
+		redirectAttributes.addFlashAttribute("message", "직원 정보가 저장되었습니다.");
 		
 		return getRedirectURLtoAffectedUser(user);
 	}
@@ -101,7 +101,7 @@ public class UserController {
 			List<Role> listRoles = service.listRoles();
 			
 			model.addAttribute("user", user);
-			model.addAttribute("pageTitle", "Edit User (ID: " + id + ")");
+			model.addAttribute("pageTitle", "직원 수정 (ID: " + id + ")");
 			model.addAttribute("listRoles", listRoles);
 			
 			return "users/user_form";
@@ -120,7 +120,7 @@ public class UserController {
 			String userPhotosDir="user-photos/" + id;
 			AmazonS3Util.removeFolder(userPhotosDir);
 			redirectAttributes.addFlashAttribute("message", 
-					"The user ID " + id + " has been deleted successfully");
+					"직원 ID: " + id + "를 삭제했습니다.");
 		} catch (UserNotFoundException ex) {
 			redirectAttributes.addFlashAttribute("message", ex.getMessage());
 		}
@@ -133,7 +133,7 @@ public class UserController {
 			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
 		service.updateUserEnabledStatus(id, enabled);
 		String status = enabled ? "enabled" : "disabled";
-		String message = "The user ID " + id + " has been " + status;
+		String message = "직원 ID: " + id + "가" +status+"되었습니다." ;
 		redirectAttributes.addFlashAttribute("message", message);
 		
 		return defaultRedirectURL;

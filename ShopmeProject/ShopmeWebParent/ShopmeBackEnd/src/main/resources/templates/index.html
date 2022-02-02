@@ -6,8 +6,8 @@
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
 	<div>
-		<h2>Shopme Control Panel</h2>
-		Welcome 
+		<h2>모두의 마켓</h2>
+		어서오세요~!! 
 		<a th:href="@{/account}" 
 			sec:authentication="principal.fullname"></a>	
 		<span sec:authentication="principal.authorities"></span>		

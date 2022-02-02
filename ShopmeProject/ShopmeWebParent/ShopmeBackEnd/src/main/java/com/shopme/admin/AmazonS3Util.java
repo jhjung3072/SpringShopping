@@ -54,7 +54,7 @@ public class AmazonS3Util {
 			int contentLength=inputStream.available();
 			client.putObject(request, RequestBody.fromInputStream(inputStream, contentLength));
 		}catch(IOException ex) {
-			LOGGER.error("Could not upload file to Amazon S3",ex);
+			LOGGER.error("Amazon S3에 업로드할 수 없습니다.",ex);
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class AmazonS3Util {
 					.key(object.key()).build();
 			
 			client.deleteObject(request);
-			System.out.println("Deleted " + object.key());
+			System.out.println("삭제했습니다 : " + object.key());
 		}
 	}
 }
