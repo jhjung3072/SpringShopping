@@ -1,0 +1,1 @@
+INDEX VERSION 1.131+C:\GitRepo\ShopmeProject\.metadata\.plugins\org.eclipse.jdt.core
