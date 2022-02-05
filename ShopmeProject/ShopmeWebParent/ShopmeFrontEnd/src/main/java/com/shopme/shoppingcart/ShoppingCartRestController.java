@@ -26,9 +26,9 @@ public class ShoppingCartRestController {
 			Customer customer = getAuthenticatedCustomer(request);
 			Integer updatedQuantity = cartService.addProduct(productId, quantity, customer);
 			
-			return updatedQuantity + " item(s) of this product were added to your shopping cart.";
+			return updatedQuantity + " 해당 상품이 장바구니에 담겼습니다.";
 		} catch (CustomerNotFoundException ex) {
-			return "You must login to add this product to cart.";
+			return "장바구니에 담기위해서 로그인이 필요합니다.";
 		} catch (ShoppingCartException ex) {
 			return ex.getMessage();
 		}
@@ -39,7 +39,7 @@ public class ShoppingCartRestController {
 			throws CustomerNotFoundException {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);
 		if (email == null) {
-			throw new CustomerNotFoundException("No authenticated customer");
+			throw new CustomerNotFoundException("승인되지 않은 회원입니다.");
 		}
 				
 		return customerService.getCustomerByEmail(email);
@@ -54,7 +54,7 @@ public class ShoppingCartRestController {
 			
 			return String.valueOf(subtotal);
 		} catch (CustomerNotFoundException ex) {
-			return "You must login to change quantity of product.";
+			return "상품의 수량을 변경하기 위해서 로그인이 필요합니다.";
 		}	
 	}
 	
@@ -65,10 +65,10 @@ public class ShoppingCartRestController {
 			Customer customer = getAuthenticatedCustomer(request);
 			cartService.removeProduct(productId, customer);
 			
-			return "The product has been removed from your shopping cart.";
+			return "해당 상품이 장바구니에서 삭제되었습니다.";
 			
 		} catch (CustomerNotFoundException e) {
-			return "You must login to remove product.";
+			return "상품을 장바구니에서 삭제하기 위해서는 로그인이 필요합니다.";
 		}
 	}
 }

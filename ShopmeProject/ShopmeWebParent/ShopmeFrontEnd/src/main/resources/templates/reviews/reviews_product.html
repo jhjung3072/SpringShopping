@@ -20,19 +20,19 @@
 			<div><h3>[[${product.name}]]</h3></div>
 			
 			<div>
-				<a th:href="@{'/ratings/' + ${product.alias} + '/page/' + ${currentPage} + '?sortField=votes&sortDir=desc'}">Sort by most voted</a>
+				<a th:href="@{'/ratings/' + ${product.alias} + '/page/' + ${currentPage} + '?sortField=votes&sortDir=desc'}">추천을 많이 받은 리뷰순</a>
 				&nbsp;
-				<a th:href="@{'/ratings/' + ${product.alias} + '/page/' + ${currentPage} + '?sortField=reviewTime&sortDir=desc'}">Sort by most recent</a>
+				<a th:href="@{'/ratings/' + ${product.alias} + '/page/' + ${currentPage} + '?sortField=reviewTime&sortDir=desc'}">최근 리뷰순</a>
 			</div>
 						
 			<div class="row m-1">
 				<div class="col-xs">
 					<input type="text" class="product-detail-rating-star" dir="ltr" data-size="md" th:value="${product.averageRating}" />
 				</div>
-				<div class="col-xs ml-1 mt-3"><span id="ratingNumber">[[${product.averageRating}]]</span> of 5</div>
+				<div class="col-xs ml-1 mt-3"><span id="ratingNumber"></span> 5점중 </div>[[${product.averageRating}]]
 			</div>
 			<div class="row m-1 ml-3">
-				<span>[[${product.reviewCount}]] ratings</span>
+				<span>[[${product.reviewCount}]] 개</span>
 			</div>			
 		</div>
 	</div>	
@@ -43,7 +43,7 @@
 	
 	<div th:replace="fragments :: modal_dialog"></div>
 			
-	<div th:replace="fragments :: pagination('/ratings/' + ${product.alias}, 'reviews')"></div>
+	<div th:replace="fragments :: pagination('/ratings/' + ${product.alias}, '리뷰')"></div>
 	
 	<div th:replace="navigation :: footer_menu"></div>
 	

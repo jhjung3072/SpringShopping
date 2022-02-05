@@ -38,12 +38,12 @@ public class ForgotPasswordController {
 			String link = Utility.getSiteURL(request) + "/reset_password?token=" + token;
 			sendEmail(link, email);
 			
-			model.addAttribute("message", "We have sent a reset password link to your email."
-					+ " Please check.");
+			model.addAttribute("message", "회원님의 이메일로 패스워드 재설정 링크를 보냈습니다."
+					+ " 확인해주세요.");
 		} catch (CustomerNotFoundException e) {
 			model.addAttribute("error", e.getMessage());
 		} catch (UnsupportedEncodingException | MessagingException e) {
-			model.addAttribute("error", "Could not send email");
+			model.addAttribute("error", "이메일을 발송할 수 없습니다.");
 		}
 		
 		return "customer/forgot_password_form";
@@ -55,15 +55,14 @@ public class ForgotPasswordController {
 		JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
 		
 		String toAddress = email;
-		String subject = "Here's the link to reset your password";
+		String subject = "패스워드 재설정 링크";
 		
-		String content = "<p>Hello,</p>"
-				+ "<p>You have requested to reset your password.</p>"
-				+ "Click the link below to change your password:</p>"
-				+ "<p><a href=\"" + link + "\">Change my password</a></p>"
+		String content = "<p>안녕하세요,</p>"
+				+ "<p>회원님의 패스워드 초기화 링크입니다</p>"
+				+ "아래의 링크를 눌러 회원님의 패스워드를 변경하세요:</p>"
+				+ "<p><a href=\"" + link + "\">패스워드 변경</a></p>"
 				+ "<br>"
-				+ "<p>Ignore this email if you do remember your password, "
-				+ "or you have not made the request.</p>";
+				+ "<p>만약 기존의 패스워드가 기억나신다면 변경하지 않으셔도 됩니다.<p>";
 		
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -98,9 +97,9 @@ public class ForgotPasswordController {
 		try {
 			customerService.updatePassword(token, password);
 			
-			model.addAttribute("pageTitle", "Reset Your Password");
-			model.addAttribute("title", "Reset Your Password");
-			model.addAttribute("message", "You have successfully changed your password.");
+			model.addAttribute("pageTitle", "패스워드 재설정");
+			model.addAttribute("title", "패스워드 재설정");
+			model.addAttribute("message", "패스워드를 재설정했습니다.");
 			
 		} catch (CustomerNotFoundException e) {
 			model.addAttribute("pageTitle", "Invalid Token");

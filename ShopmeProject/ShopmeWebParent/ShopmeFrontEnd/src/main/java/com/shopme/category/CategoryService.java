@@ -33,7 +33,7 @@ public class CategoryService {
 	public Category getCategory(String alias) throws CategoryNotFoundException {
 		Category category = repo.findByAliasEnabled(alias);
 		if (category == null) {
-			throw new CategoryNotFoundException("Could not find any categories with alias " + alias);
+			throw new CategoryNotFoundException("해당 줄임말로된 카테고리가 없습니다: " + alias);
 		}
 		
 		return category;

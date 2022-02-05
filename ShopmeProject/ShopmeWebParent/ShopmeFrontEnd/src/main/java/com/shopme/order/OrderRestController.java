@@ -25,16 +25,16 @@ public class OrderRestController {
 	public ResponseEntity<?> handleOrderReturnRequest(@RequestBody OrderReturnRequest returnRequest,
 			HttpServletRequest servletRequest) {
 		
-		System.out.println("Order ID: " + returnRequest.getOrderId());
-		System.out.println("Reason: " + returnRequest.getReason());
-		System.out.println("Note: " + returnRequest.getNote());
+		System.out.println("주문 ID: " + returnRequest.getOrderId());
+		System.out.println("사유: " + returnRequest.getReason());
+		System.out.println("내용: " + returnRequest.getNote());
 		
 		Customer customer = null;
 		
 		try {
 			customer = getAuthenticatedCustomer(servletRequest);
 		} catch (CustomerNotFoundException ex) {
-			return new ResponseEntity<>("Authentication required", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("로그인이 필요합니다.", HttpStatus.BAD_REQUEST);
 		}
 		
 		try {
@@ -50,7 +50,7 @@ public class OrderRestController {
 			throws CustomerNotFoundException {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);
 		if (email == null) {
-			throw new CustomerNotFoundException("No authenticated customer");
+			throw new CustomerNotFoundException("인증되지 않은 회원");
 		}
 				
 		return customerService.getCustomerByEmail(email);

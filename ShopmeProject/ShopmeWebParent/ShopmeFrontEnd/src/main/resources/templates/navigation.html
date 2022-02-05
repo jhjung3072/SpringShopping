@@ -24,11 +24,11 @@
 				
 				<th:block sec:authorize="!isAuthenticated()">
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/login}">Login</a>
+					<a class="nav-link" th:href="@{/login}">로그인</a>
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/register}">Register</a>
+					<a class="nav-link" th:href="@{/register}">회원가입</a>
 				</li>
 				</th:block>
 				
@@ -46,7 +46,7 @@
 		
 		<th:block sec:authorize="isAuthenticated()">	
 		<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
-			<input type="submit" value="Logout" />
+			<input type="submit" value="로그아웃" />
 		</form>
 		</th:block>
 		
@@ -56,7 +56,7 @@
 					<input type="search" name="keyword" class="form-control mr-sm-2"
 						th:value="${searchKeyword}" 
 						placeholder="keyword" required />
-					<input type="submit" value="Search" class="btn btn-outline-success" />
+					<input type="submit" value="검색" class="btn btn-outline-success" />
 				</form>
 				<ul class="navbar-nav">						
 					<th:block sec:authorize="isAuthenticated()">
@@ -66,19 +66,19 @@
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/address_book}">Address Book</a>
+						<a class="nav-link" th:href="@{/address_book}">배송지</a>
 					</li>
 										
 					<li class="nav-item">
-						<a class="nav-link" href="">Questions</a>
+						<a class="nav-link" href="">질문</a>
 					</li>
 															
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/reviews}">Reviews</a>
+						<a class="nav-link" th:href="@{/reviews}">리뷰</a>
 					</li>
 																				
 					<li class="nav-item">
-						<a class="nav-link" th:href="@{/orders}">Orders</a>
+						<a class="nav-link" th:href="@{/orders}">주문내역</a>
 					</li>
 					
 					<li class="nav-item">
@@ -86,7 +86,7 @@
 					</li>
 					
 					<li class="nav-item">
-						<a class="nav-link" href="javascript: document.logoutForm.submit()">Logout</a>
+						<a class="nav-link" href="javascript: document.logoutForm.submit()">로그아웃</a>
 					</li>					
 					</th:block>						
 				</ul>				

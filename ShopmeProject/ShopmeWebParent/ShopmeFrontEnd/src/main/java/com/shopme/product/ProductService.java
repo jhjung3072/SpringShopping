@@ -28,7 +28,7 @@ public class ProductService {
 	public Product getProduct(String alias) throws ProductNotFoundException {
 		Product product = repo.findByAlias(alias);
 		if (product == null) {
-			throw new ProductNotFoundException("Could not find any product with alias " + alias);
+			throw new ProductNotFoundException("해당 줄임말로된 상품을 찾을 수 없습니다. " + alias);
 		}
 		
 		return product;
@@ -39,7 +39,7 @@ public class ProductService {
 			Product product = repo.findById(id).get();
 			return product;
 		} catch ( NoSuchElementException ex) {
-			throw new ProductNotFoundException("Could not find any product with ID " + id);
+			throw new ProductNotFoundException("해당 상품 ID를 찾을 수 없습니다: " + id);
 		}
 		
 	}

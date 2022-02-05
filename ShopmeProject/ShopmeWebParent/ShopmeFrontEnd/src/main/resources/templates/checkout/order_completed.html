@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Shopme', 'none')" />
+<head th:replace="fragments :: page_head('모두의 마켓', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: header_menu"></div>
 	<div th:replace="navigation :: search_nav"></div>
 	
 	<div class="text-center border border-secondary rounded m-3 p-3">
-		<h2>Your Order has been Completed!</h2>
-		<h4>A confirmation email has been sent to you.</h4>
-		<h4>Kindly check your email for the details.</h4>
+		<h2>회원님의 주문이 성공적으로 완료되었습니다!</h2>
+		<h4>주문 확인 메일이 회원님의 이메일로 발송되었습니다.</h4>
+		<h4>이메일을 확인해주세요</h4>
 	</div>
 
 	

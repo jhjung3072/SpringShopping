@@ -37,7 +37,7 @@ public class CustomerController {
 		List<Country> listCountries = customerService.listAllCountries();
 		
 		model.addAttribute("listCountries", listCountries);
-		model.addAttribute("pageTitle", "Customer Registration");
+		model.addAttribute("pageTitle", "회원가입");
 		model.addAttribute("customer", new Customer());
 		
 		return "register/register_form";
@@ -49,7 +49,7 @@ public class CustomerController {
 		customerService.registerCustomer(customer);
 		sendVerificationEmail(request, customer);
 		
-		model.addAttribute("pageTitle", "Registration Succeeded!");
+		model.addAttribute("pageTitle", "회원가입이 완료되었습니다.");
 		
 		return "/register/register_success";
 	}
@@ -107,7 +107,7 @@ public class CustomerController {
 	public String updateAccountDetails(Model model, Customer customer, RedirectAttributes ra,
 			HttpServletRequest request) {
 		customerService.update(customer);
-		ra.addFlashAttribute("message", "Your account details have been updated.");
+		ra.addFlashAttribute("message", "계정정보가 수정되었습니다.");
 		
 		updateNameForAuthenticatedCustomer(customer, request);
 		

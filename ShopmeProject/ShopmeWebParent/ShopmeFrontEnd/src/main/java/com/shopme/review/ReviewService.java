@@ -45,7 +45,7 @@ public class ReviewService {
 	public Review getByCustomerAndId(Customer customer, Integer reviewId) throws ReviewNotFoundException {
 		Review review = reviewRepo.findByCustomerAndId(customer.getId(), reviewId);
 		if (review == null) 
-			throw new ReviewNotFoundException("Customer doesn not have any reviews with ID " + reviewId);
+			throw new ReviewNotFoundException("회원이 해당 리뷰ID를 갖고 있지 않습니다. " + reviewId);
 		
 		return review;
 	}

@@ -64,16 +64,16 @@ public class PayPalService {
 		
 		switch (statusCode) {
 		case NOT_FOUND: 
-			message = "Order ID not found";
+			message = "주문ID를 찾지 못했습니다.";
 			
 		case BAD_REQUEST:
-			message = "Bad Request to PayPal Checkout API";
+			message = "잘못된 요청: 페이팔 결제 API";
 			
 		case INTERNAL_SERVER_ERROR:
-			message = "PayPal server error";
+			message = "페이팔 서버 에러";
 			
 		default:
-			message = "PayPal returned non-OK status code";
+			message = "페이팔 에러: 올바르지 않은 상태코드가 반환되었습니다.";
 		}
 		
 		throw new PayPalApiException(message);

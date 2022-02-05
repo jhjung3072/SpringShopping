@@ -5,33 +5,33 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="returnOrderModalTitle">Return Order</h4>
+				<h4 class="modal-title" id="returnOrderModalTitle">주문 취소</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			
 			<form onsubmit="return submitReturnOrderForm();">
 			<div class="modal-body">
 				<div id="divReason">
-					<div>Reason:</div>
+					<div>사유:</div>
 					<div>
-						<input type="radio" name="returnReason" value="I bought the wrong items" required />
-						I bought the wrong items
+						<input type="radio" name="returnReason" value="상품을 실수로 잘못골랐습니다." required />
+						상품을 실수로 잘못골랐습니다.
 					</div>
 					<div>
-						<input type="radio" name="returnReason" value="I received the wrong items" />
-						I received the wrong items
+						<input type="radio" name="returnReason" value="주문한것과 다른 상품을 받았습니다." />
+						주문한것과 다른 상품을 받았습니다.
 					</div>
 					<div>
-						<input type="radio" name="returnReason" value="The product was damaged/defective" />
-						The product was damaged/defective
+						<input type="radio" name="returnReason" value="상품에 결함이 있습니다." />
+						상품에 결함이 있습니다.
 					</div>
 					<div>
-						<input type="radio" name="returnReason" value="The product arrived too late" />
-						The product arrived too late
+						<input type="radio" name="returnReason" value="배송이 너무 늦습니다." />
+						배송이 너무 늦습니다.
 					</div>	
 					<div class="m-1">
 						<textarea class="form-control" id="returnNote" rows="3" maxlength="120"
-							placeholder="Additional information"></textarea>
+							placeholder="기타 다른 사유"></textarea>
 					</div>														
 				</div>
 				<div id="divMessage" class="text-center"></div>
@@ -39,8 +39,8 @@
 			
 			
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-success" id="firstButton">Send Request</button>
-				<button type="button" class="btn btn-danger" id="secondButton" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-success" id="firstButton">확인</button>
+				<button type="button" class="btn btn-danger" id="secondButton" data-dismiss="modal">취소</button>
 			</div>
 			</form>
 		</div>

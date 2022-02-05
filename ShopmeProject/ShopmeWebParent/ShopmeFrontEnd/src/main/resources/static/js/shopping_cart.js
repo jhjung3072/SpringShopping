@@ -27,7 +27,7 @@ function decreaseQuantity(link) {
 		quantityInput.val(newQuantity);
 		updateQuantity(productId, newQuantity);
 	} else {
-		showWarningModal('Minimum quantity is 1');
+		showWarningModal('최소 수량은 1개 입니다.');
 	}	
 }
 
@@ -40,7 +40,7 @@ function increaseQuantity(link) {
 			quantityInput.val(newQuantity);
 			updateQuantity(productId, newQuantity);
 		} else {
-			showWarningModal('Maximum quantity is 5');
+			showWarningModal('최대 수량은 5개 입니다.');
 		}	
 }
 
@@ -57,7 +57,7 @@ function updateQuantity(productId, quantity) {
 		updateSubtotal(updatedSubtotal, productId);
 		updateTotal();
 	}).fail(function() {
-		showErrorModal("Error while updating product quantity.");
+		showErrorModal("상품 수량 갱신중에 에러가 발생했습니다.");
 	});	
 }
 
@@ -102,10 +102,10 @@ function removeProduct(link) {
 		updateTotal();
 		updateCountNumbers();
 		
-		showModalDialog("Shopping Cart", response);
+		showModalDialog("장바구니", response);
 		
 	}).fail(function() {
-		showErrorModal("Error while removing product.");
+		showErrorModal("상품 삭제중에 에러가 발생했습니다.");
 	});				
 }
 

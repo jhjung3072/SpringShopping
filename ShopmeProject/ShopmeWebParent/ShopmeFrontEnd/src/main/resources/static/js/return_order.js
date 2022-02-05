@@ -23,18 +23,18 @@ function showReturnModalDialog(link) {
 	divMessage.hide();
 	divReason.show();
 	firstButton.show();	
-	secondButton.text("Cancel");
+	secondButton.text("취소");
 	fieldNote.val("");
 	
-	orderId = link.attr("orderId");
-	modalTitle.text("Return Order ID #" + orderId);	
+	orderId = link.attr("주문Id");
+	modalTitle.text("환불 주문 ID #" + orderId);	
 	returnModal.modal("show");
 }
 
 function showMessageModal(message) {
 	divReason.hide();
 	firstButton.hide();
-	secondButton.text("Close");
+	secondButton.text("닫기");
 	divMessage.text(message);
 	
 	divMessage.show();
@@ -71,7 +71,7 @@ function sendReturnOrderRequest(reason, note) {
 		
 	}).done(function(returnResponse) {
 		console.log(returnResponse);
-		showMessageModal("Return request has been sent");
+		showMessageModal("환불 요청이 접수되었습니다.");
 		updateStatusTextAndHideReturnButton(returnResponse.orderId);
 	}).fail(function(err) {
 		console.log(err);

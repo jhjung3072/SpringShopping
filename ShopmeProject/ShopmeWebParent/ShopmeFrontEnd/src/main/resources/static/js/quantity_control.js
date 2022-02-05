@@ -8,7 +8,7 @@ $(document).ready(function() {
 		if (newQuantity > 0) {
 			quantityInput.val(newQuantity);
 		} else {
-			showWarningModal('Minimum quantity is 1');
+			showWarningModal('최소 수량은 1개 입니다.');
 		}
 	});
 	
@@ -21,7 +21,7 @@ $(document).ready(function() {
 		if (newQuantity <= 5) {
 			quantityInput.val(newQuantity);
 		} else {
-			showWarningModal('Maximum quantity is 5');
+			showWarningModal('최대 수량은 5개 입니다.');
 		}
 	});	
 });

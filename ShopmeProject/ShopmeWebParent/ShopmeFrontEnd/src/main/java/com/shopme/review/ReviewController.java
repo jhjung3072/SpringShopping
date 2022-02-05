@@ -125,7 +125,7 @@ public class ReviewController {
 		}
 		
 		model.addAttribute("endCount", endCount);
-		model.addAttribute("pageTitle", "Reviews for " + product.getShortName());
+		model.addAttribute("pageTitle", "리뷰: " + product.getShortName());
 		
 		return "reviews/reviews_product";
 	}

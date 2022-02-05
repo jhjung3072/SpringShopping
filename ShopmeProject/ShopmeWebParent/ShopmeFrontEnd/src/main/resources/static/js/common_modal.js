@@ -5,9 +5,9 @@ function showModalDialog(title, message) {
 }
 
 function showErrorModal(message) {
-	showModalDialog("Error", message);
+	showModalDialog("에러", message);
 }
 
 function showWarningModal(message) {
-	showModalDialog("Warning", message);
+	showModalDialog("경고", message);
 }	

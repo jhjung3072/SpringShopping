@@ -7,37 +7,37 @@
 	<div th:replace="navigation :: search_nav"></div>
 
 	<div class="text-center">
-		<h2>Checkout</h2>
+		<h2>결제</h2>
 	</div>
 	
 	<div class="row m-1">
 		<div class="col-sm-8">
 			<div class="card">
-				<div class="card-header"><h5>Shipping information</h5></div>
+				<div class="card-header"><h5>배송지 정보</h5></div>
 				<div class="card-body">
 					<p>
-						<b>Ship to:</b>&nbsp; [[${shippingAddress}]]
-						<a th:href="@{/address_book(redirect=checkout)}">[Ship to another address]</a>
+						<b>배송지:</b>&nbsp; [[${shippingAddress}]]
+						<a th:href="@{/address_book(redirect=checkout)}">[다른 배송지를 선택]</a>
 					</p>
 					<p>
-						<b>Days to deliver: </b>[[${checkoutInfo.deliverDays}]] day(s)
+						<b>배송 소요일: </b>[[${checkoutInfo.deliverDays}]] 일
 					</p>
 					<p>
-						<b>Expected deliver date: </b>[[${#dates.format(checkoutInfo.deliverDate, 'E, dd MMM yyyy')}]]
+						<b>예상 배송일: </b>[[${#dates.format(checkoutInfo.deliverDate, 'E, dd MMM yyyy')}]]
 					</p>
 				</div>
 			</div>		
 			
 			<div class="card mt-3 mb-3">
-				<div class="card-header"><h5>Payment Method</h5></div>
+				<div class="card-header"><h5>결제 방법</h5></div>
 				<div class="card-body">
 					<div th:if="${checkoutInfo.codSupported}">
 						<form th:action="@{/place_order}" method="post">
 						<p>
 						
-							<input type="radio" name="paymentMethod" id="radioCOD" value="COD" /> Cash on Delivery (COD)
+							<input type="radio" name="paymentMethod" id="radioCOD" value="COD" /> 착불로 수령
 							&nbsp;
-							<button class="btn btn-primary d-none" type="submit" id="buttonSubmit">Place Order with COD</button>
+							<button class="btn btn-primary d-none" type="submit" id="buttonSubmit">착불로 주문</button>
 						</p>
 						</form>
 					</div>
@@ -53,7 +53,7 @@
 		
 		<div class="col-sm-4">
 			<div class="card">
-				<div class="card-header"><h5>Order Summary</h5></div>
+				<div class="card-header"><h5>영수증</h5></div>
 				<div class="card-body">
 					<div>
 					<table>
@@ -77,17 +77,17 @@
 					</div>
 					
 					<div class="row mt-2">
-						<div class="col">Product Total: </div>
+						<div class="col">상품 가격: </div>
 						<div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.productTotal})"></div></div>
 					</div>
 					
 					<div class="row mt-2">
-						<div class="col">Shipping Total: </div>
+						<div class="col">배송비: </div>
 						<div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.shippingCostTotal})"></div></div>
 					</div>
 							
 					<div class="row mt-2">
-						<div class="col">Payment Total: </div>
+						<div class="col">결제 총합: </div>
 						<div class="col"><b><div th:replace="fragments :: format_currency(${checkoutInfo.paymentTotal})"></div></b></div>
 					</div>										
 				</div>
@@ -172,12 +172,12 @@
 		
 		onCancel: function(data) {
 			// buyer cancelled payment
-			alert('Payment cancelled by the buyer');
+			alert('회원에 의해 결제가 취소되었습니다.');
 		},
 		
 		onError: function(err) {
 			// error that prevents buyer from doing checkout
-			showErrorModal("Something wrong with your address information, so payment will not work.");
+			showErrorModal("주소에 오류가 있습니다. 결제가 취소되었습니다.");
 		}
 	}).render("#paypal-button-container");
 	

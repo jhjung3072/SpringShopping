@@ -127,7 +127,7 @@ public class ProductController {
 		model.addAttribute("startCount", startCount);
 		model.addAttribute("endCount", endCount);
 		model.addAttribute("totalItems", pageProducts.getTotalElements());
-		model.addAttribute("pageTitle", keyword + " - Search Result");
+		model.addAttribute("pageTitle", keyword + " - 검색 결과");
 		
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("searchKeyword", keyword);

@@ -52,22 +52,22 @@ function updateVoteCountAndIcons(currentLink, voteResult) {
 
 function highlightVoteUpIcon(voteUpLink, voteDownLink) {
 	voteUpLink.removeClass("far").addClass("fas");
-	voteUpLink.attr("title", "Undo vote up this review");
+	voteUpLink.attr("title", "좋아요 취소");
 	voteDownLink.removeClass("fas").addClass("far");
 }
 
 function highlightVoteDownIcon(voteDownLink, voteUpLink) {
 	voteDownLink.removeClass("far").addClass("fas");
-	voteDownLink.attr("title", "Undo vote down this review");
+	voteDownLink.attr("title", "싫어요 취소");
 	voteUpLink.removeClass("fas").addClass("far");
 }
 
 function unhighlightVoteDownIcon(voteDownLink) {
-	voteDownLink.attr("title", "Vote down this review");
+	voteDownLink.attr("title", "싫어요");
 	voteDownLink.removeClass("fas").addClass("far");	
 }
 
 function unhighlightVoteUpIcon(voteUpLink) {
-	voteUpLink.attr("title", "Vote up this review");
+	voteUpLink.attr("title", "좋아요");
 	voteUpLink.removeClass("fas").addClass("far");	
 }

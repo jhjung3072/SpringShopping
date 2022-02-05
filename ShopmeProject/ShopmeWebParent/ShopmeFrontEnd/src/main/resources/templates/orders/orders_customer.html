@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('My Orders', 'none')" />
+<head th:replace="fragments :: page_head('주문 내역', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: header_menu"></div>
 	<div th:replace="navigation :: search_nav"></div>
 	<div>
-		<h2>My Orders</h2>	
+		<h2>주문 내역</h2>	
 	</div>
 		
 	<div th:replace="fragments :: search_form"></div>
@@ -16,26 +16,26 @@
 			<thead class="thead-dark">
 				<tr>
 					<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
-					<th th:replace="fragments :: column_link('orderTime', 'Order Time', 'none')" />
-					<th>Products</th>
-					<th th:replace="fragments :: column_link('total', 'Total', 'none')" />
-					<th th:replace="fragments :: column_link('status', 'Status', 'none')" />
+					<th th:replace="fragments :: column_link('orderTime', '주문 시각', 'none')" />
+					<th>상품</th>
+					<th th:replace="fragments :: column_link('total', '총합', 'none')" />
+					<th th:replace="fragments :: column_link('status', '상태', 'none')" />
 					<th></th>
 				</tr>								
 			</thead>
 			<tbody>
 				<tr th:each="order : ${listOrders}">
 					<td th:text="${order.id}">ID</td>
-					<td><div th:replace="fragments :: format_time(${order.orderTime})">Order Time</div></td>
+					<td><div th:replace="fragments :: format_time(${order.orderTime})">주문 시각</div></td>
 					<td th:utext="${order.productNames}"></td>
 					<td>
-						<div th:replace="fragments :: format_currency(${order.total})">Total</div>
+						<div th:replace="fragments :: format_currency(${order.total})">총합</div>
 					</td>
 					<td><span th:class="'textOrderStatus' + ${order.id}">[[${order.status}]]</span></td>
 					<td>
 						<a class="fas fa-file-alt fa-2x icon-green linkDetail" 
 							th:href="@{'/orders/detail/' + ${order.id}}" 
-							title="View details of this order"></a>
+							title="주문 상세히 보기"></a>
 									
 						<th:block th:if="${order.returnRequested == false && order.delivered == true && order.returned == false}">
 							&nbsp;&nbsp;&nbsp;		
@@ -57,7 +57,7 @@
 				<div class="card-header">
 					<div class="row">
 						<div class="col">
-							<span>Order ID #[[${order.id}]]</span>						
+							<span>주문 ID #[[${order.id}]]</span>						
 						</div>						
 						<div class="col">
 							<div class="float-right">
@@ -81,7 +81,7 @@
 					</div>
 					<div class="row">
 						<div class="col">
-							<div th:replace="fragments :: format_currency(${order.total})">Total</div>	
+							<div th:replace="fragments :: format_currency(${order.total})">총합</div>	
 						</div>
 						<div class="col">
 							<span th:class="'textOrderStatus' + ${order.id}">[[${order.status}]]</span>
@@ -94,7 +94,7 @@
 	</th:block>
 	</div>		
 	
-	<div th:replace="fragments :: pagination('/orders', 'orders')"></div>
+	<div th:replace="fragments :: pagination('/orders', '주문내역')"></div>
 	
 	<div th:replace="orders/return_order_modal :: content"></div>
 		

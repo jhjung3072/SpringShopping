@@ -139,7 +139,7 @@ public class CustomerService {
 			
 			return token;
 		} else {
-			throw new CustomerNotFoundException("Could not find any customer with the email " + email);
+			throw new CustomerNotFoundException("해당 이메일을 가진 회원을 찾을 수 없습니다: " + email);
 		}
 	}	
 	
@@ -150,7 +150,7 @@ public class CustomerService {
 	public void updatePassword(String token, String newPassword) throws CustomerNotFoundException {
 		Customer customer = customerRepo.findByResetPasswordToken(token);
 		if (customer == null) {
-			throw new CustomerNotFoundException("No customer found: invalid token");
+			throw new CustomerNotFoundException("회원을 찾을 수 없습니다.: invalid token");
 		}
 		
 		customer.setPassword(newPassword);

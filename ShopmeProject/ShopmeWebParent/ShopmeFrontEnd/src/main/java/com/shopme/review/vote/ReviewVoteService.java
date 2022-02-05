@@ -25,7 +25,7 @@ public class ReviewVoteService {
 		reviewRepo.updateVoteCount(reviewId);
 		Integer voteCount = reviewRepo.getVoteCount(reviewId);
 		
-		return VoteResult.success("You have unvoted " + voteType + " that review.", voteCount);
+		return VoteResult.success(voteType + "을 취소했습니다.", voteCount);
 	}
 	
 	public VoteResult doVote(Integer reviewId, Customer customer, VoteType voteType) {
@@ -34,7 +34,7 @@ public class ReviewVoteService {
 		try {
 			review = reviewRepo.findById(reviewId).get();
 		} catch (NoSuchElementException ex) {
-			return VoteResult.fail("The review ID " + reviewId + " no longer exists.");
+			return VoteResult.fail("해당 리뷰ID: " + reviewId + "가 존재하지 않습니다..");
 		}
 		
 		ReviewVote vote = voteRepo.findByReviewAndCustomer(reviewId, customer.getId());
@@ -64,8 +64,7 @@ public class ReviewVoteService {
 		reviewRepo.updateVoteCount(reviewId);
 		Integer voteCount = reviewRepo.getVoteCount(reviewId);
 		
-		return VoteResult.success("You have successfully voted " + voteType + " that review.", 
-				voteCount);
+		return VoteResult.success(voteType + "했습니다.", voteCount);
 	}
 	
 	public void markReviewsVotedForProductByCustomer(List<Review>listReviews, Integer productId,

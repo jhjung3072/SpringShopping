@@ -30,9 +30,9 @@ public class ShoppingCartService {
 			updatedQuantity = cartItem.getQuantity() + quantity;
 			
 			if (updatedQuantity > 5) {
-				throw new ShoppingCartException("Could not add more " + quantity + " item(s)"
-						+ " because there's already " + cartItem.getQuantity() + " item(s) "
-						+ "in your shopping cart. Maximum allowed quantity is 5.");
+				throw new ShoppingCartException(quantity + "개의 상품을 추가할 수 없습니다."
+						+ "회원님의 장바구니에 " + cartItem.getQuantity() + "개의 상품이 있습니다. "
+						+ "최대 수량은 5개 입니다.");
 			}
 		} else {
 			cartItem = new CartItem();

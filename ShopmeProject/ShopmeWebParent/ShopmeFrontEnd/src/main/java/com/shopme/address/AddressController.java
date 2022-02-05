@@ -55,7 +55,7 @@ public class AddressController {
 		
 		model.addAttribute("listCountries", listCountries);
 		model.addAttribute("address", new Address());
-		model.addAttribute("pageTitle", "Add New Address");
+		model.addAttribute("pageTitle", "새 주소 추가하기");
 		
 		return "address_book/address_form";
 	}
@@ -74,7 +74,7 @@ public class AddressController {
 			redirectURL += "?redirect=checkout";
 		}
 		
-		ra.addFlashAttribute("message", "The address has been saved successfully.");
+		ra.addFlashAttribute("message", "주소가 성공적으로 저장되었습니다.");
 		
 		return redirectURL;
 	}
@@ -89,7 +89,7 @@ public class AddressController {
 
 		model.addAttribute("address", address);
 		model.addAttribute("listCountries", listCountries);
-		model.addAttribute("pageTitle", "Edit Address (ID: " + addressId + ")");
+		model.addAttribute("pageTitle", "주소 수정 (ID: " + addressId + ")");
 		
 		return "address_book/address_form";
 	}
@@ -100,7 +100,7 @@ public class AddressController {
 		Customer customer = getAuthenticatedCustomer(request);
 		addressService.delete(addressId, customer.getId());
 		
-		ra.addFlashAttribute("message", "The address ID " + addressId + " has been deleted.");
+		ra.addFlashAttribute("message", "주소 ID: " + addressId + " 가 삭제되었습니다");
 		
 		return "redirect:/address_book";
 	}

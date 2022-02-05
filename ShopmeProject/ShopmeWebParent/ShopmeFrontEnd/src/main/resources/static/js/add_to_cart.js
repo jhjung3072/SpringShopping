@@ -15,8 +15,8 @@ function addToCart() {
 			xhr.setRequestHeader(csrfHeaderName, csrfValue);
 		}
 	}).done(function(response) {
-		showModalDialog("Shopping Cart", response);
+		showModalDialog("장바구니", response);
 	}).fail(function() {
-		showErrorModal("Error while adding product to shopping cart.");
+		showErrorModal("상품을 장바구니에 담는 중에 에러가 발생했습니다.");
 	});
 }

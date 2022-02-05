@@ -23,10 +23,10 @@ function voteReview(currentLink) {
 			});
 		}
 		
-		showModalDialog("Vote Review", voteResult.message);
+		showModalDialog("리뷰 추천", voteResult.message);
 		
 	}).fail(function() {
-		showErrorModal("Error voting review.");
+		showErrorModal("리뷰 추천 에러");
 	});	
 }
 
@@ -52,22 +52,22 @@ function updateVoteCountAndIcons(currentLink, voteResult) {
 
 function highlightVoteUpIcon(voteUpLink, voteDownLink) {
 	voteUpLink.removeClass("far").addClass("fas");
-	voteUpLink.attr("title", "Undo vote up this review");
+	voteUpLink.attr("title", "이 리뷰의 추천을 취소했습니다.");
 	voteDownLink.removeClass("fas").addClass("far");
 }
 
 function highlightVoteDownIcon(voteDownLink, voteUpLink) {
 	voteDownLink.removeClass("far").addClass("fas");
-	voteDownLink.attr("title", "Undo vote down this review");
+	voteDownLink.attr("title", "이 리뷰의 비추천을 취소했습니다.");
 	voteUpLink.removeClass("fas").addClass("far");
 }
 
 function unhighlightVoteDownIcon(voteDownLink) {
-	voteDownLink.attr("title", "Vote down this review");
+	voteDownLink.attr("title", "이 리뷰를 비추천했습니다.");
 	voteDownLink.removeClass("fas").addClass("far");	
 }
 
 function unhighlightVoteUpIcon(voteUpLink) {
-	voteUpLink.attr("title", "Vote up this review");
+	voteUpLink.attr("title", "이 리뷰를 추천했습니다.");
 	voteUpLink.removeClass("fas").addClass("far");	
 }

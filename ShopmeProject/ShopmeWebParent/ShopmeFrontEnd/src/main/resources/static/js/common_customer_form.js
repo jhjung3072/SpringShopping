@@ -26,13 +26,13 @@ function loadStatesForCountry() {
 		});
 		
 	}).fail(function() {
-		alert('failed to connect to the server!');
+		alert('서버연결 에러 발생');
 	});
 }
 
 function checkPasswordMatch(confirmPassword) {
 	if (confirmPassword.value != $("#password").val()) {
-		confirmPassword.setCustomValidity("Passwords do not match!");
+		confirmPassword.setCustomValidity("패스워드가 서로 다릅니다.");
 	} else {
 		confirmPassword.setCustomValidity("");
 	}

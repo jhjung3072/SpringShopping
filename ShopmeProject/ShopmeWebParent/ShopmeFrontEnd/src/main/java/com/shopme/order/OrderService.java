@@ -105,7 +105,7 @@ public class OrderService {
 			throws OrderNotFoundException {
 		Order order = repo.findByIdAndCustomer(request.getOrderId(), customer);
 		if (order == null) {
-			throw new OrderNotFoundException("Order ID " + request.getOrderId() + " not found");
+			throw new OrderNotFoundException("주문 ID: " + request.getOrderId() + " 를 찾을 수 없습니다.");
 		}
 		
 		if (order.isReturnRequested()) return;
@@ -115,7 +115,7 @@ public class OrderService {
 		track.setUpdatedTime(new Date());
 		track.setStatus(OrderStatus.RETURN_REQUESTED);
 		
-		String notes = "Reason: " + request.getReason();
+		String notes = "사유: " + request.getReason();
 		if (!"".equals(request.getNote())) {
 			notes += ". " + request.getNote();
 		}

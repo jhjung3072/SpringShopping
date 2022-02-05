@@ -13,10 +13,10 @@
 	<div th:replace="navigation :: search_nav"></div>
 	
 	<div th:if="${totalItems > 0}">
-		<h2>Search Results for '[[${keyword}]]'</h2>
+		<h2>'[[${keyword}]]' 검색 결과입니다.</h2>
 	</div>
 	<div th:unless="${totalItems > 0}">
-		<h3>No match found for '[[${keyword}]]'</h3>
+		<h3>'[[${keyword}]]' 검색 결과가 없습니다.</h3>
 	</div>
 		
 	<div class="row">
@@ -25,7 +25,7 @@
 		</th:block>
 	</div>
 	
-	<div th:replace="fragments :: pagination('/search', 'product')"></div>
+	<div th:replace="fragments :: pagination('/search', '상품')"></div>
 	
 	<div th:replace="navigation :: footer_menu"></div>
 </div>	

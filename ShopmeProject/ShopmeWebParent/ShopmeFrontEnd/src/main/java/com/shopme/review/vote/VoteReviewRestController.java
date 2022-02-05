@@ -24,7 +24,7 @@ public class VoteReviewRestController {
 		Customer customer = helper.getAuthenticatedCustomer(request);
 		
 		if (customer == null) {
-			return VoteResult.fail("You must login to vote the review.");
+			return VoteResult.fail("추천을 누르시려면 로그인이 필요합니다.");
 		}
 		
 		VoteType voteType = VoteType.valueOf(type.toUpperCase());

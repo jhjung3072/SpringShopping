@@ -29,20 +29,20 @@
 		
 <div th:fragment="pagination(moduleURL, entityName)" th:remove="tag">
 	<div class="text-center m-1" th:if="${totalItems > 0}">
-		<span>Showing [[${entityName}]] # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
+		<span>[[${entityName}]]  [[${startCount}]] ~ [[${endCount}]] of [[${totalItems}]]</span>
 	</div>
 	<div class="text-center m-1" th:unless="${totalItems > 0}">
-		<span>No [[${entityName}]] found</span>
+		<span>[[${entityName}]]을 찾을 수 없습니다.</span>
 	</div>
 	
 	<div th:if="${totalPages > 1}">
 		<nav>
 		  <ul class="pagination justify-content-center flex-wrap">
 		    <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-		    	<a th:replace="fragments :: page_link(${moduleURL}, 1, 'First')"></a>
+		    	<a th:replace="fragments :: page_link(${moduleURL}, 1, '처음')"></a>
 		    </li>		  
 		    <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-		    	<a th:replace="fragments :: page_link(${moduleURL}, ${currentPage - 1}, 'Previous')"></a>
+		    	<a th:replace="fragments :: page_link(${moduleURL}, ${currentPage - 1}, '이전')"></a>
 		    </li>
 		    
 		    <li th:class="${currentPage != i ? 'page-item': 'page-item active'}" 
@@ -51,11 +51,11 @@
 		    </li>
 		    
 		    <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-		    	<a th:replace="fragments :: page_link(${moduleURL}, ${currentPage + 1}, 'Next')"></a>
+		    	<a th:replace="fragments :: page_link(${moduleURL}, ${currentPage + 1}, '다음')"></a>
 		    </li>
 		    
 		    <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-		    	<a th:replace="fragments :: page_link(${moduleURL}, ${totalPages}, 'Last')"></a>
+		    	<a th:replace="fragments :: page_link(${moduleURL}, ${totalPages}, '마지막')"></a>
 		    </li>		    
 		  </ul>
 		</nav>	
@@ -66,7 +66,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="modalTitle">Warning</h4>
+				<h4 class="modal-title" id="modalTitle">경고</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			
@@ -75,7 +75,7 @@
 			</div>
 			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -85,7 +85,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Delete Confirmation</h4>
+				<h4 class="modal-title">삭제 확인</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			
@@ -94,8 +94,8 @@
 			</div>
 			
 			<div class="modal-footer">
-				<a class="btn btn-success" href="" id="yesButton">Yes</a>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+				<a class="btn btn-success" href="" id="yesButton">네</a>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">아니요</button>
 			</div>
 		</div>
 	</div>
@@ -118,7 +118,7 @@
 		<input type="hidden" name="sortField" th:value="${sortField}" />
 		<input type="hidden" name="sortDir" th:value="${sortDir}" />
 		
-		Filter:&nbsp;
+		검색어:&nbsp;
 		<input type="search" name="keyword" th:value="${keyword}" class="form-control" required/>
 		&nbsp;&nbsp;
 		<button type="submit" class="btn btn-primary">

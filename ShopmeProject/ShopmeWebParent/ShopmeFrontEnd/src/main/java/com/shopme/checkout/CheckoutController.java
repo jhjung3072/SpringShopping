@@ -163,11 +163,11 @@ public class CheckoutController {
 			if (paypalService.validateOrder(orderId)) {
 				return placeOrder(request);
 			} else {
-				pageTitle = "Checkout Failure";
-				message = "ERROR: Transaction could not be completed because order information is invalid";
+				pageTitle = "결제 실패";
+				message = "에러: 주문정보 에러";
 			}
 		} catch (PayPalApiException e) {
-			message = "ERROR: Transaction failed due to error: " + e.getMessage();
+			message = "에러: " + e.getMessage();
 		}
 		
 		model.addAttribute("pageTitle", pageTitle);
