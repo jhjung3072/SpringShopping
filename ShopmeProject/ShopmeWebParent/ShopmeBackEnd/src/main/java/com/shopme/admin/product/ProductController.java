@@ -32,11 +32,13 @@ public class ProductController {
 	@Autowired private BrandService brandService;
 	@Autowired private CategoryService categoryService;
 	
+	// 상품 목록 페이지 GET
 	@GetMapping("/products")
 	public String listFirstPage(Model model) {
 		return defaultRedirectURL;
 	}
 	
+	// 상품 목록 페이징 GET
 	@GetMapping("/products/page/{pageNum}")
 	public String listByPage(
 			@PagingAndSortingParam(listName = "listProducts", moduleURL = "/products") PagingAndSortingHelper helper,
@@ -54,6 +56,7 @@ public class ProductController {
 		return "products/products";		
 	}
 	
+	// 상품 추가 폼 GET
 	@GetMapping("/products/new")
 	public String newProduct(Model model) {
 		List<Brand> listBrands = brandService.listAll();
@@ -70,6 +73,7 @@ public class ProductController {
 		return "products/product_form";
 	}
 	
+	// 상품 추가 POST
 	@PostMapping("/products/save")
 	public String saveProduct(Product product, RedirectAttributes ra,
 			@RequestParam(value = "fileImage", required = false) MultipartFile mainImageMultipart,			
@@ -82,8 +86,9 @@ public class ProductController {
 			@AuthenticationPrincipal ShopmeUserDetails loggedUser
 			) throws IOException {
 		
+		// 판매관리자만 권한
 		if (!loggedUser.hasRole("운영자") && !loggedUser.hasRole("편집자")) {
-			if (loggedUser.hasRole("Salesperson")) {
+			if (loggedUser.hasRole("판매관리자")) {
 				productService.saveProductPrice(product);
 				ra.addFlashAttribute("message", "상품이 저장되었습니다.");			
 				return defaultRedirectURL;
@@ -106,7 +111,7 @@ public class ProductController {
 		return defaultRedirectURL;
 	}
 
-	
+	// 상품 활성화 업데이트 GET
 	@GetMapping("/products/{id}/enabled/{status}")
 	public String updateProductEnabledStatus(@PathVariable("id") Integer id,
 			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
@@ -118,11 +123,13 @@ public class ProductController {
 		return defaultRedirectURL;
 	}
 	
+	// 상품 삭제 GET
 	@GetMapping("/products/delete/{id}")
 	public String deleteProduct(@PathVariable(name = "id") Integer id, 
 			Model model, RedirectAttributes redirectAttributes) {
 		try {
 			productService.delete(id);
+			// 상품에 해당하는 메인 이미지와 보조이미지 삭제
 			String productExtraImagesDir = "../product-images/" + id + "/extras";
 			String productImagesDir = "../product-images/" + id;
 			
@@ -138,6 +145,7 @@ public class ProductController {
 		return defaultRedirectURL;
 	}
 	
+	// 상품 수정
 	@GetMapping("/products/edit/{id}")
 	public String editProduct(@PathVariable("id") Integer id, Model model,
 			RedirectAttributes ra, @AuthenticationPrincipal ShopmeUserDetails loggedUser) {
@@ -148,6 +156,7 @@ public class ProductController {
 			
 			boolean isReadOnlyForSalesperson = false;
 			
+			// 판매관리자만 권한
 			if (!loggedUser.hasRole("운영자") && !loggedUser.hasRole("편집자")) {
 				if (loggedUser.hasRole("판매관리자")) {
 					isReadOnlyForSalesperson = true;
@@ -169,6 +178,7 @@ public class ProductController {
 		}
 	}
 	
+	// 상품 상세 페이지 GET
 	@GetMapping("/products/detail/{id}")
 	public String viewProductDetails(@PathVariable("id") Integer id, Model model,
 			RedirectAttributes ra) {

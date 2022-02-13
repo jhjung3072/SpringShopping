@@ -13,10 +13,12 @@ import com.shopme.common.entity.setting.SettingCategory;
 public class SettingService {
 	@Autowired private SettingRepository repo;
 	
+	// 설정 목록 리스트
 	public List<Setting> listAllSettings() {
 		return (List<Setting>) repo.findAll();
 	}
 	
+	// 일반 설정 및 환율 정보 가져오기
 	public GeneralSettingBag getGeneralSettings() {
 		List<Setting> settings = new ArrayList<>();
 		

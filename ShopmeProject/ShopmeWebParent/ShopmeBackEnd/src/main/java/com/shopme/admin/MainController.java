@@ -16,6 +16,7 @@ public class MainController {
 	
 	@GetMapping("/login")
 	public String viewLoginPage() {
+		//사용자 인증정보가 null 이거나 비로그인 사용자
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
 			return "login";

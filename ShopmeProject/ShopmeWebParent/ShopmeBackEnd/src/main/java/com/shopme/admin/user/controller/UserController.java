@@ -33,11 +33,13 @@ public class UserController {
 	private String defaultRedirectURL = "redirect:/users/page/1?sortField=firstName&sortDir=asc";
 	@Autowired private UserService service;
 	
+	// 직원 목록
 	@GetMapping("/users")
 	public String listFirstPage() {
 		return defaultRedirectURL;
 	}
 	
+	// 직원 목록 페이징
 	@GetMapping("/users/page/{pageNum}")
 	public String listByPage(
 			@PagingAndSortingParam(listName = "listUsers", moduleURL = "/users") PagingAndSortingHelper helper,
@@ -47,7 +49,7 @@ public class UserController {
 		return "users/users";		
 	}
 	
-	
+	// 직원 추가 폼 GET
 	@GetMapping("/users/new")
 	public String newUser(Model model) {
 		List<Role> listRoles = service.listRoles();
@@ -62,11 +64,12 @@ public class UserController {
 		return "users/user_form";
 	}
 	
+	// 직원 저장 POST
 	@PostMapping("/users/save")
 	public String saveUser(User user, RedirectAttributes redirectAttributes,
 			@RequestParam("image") MultipartFile multipartFile) throws IOException {
 		
-		if (!multipartFile.isEmpty()) {
+		if (!multipartFile.isEmpty()) { // 이미지가 있다면 기존의 이미지 삭제 후 재업로드
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 			user.setPhotos(fileName);
 			User savedUser = service.save(user);
@@ -87,11 +90,13 @@ public class UserController {
 		return getRedirectURLtoAffectedUser(user);
 	}
 
+	// 직원 이메일 앞 부분으로 검색한 페이지로 리다이렉트
 	private String getRedirectURLtoAffectedUser(User user) {
 		String firstPartOfEmail = user.getEmail().split("@")[0];
 		return "redirect:/users/page/1?sortField=id&sortDir=asc&keyword=" + firstPartOfEmail;
 	}
 	
+	// 직원 정보 수정 폼 GET
 	@GetMapping("/users/edit/{id}")
 	public String editUser(@PathVariable(name = "id") Integer id, 
 			Model model,
@@ -111,11 +116,12 @@ public class UserController {
 		}
 	}
 	
+	// 직원 삭제 GET
 	@GetMapping("/users/delete/{id}")
 	public String deleteUser(@PathVariable(name = "id") Integer id, 
 			Model model,
 			RedirectAttributes redirectAttributes) {
-		try {
+		try { // 직원을 삭제하면서 이미지도 삭제
 			service.delete(id);;
 			String userPhotosDir="user-photos/" + id;
 			AmazonS3Util.removeFolder(userPhotosDir);
@@ -128,6 +134,7 @@ public class UserController {
 		return defaultRedirectURL;
 	}
 	
+	// 직원 활성화 여부 업데이트 GET
 	@GetMapping("/users/{id}/enabled/{status}")
 	public String updateUserEnabledStatus(@PathVariable("id") Integer id,
 			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
@@ -139,6 +146,7 @@ public class UserController {
 		return defaultRedirectURL;
 	}
 	
+	// 직원 목록 csv 파일로 내보내기
 	@GetMapping("/users/export/csv")
 	public void exportToCSV(HttpServletResponse response) throws IOException {
 		List<User> listUsers = service.listAll();
@@ -146,6 +154,7 @@ public class UserController {
 		exporter.export(listUsers, response);
 	}
 	
+	// 직원 목록 excel 파일로 내보내기
 	@GetMapping("/users/export/excel")
 	public void exportToExcel(HttpServletResponse response) throws IOException {
 		List<User> listUsers = service.listAll();
@@ -154,6 +163,7 @@ public class UserController {
 		exporter.export(listUsers, response);
 	}
 	
+	// // 직원 목록 pdf 파일로 내보내기
 	@GetMapping("/users/export/pdf")
 	public void exportToPDF(HttpServletResponse response) throws IOException {
 		List<User> listUsers = service.listAll();

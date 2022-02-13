@@ -21,11 +21,13 @@ public class ShippingRateController {
 	
 	@Autowired private ShippingRateService service;
 	
+	// 배송비 목록
 	@GetMapping("/shipping_rates")
 	public String listFirstPage() {
 		return defaultRedirectURL;
 	}
 	
+	// 배송비 목록 페이징
 	@GetMapping("/shipping_rates/page/{pageNum}")
 	public String listByPage(@PagingAndSortingParam(listName = "shippingRates", 
 						moduleURL = "/shipping_rates") PagingAndSortingHelper helper,
@@ -34,6 +36,7 @@ public class ShippingRateController {
 		return "shipping_rates/shipping_rates";
 	}	
 	
+	// 배송비 기본 값 추가 폼 GET
 	@GetMapping("/shipping_rates/new")
 	public String newRate(Model model) {
 		List<Country> listCountries = service.listAllCountries();
@@ -45,6 +48,7 @@ public class ShippingRateController {
 		return "shipping_rates/shipping_rate_form";		
 	}
 
+	// 배송비 저장 POST
 	@PostMapping("/shipping_rates/save")
 	public String saveRate(ShippingRate rate, RedirectAttributes ra) {
 		try {
@@ -55,7 +59,8 @@ public class ShippingRateController {
 		}
 		return defaultRedirectURL;
 	}
-		
+	
+	// 배송비 수정 폼 GET
 	@GetMapping("/shipping_rates/edit/{id}")
 	public String editRate(@PathVariable(name = "id") Integer id,
 			Model model, RedirectAttributes ra) {
@@ -74,6 +79,7 @@ public class ShippingRateController {
 		}
 	}
 
+	// 배송비 착불 가능 여부 GET
 	@GetMapping("/shipping_rates/cod/{id}/enabled/{supported}")
 	public String updateCODSupport(@PathVariable(name = "id") Integer id,
 			@PathVariable(name = "supported") Boolean supported,
@@ -87,6 +93,7 @@ public class ShippingRateController {
 		return defaultRedirectURL;
 	}
 	
+	// 배송비 삭제 GET
 	@GetMapping("/shipping_rates/delete/{id}")
 	public String deleteRate(@PathVariable(name = "id") Integer id,
 			Model model, RedirectAttributes ra) {

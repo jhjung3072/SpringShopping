@@ -16,6 +16,7 @@ public class ReportRestController {
 	@Autowired private MasterOrderReportService masterOrderReportService;
 	@Autowired private OrderDetailReportService orderDetailReportService;
 	
+	// 통계 기간을 설정하는 버튼을 누르면 호출되는 함수 Get
 	@GetMapping("/reports/sales_by_date/{period}")
 	public List<ReportItem> getReportDataByDatePeriod(@PathVariable("period") String period) {
 		System.out.println("Report period: " + period);
@@ -39,6 +40,7 @@ public class ReportRestController {
 		
 	}
 	
+	// 사용자가 시작 날짜와 마지막 날짜를 지정하는 함수
 	@GetMapping("/reports/sales_by_date/{startDate}/{endDate}")
 	public List<ReportItem> getReportDataByDatePeriod(@PathVariable("startDate") String startDate,
 			@PathVariable("endDate") String endDate) throws ParseException {
@@ -49,6 +51,7 @@ public class ReportRestController {
 		return masterOrderReportService.getReportDataByDateRange(startTime, endTime,ReportType.DAY);
 	}
 	
+	// 사용자가 지정한 기간의 카테고리, 상품 별 통계를 보여주는 함수
 	@GetMapping("/reports/{groupBy}/{startDate}/{endDate}")
 	public List<ReportItem> getReportDataByCategoryOrProductDateRange(@PathVariable("groupBy") String groupBy,
 			@PathVariable("startDate") String startDate,
@@ -61,6 +64,7 @@ public class ReportRestController {
 		return orderDetailReportService.getReportDataByDateRange(startTime, endTime,reportType);
 	}
 	
+	//  카테고리, 상품 별 통계를 보여주는 함수
 	@GetMapping("/reports/{groupBy}/{period}")
 	public List<ReportItem> getReportDataByCategoryOrProduct(@PathVariable("groupBy") String groupBy,
 				@PathVariable("period") String period){

@@ -26,11 +26,14 @@ public class CategoryController {
 	@Autowired
 	private CategoryService service;
 	
+	// 카테고리 목록 첫번째 페이지 GET
 	@GetMapping("/categories")
 	public String listFirstPage(String sortDir, Model model) {
 		return listByPage(1, sortDir, null, model);
 	}
 	
+	// 카테고리 목록 페이징 GET
+	// default 오름차순
 	@GetMapping("/categories/page/{pageNum}") 
 	public String listByPage(@PathVariable(name = "pageNum") int pageNum, 
 			String sortDir,	String keyword,	Model model) {
@@ -65,6 +68,7 @@ public class CategoryController {
 		return "categories/categories";		
 	}
 	
+	// 카테고리 생성 폼 GET
 	@GetMapping("/categories/new")
 	public String newCategory(Model model) {
 		List<Category> listCategories = service.listCategoriesUsedInForm();
@@ -76,6 +80,7 @@ public class CategoryController {
 		return "categories/category_form";
 	}
 	
+	// 카테고리 저장
 	@PostMapping("/categories/save")
 	public String saveCategory(Category category, 
 			@RequestParam("fileImage") MultipartFile multipartFile,
@@ -97,6 +102,7 @@ public class CategoryController {
 		return "redirect:/categories";
 	}
 	
+	// 카테고리 수정 폼 GET
 	@GetMapping("/categories/edit/{id}")
 	public String editCategory(@PathVariable(name = "id") Integer id, Model model,
 			RedirectAttributes ra) {
@@ -115,6 +121,7 @@ public class CategoryController {
 		}
 	}
 	
+	// 카테고리 활성화 GET
 	@GetMapping("/categories/{id}/enabled/{status}")
 	public String updateCategoryEnabledStatus(@PathVariable("id") Integer id,
 			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
@@ -126,6 +133,7 @@ public class CategoryController {
 		return "redirect:/categories";
 	}
 	
+	// 카테고리 삭제 GET
 	@GetMapping("/categories/delete/{id}")
 	public String deleteCategory(@PathVariable(name = "id") Integer id, 
 			Model model,
@@ -144,6 +152,7 @@ public class CategoryController {
 		return "redirect:/categories";
 	}
 	
+	// 카테고리 CSV로 내보내기 GET
 	@GetMapping("/categories/export/csv")
 	public void exportToCSV(HttpServletResponse response) throws IOException {
 		List<Category> listCategories = service.listCategoriesUsedInForm();

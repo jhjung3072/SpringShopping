@@ -1,5 +1,6 @@
 package com.shopme.admin.category;
 
+//카테고리 페이징 시 전체 페이지 개수와 요소 값을 사용하기 위한 클래스
 public class CategoryPageInfo {
 	private int totalPages;
 	private long totalElements;

@@ -19,11 +19,13 @@ public class ReviewController {
 	
 	@Autowired private ReviewService service;
 	
+	// 리뷰 목록 페이지 GET
 	@GetMapping("/reviews")
 	public String listFirstPage(Model model) {
 		return defaultRedirectURL;
 	}
 
+	// 리뷰 목록 페이징 GET
 	@GetMapping("/reviews/page/{pageNum}")
 	public String listByPage(
 			@PagingAndSortingParam(listName = "listReviews", moduleURL = "/reviews") PagingAndSortingHelper helper,
@@ -34,6 +36,7 @@ public class ReviewController {
 		return "reviews/reviews";
 	}
 	
+	// 리뷰 상세 GET
 	@GetMapping("/reviews/detail/{id}")
 	public String viewReview(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
 		try {
@@ -47,6 +50,7 @@ public class ReviewController {
 		}
 	}
 	
+	// 리뷰 수정 폼 GET
 	@GetMapping("/reviews/edit/{id}")
 	public String editReview(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
 		try {
@@ -62,6 +66,7 @@ public class ReviewController {
 		}
 	}	
 	
+	// 리뷰 저장 POST
 	@PostMapping("/reviews/save")
 	public String saveReview(Review reviewInForm, RedirectAttributes ra) {
 		service.save(reviewInForm);		
@@ -69,6 +74,7 @@ public class ReviewController {
 		return defaultRedirectURL;		
 	}
 	
+	// 리뷰 삭제 GET
 	@GetMapping("/reviews/delete/{id}")
 	public String deleteReview(@PathVariable("id") Integer id, RedirectAttributes ra) {
 		try {

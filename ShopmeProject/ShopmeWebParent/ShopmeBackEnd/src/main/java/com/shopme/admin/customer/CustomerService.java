@@ -24,14 +24,17 @@ public class CustomerService {
 	@Autowired private CountryRepository countryRepo;	
 	@Autowired private PasswordEncoder passwordEncoder;
 	
+	// 페이징
 	public void listByPage(int pageNum, PagingAndSortingHelper helper) {
 		helper.listEntities(pageNum, CUSTOMERS_PER_PAGE, customerRepo);
 	}
 	
+	// 회원 활성화
 	public void updateCustomerEnabledStatus(Integer id, boolean enabled) {
 		customerRepo.updateEnabledStatus(id, enabled);
 	}
 	
+	// 회원 get by ID
 	public Customer get(Integer id) throws CustomerNotFoundException {
 		try {
 			return customerRepo.findById(id).get();
@@ -40,10 +43,13 @@ public class CustomerService {
 		}
 	}
 
+	// 국가 리스트 목록
 	public List<Country> listAllCountries() {
 		return countryRepo.findAllByOrderByNameAsc();
 	}		
 	
+	// 이메일 중복 여부
+	// true or false
 	public boolean isEmailUnique(Integer id, String email) {
 		Customer existCustomer = customerRepo.findByEmail(email);
 
@@ -55,13 +61,18 @@ public class CustomerService {
 		return true;
 	}
 	
+	// 회원 저장
+	// passwordEncoder -> 암호화 적용
 	public void save(Customer customerInForm) {
 		Customer customerInDB = customerRepo.findById(customerInForm.getId()).get();
 		
+		// 패스워드 칸이 작성되었다면
 		if (!customerInForm.getPassword().isEmpty()) {
+			// 패스워드 암호화
 			String encodedPassword = passwordEncoder.encode(customerInForm.getPassword());
 			customerInForm.setPassword(encodedPassword);			
 		} else {
+			// 패스워드 칸이 비어져있다면 -> 회원 수정 시
 			customerInForm.setPassword(customerInDB.getPassword());
 		}		
 		
@@ -74,6 +85,7 @@ public class CustomerService {
 		customerRepo.save(customerInForm);
 	}
 	
+	// 회원 삭제
 	public void delete(Integer id) throws CustomerNotFoundException {
 		Long count = customerRepo.countById(id);
 		if (count == null || count == 0) {

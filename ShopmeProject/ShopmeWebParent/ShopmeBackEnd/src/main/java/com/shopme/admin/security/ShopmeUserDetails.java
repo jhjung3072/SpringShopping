@@ -12,15 +12,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
+//Spring Security에서 사용자의 정보를 담고 불러오기 위해 구현하는 인터페이스
 public class ShopmeUserDetails implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	private User user;
-	
 	
 	public ShopmeUserDetails(User user) {
 		this.user = user;
 	}
 
+	// 해당 직원의 권한 목록
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<Role> roles = user.getRoles();
@@ -34,31 +35,37 @@ public class ShopmeUserDetails implements UserDetails {
 		return authories;
 	}
 
+	// 패스워드
 	@Override
 	public String getPassword() {
 		return user.getPassword();
 	}
 
+	// 이메일
 	@Override
 	public String getUsername() {
 		return user.getEmail();
 	}
 
+	// 계정 만료 여부
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
 
+	// 계정 잠김 여부
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
 
+	// 패스워드 만료 여부
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
+	// 활성화 여부
 	@Override
 	public boolean isEnabled() {
 		return user.isEnabled();
@@ -76,6 +83,7 @@ public class ShopmeUserDetails implements UserDetails {
 		this.user.setLastName(lastName);
 	}	
 	
+	// 권한 있는지 유무
 	public boolean hasRole(String roleName) {
 		return user.hasRole(roleName);
 	}

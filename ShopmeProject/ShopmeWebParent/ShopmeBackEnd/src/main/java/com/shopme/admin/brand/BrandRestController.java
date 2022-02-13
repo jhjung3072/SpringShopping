@@ -18,11 +18,13 @@ public class BrandRestController {
 	@Autowired
 	private BrandService service;
 	
+	// 브랜드 이름 중복
 	@PostMapping("/brands/check_unique")
 	public String checkUnique(Integer id, String name) {
 		return service.checkUnique(id, name);
 	}
 	
+	//브랜드 별 목록
 	@GetMapping("/brands/{id}/categories")
 	public List<CategoryDTO> listCategoriesByBrand(@PathVariable(name = "id") Integer brandId) throws BrandNotFoundRestException {
 		List<CategoryDTO> listCategories = new ArrayList<>(); 

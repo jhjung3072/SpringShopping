@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
+//직원 사진과 상품 사진 저장 및 삭제 유틸 클래스
 public class FileUploadUtil {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileUploadUtil.class);
 	

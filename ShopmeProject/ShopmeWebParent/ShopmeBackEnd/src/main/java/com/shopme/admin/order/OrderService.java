@@ -26,6 +26,7 @@ public class OrderService {
 	@Autowired private OrderRepository orderRepo;
 	@Autowired private CountryRepository countryRepo;
 	
+	// 주문 목록 페이징
 	public void listByPage(int pageNum, PagingAndSortingHelper helper) {
 		String sortField = helper.getSortField();
 		String sortDir = helper.getSortDir();
@@ -33,6 +34,7 @@ public class OrderService {
 		
 		Sort sort = null;
 		
+		// 배송지별로 정렬시 국가 -> 도 -> 시 순으로 정렬
 		if ("destination".equals(sortField)) {
 			sort = Sort.by("country").and(Sort.by("state")).and(Sort.by("city"));
 		} else {
@@ -53,6 +55,7 @@ public class OrderService {
 		helper.updateModelAttributes(pageNum, page);		
 	}
 	
+	// 주문 GET by ID
 	public Order get(Integer id) throws OrderNotFoundException {
 		try {
 			return orderRepo.findById(id).get();
@@ -61,6 +64,7 @@ public class OrderService {
 		}
 	}
 	
+	// 주문 삭제
 	public void delete(Integer id) throws OrderNotFoundException {
 		Long count = orderRepo.countById(id);
 		if (count == null || count == 0) {
@@ -70,10 +74,12 @@ public class OrderService {
 		orderRepo.deleteById(id);
 	}
 
+	// 국가리스트
 	public List<Country> listAllCountries() {
 		return countryRepo.findAllByOrderByNameAsc();
 	}
 
+	// 주문 저장
 	public void save(Order orderInForm) {
 		Order orderInDB = orderRepo.findById(orderInForm.getId()).get();
 		orderInForm.setOrderTime(orderInDB.getOrderTime());
@@ -82,6 +88,7 @@ public class OrderService {
 		orderRepo.save(orderInForm);
 	}	
 	
+	// 주문 상태 수정 in RestController
 	public void updateStatus(Integer orderId, String status) {
 		Order orderInDB = orderRepo.findById(orderId).get();
 		OrderStatus statusToUpdate = OrderStatus.valueOf(status);

@@ -12,9 +12,11 @@ import org.supercsv.prefs.CsvPreference;
 import com.shopme.admin.AbstractExporter;
 import com.shopme.common.entity.Category;
 
+// 카테고리 csv로 내보내기 클래스
 public class CategoryCsvExporter extends AbstractExporter {
 	public void export(List<Category> listCategories, HttpServletResponse response) 
 			throws IOException {
+		// 파일명 설정 from AbstractExporter
 		super.setResponseHeader(response, "text/csv", ".csv", "카테고리 목록_");
 		
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), 

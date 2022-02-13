@@ -10,21 +10,25 @@ import com.shopme.admin.paging.PagingAndSortingHelper;
 import com.shopme.admin.paging.PagingAndSortingParam;
 import com.shopme.admin.product.ProductService;
 
+// 주문 상세 페이지 수정시 주문 상품 추가할 때 사용하는 Controller
 @Controller
 public class ProductSearchController {
 
 	@Autowired private ProductService service;
 	
+	// 주문 상세 페이지에서 상품 목록 폼 GET
 	@GetMapping("/orders/search_product")
 	public String showSearchProductPage() {
 		return "orders/search_product";
 	}
 	
+	// 주문 상세 페이지에서 상품 키워드 검색 POST
 	@PostMapping("/orders/search_product")
 	public String searchProducts(String keyword) {
 		return "redirect:/orders/search_product/page/1?sortField=name&sortDir=asc&keyword=" + keyword;
 	}
 	
+	// 주문 상세 페이지에서 상품 검색 페이징 GET
 	@GetMapping("/orders/search_product/page/{pageNum}")
 	public String searchProductsByPage(@PagingAndSortingParam(listName = "listProducts", 
 			moduleURL = "/orders/search_product") PagingAndSortingHelper helper,

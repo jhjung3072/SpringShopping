@@ -24,6 +24,7 @@ public class PagingAndSortingHelper {
 		this.keyword = keyword;
 	}
 	
+	// 페이징 addtribute
 	public void updateModelAttributes(int pageNum, Page<?> page) {
 		List<?> listItems = page.getContent();
 		int pageSize = page.getSize();
@@ -42,6 +43,7 @@ public class PagingAndSortingHelper {
 		model.addAttribute(listName, listItems);
 	}
 	
+	// 검색결과 필터 후 페이징 attribute
 	public void listEntities(int pageNum, int pageSize, SearchRepository<?, Integer> repo) {
 		Pageable pageable = createPageable(pageSize, pageNum);
 		Page<?> page = null;

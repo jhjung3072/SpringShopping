@@ -21,11 +21,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new ShopmeUserDetailsService();
 	}
 	
+	// 패스워드 인코딩
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
+	//DaoAuthenticationProvider는 요청받은 유저의 ID, Password와 저장된 ID, Password를 검증
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setUserDetailsService(userDetailsService());

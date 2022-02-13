@@ -21,27 +21,33 @@ import com.shopme.common.entity.product.ProductImage;
 public class ProductSaveHelper {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductSaveHelper.class);
 	
+	// 보조 이미지 삭제
 	static void deleteExtraImagesWeredRemovedOnForm(Product product) {
 		String extraImageDir = "product-images/" + product.getId() + "/extras";
 		List<String> listObjectKeys=AmazonS3Util.listFolder(extraImageDir);
 		
+		// 삭제 방식 : 예) product-images/1/카메라.jpg -> 마지막 슬래쉬"/" 부터 파일이름 
 		for (String objectKey:listObjectKeys) {
 			int lastIndexOfSlash=objectKey.lastIndexOf("/");
 			String fileName=objectKey.substring(lastIndexOfSlash+1,objectKey.length());
 			
+			// 상품 이미지에 존재하지 않는다면(삭제되었다면)
 			if (!product.containsImageName(fileName)) {
+				// 이미지 파일 삭제
 				AmazonS3Util.deleteFile(objectKey);
-				System.out.println("Deleted extra Image: "+ objectKey);
+				System.out.println("보조 이미지 삭제됨: "+ objectKey);
 			}
 		}
 	}
 
+	// 보조이미지 파일명 설정
 	static void setExistingExtraImageNames(String[] imageIDs, String[] imageNames, 
 			Product product) {
 		if (imageIDs == null || imageIDs.length == 0) return;
 		
 		Set<ProductImage> images = new HashSet<>();
 		
+		// 해당 메인 이미지 길이 만큼 반복하면서 이미지 이름 설정
 		for (int count = 0; count < imageIDs.length; count++) {
 			Integer id = Integer.parseInt(imageIDs[count]);
 			String name = imageNames[count];
@@ -53,6 +59,7 @@ public class ProductSaveHelper {
 		
 	}
 
+	// 상품 스펙 설정페이지, 스펙이름과 값 설정
 	static void setProductDetails(String[] detailIDs, String[] detailNames, 
 			String[] detailValues, Product product) {
 		if (detailNames == null || detailNames.length == 0) return;
@@ -70,6 +77,7 @@ public class ProductSaveHelper {
 		}
 	}
 
+	// 상품 이미지 저장
 	static void saveUploadedImages(MultipartFile mainImageMultipart, 
 			MultipartFile[] extraImageMultiparts, Product savedProduct) throws IOException {
 		if (!mainImageMultipart.isEmpty()) {
@@ -77,7 +85,11 @@ public class ProductSaveHelper {
 			String uploadDir = "product-images/" + savedProduct.getId();
 			
 			List<String> listObjectKeys=AmazonS3Util.listFolder(uploadDir);
+			
+			//메인 이미지 저장
+			// 폴더 내부를 순환하면서 기존의 메인 이미지를 삭제후 재업로드
 			for (String objectKey:listObjectKeys) {
+				// "/extras/" 가 아니라면 메인 이미지라는 의미
 				if (!objectKey.contains("/extras/")) {
 					AmazonS3Util.deleteFile(objectKey);
 				}
@@ -85,6 +97,7 @@ public class ProductSaveHelper {
 			AmazonS3Util.uploadFile(uploadDir, fileName, mainImageMultipart.getInputStream());		
 		}
 		
+		// 보조 이미지가 있다면,
 		if (extraImageMultiparts.length > 0) {
 			String uploadDir = "product-images/" + savedProduct.getId() + "/extras";
 			
@@ -98,12 +111,13 @@ public class ProductSaveHelper {
 		
 	}
 
+	// 새 보조이미지 파일명 설정
 	static void setNewExtraImageNames(MultipartFile[] extraImageMultiparts, Product product) {
 		if (extraImageMultiparts.length > 0) {
 			for (MultipartFile multipartFile : extraImageMultiparts) {
 				if (!multipartFile.isEmpty()) {
 					String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-					
+					// 기존에 등록되지 않았다면 추가하기
 					if (!product.containsImageName(fileName)) {
 						product.addExtraImage(fileName);
 					}
@@ -112,6 +126,7 @@ public class ProductSaveHelper {
 		}
 	}
 
+	// 메인 이미지 파일명 설정
 	static void setMainImageName(MultipartFile mainImageMultipart, Product product) {
 		if (!mainImageMultipart.isEmpty()) {
 			String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());

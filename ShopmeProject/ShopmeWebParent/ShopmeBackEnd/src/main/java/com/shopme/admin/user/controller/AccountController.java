@@ -24,6 +24,7 @@ public class AccountController {
 	@Autowired
 	private UserService service;
 	
+	// 회원 계정 정보 폼 GET
 	@GetMapping("/account")
 	public String viewDetails(@AuthenticationPrincipal ShopmeUserDetails loggedUser,
 			Model model) {
@@ -35,12 +36,13 @@ public class AccountController {
 		
 	}
 	
+	// 회원 계정 정보 수정 POST
 	@PostMapping("/account/update")
 	public String saveDetails(User user, RedirectAttributes redirectAttributes,
 			@AuthenticationPrincipal ShopmeUserDetails loggedUser,
 			@RequestParam("image") MultipartFile multipartFile) throws IOException {
 		
-		if (!multipartFile.isEmpty()) {
+		if (!multipartFile.isEmpty()) { // 사진이 있다면 기존 경로의 사진을 삭제후 재업로드
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 			user.setPhotos(fileName);
 			User savedUser = service.updateAccount(user);
@@ -50,7 +52,7 @@ public class AccountController {
 			FileUploadUtil.cleanDir(uploadDir);
 			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 			
-		} else {
+		} else { // 사진이 비어있다면 null
 			if (user.getPhotos().isEmpty()) user.setPhotos(null);
 			service.updateAccount(user);
 		}

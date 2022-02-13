@@ -11,6 +11,7 @@ public class OrderRestController {
 	@Autowired
 	private OrderService service;
 
+	// 배송상태 수정 POST
 	@PostMapping("/orders_shipper/update/{id}/{status}")
 	public Response updateOrderStatus(@PathVariable("id") Integer orderId, @PathVariable("status") String status) {
 		service.updateStatus(orderId, status);

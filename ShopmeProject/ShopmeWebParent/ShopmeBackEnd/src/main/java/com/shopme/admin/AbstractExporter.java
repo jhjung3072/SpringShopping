@@ -8,6 +8,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 
+// PDF, 엑셀, csv 파일 내보낼때 파일이름 설정 클래스
 public class AbstractExporter {
 
 	public void setResponseHeader(HttpServletResponse response, String contentType, 

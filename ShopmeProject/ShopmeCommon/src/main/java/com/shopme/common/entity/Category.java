@@ -63,6 +63,7 @@ public class Category extends IdBasedEntity {
 		return copyCategory;
 	}
 	
+	// 카테고리 insert 시 '--' 삽입을 위해 copy
 	public static Category copyFull(Category category) {
 		Category copyCategory = new Category();
 		copyCategory.setId(category.getId());

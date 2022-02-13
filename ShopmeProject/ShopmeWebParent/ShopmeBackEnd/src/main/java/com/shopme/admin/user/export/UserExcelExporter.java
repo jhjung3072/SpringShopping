@@ -17,6 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.shopme.admin.AbstractExporter;
 import com.shopme.common.entity.User;
 
+// excel 행과 열 매핑 클래스
 public class UserExcelExporter extends AbstractExporter {
 	private XSSFWorkbook workbook;
 	private XSSFSheet sheet;

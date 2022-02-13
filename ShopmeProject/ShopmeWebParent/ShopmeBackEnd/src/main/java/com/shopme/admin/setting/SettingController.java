@@ -29,10 +29,11 @@ public class SettingController {
 	
 	@Autowired private CurrencyRepository currencyRepo;
 	
+	// 설정 목록 리스트 GET
 	@GetMapping("/settings")
 	public String listAll(Model model) {
-		List<Setting> listSettings = service.listAllSettings();
-		List<Currency> listCurrencies = currencyRepo.findAllByOrderByNameAsc();
+		List<Setting> listSettings = service.listAllSettings(); // 설정 목록
+		List<Currency> listCurrencies = currencyRepo.findAllByOrderByNameAsc(); // 환율 목록
 		
 		model.addAttribute("listCurrencies", listCurrencies);
 		
@@ -40,18 +41,19 @@ public class SettingController {
 			model.addAttribute(setting.getKey(), setting.getValue());
 		}
 		
-		model.addAttribute("S3_BASE_URL", Constants.S3_BASE_URI);
+		model.addAttribute("S3_BASE_URL", Constants.S3_BASE_URI); // uri 설정
 		
 		return "settings/settings";
 	}
 	
+	// 일반 설정 POST
 	@PostMapping("/settings/save_general")
 	public String saveGeneralSettings(@RequestParam("fileImage") MultipartFile multipartFile,
 			HttpServletRequest request, RedirectAttributes ra) throws IOException {
 		GeneralSettingBag settingBag = service.getGeneralSettings();
 		
-		saveSiteLogo(multipartFile, settingBag);
-		saveCurrencySymbol(request, settingBag);
+		saveSiteLogo(multipartFile, settingBag); // 사이트 로고
+		saveCurrencySymbol(request, settingBag); // 환율 표시
 		
 		updateSettingValuesFromForm(request, settingBag.list());
 		
@@ -60,6 +62,7 @@ public class SettingController {
 		return "redirect:/settings";
 	}
 
+	// 사이트 로고 저장
 	private void saveSiteLogo(MultipartFile multipartFile, GeneralSettingBag settingBag) throws IOException {
 		if (!multipartFile.isEmpty()) {
 			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -67,11 +70,12 @@ public class SettingController {
 			settingBag.updateSiteLogo(value);
 			
 			String uploadDir = "site-logo";
-			AmazonS3Util.removeFolder(uploadDir);
+			AmazonS3Util.removeFolder(uploadDir); // 기존의 폴더 제거 후 재업로드
 			AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 		}
 	}
 	
+	// 환율 표시 저장
 	private void saveCurrencySymbol(HttpServletRequest request, GeneralSettingBag settingBag) {
 		Integer currencyId = Integer.parseInt(request.getParameter("CURRENCY_ID"));
 		Optional<Currency> findByIdResult = currencyRepo.findById(currencyId);
@@ -82,6 +86,7 @@ public class SettingController {
 		}
 	}
 	
+	// 설정 필드 값 저장
 	private void updateSettingValuesFromForm(HttpServletRequest request, List<Setting> listSettings) {
 		for (Setting setting : listSettings) {
 			String value = request.getParameter(setting.getKey());
@@ -93,6 +98,7 @@ public class SettingController {
 		service.saveAll(listSettings);
 	}
 	
+	// 메일 서버 저장 POST
 	@PostMapping("/settings/save_mail_server")
 	public String saveMailServerSetttings(HttpServletRequest request, RedirectAttributes ra) {
 		List<Setting> mailServerSettings = service.getMailServerSettings();
@@ -103,6 +109,7 @@ public class SettingController {
 		return "redirect:/settings#mailServer";
 	}
 	
+	// 메일 양식 저장 POST
 	@PostMapping("/settings/save_mail_templates")
 	public String saveMailTemplateSetttings(HttpServletRequest request, RedirectAttributes ra) {
 		List<Setting> mailTemplateSettings = service.getMailTemplateSettings();
@@ -113,6 +120,7 @@ public class SettingController {
 		return "redirect:/settings#mailTemplates";
 	}
 	
+	// 결제 API 저장
 	@PostMapping("/settings/save_payment")
 	public String savePaymentSetttings(HttpServletRequest request, RedirectAttributes ra) {
 		List<Setting> paymentSettings = service.getPaymentSettings();

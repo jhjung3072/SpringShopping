@@ -10,11 +10,13 @@ import com.shopme.common.entity.Customer;
 
 public interface CustomerRepository extends SearchRepository<Customer, Integer> {
 	
+	// 해당 키워드 회원 검색(이메일, 이름, 주소, 도, 시, 우편번호, 국가) 및 페이징
 	@Query("SELECT c FROM Customer c WHERE CONCAT(c.email, ' ', c.firstName, ' ', c.lastName, ' ', "
 			+ "c.addressLine1, ' ', c.addressLine2, ' ', c.city, ' ', c.state, "
 			+ "' ', c.postalCode, ' ', c.country.name) LIKE %?1%")
 	public Page<Customer> findAll(String keyword, Pageable pageable);
 	
+	// 회원 활성화
 	@Query("UPDATE Customer c SET c.enabled = ?2 WHERE c.id = ?1")
 	@Modifying
 	public void updateEnabledStatus(Integer id, boolean enabled);

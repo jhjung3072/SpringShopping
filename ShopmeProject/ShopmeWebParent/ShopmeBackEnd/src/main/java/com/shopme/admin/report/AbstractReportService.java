@@ -9,17 +9,22 @@ import java.util.List;
 public abstract class AbstractReportService {
 	protected DateFormat dateFormatter;
 	
+	// 일주일 동안의 통계
 	public List<ReportItem> getReportDataLast7Days(ReportType reportType) {
 		return getReportDataLastXDays(7,reportType);
 	}
 
+	// 28일 동안의 통계
 	public List<ReportItem> getReportDataLast28Days(ReportType reportType) {
 		return getReportDataLastXDays(28,reportType);
 	}
 	
+	// X일동안의 통계 범위를 지정하기 위한 함수
 	protected List<ReportItem> getReportDataLastXDays(int days, ReportType reportType) {
+		// 통계 마지막일은 현재 일
 		Date endTime = new Date();
 		Calendar cal = Calendar.getInstance();
+		// 현재를 기준으로 days-1 만큼을 기준으로 startTime
 		cal.add(Calendar.DAY_OF_MONTH, -(days - 1));
 		Date startTime = cal.getTime();
 		
@@ -31,17 +36,22 @@ public abstract class AbstractReportService {
 		return getReportDataByDateRangeInternal(startTime, endTime, reportType);
 	}
 	
+	// 6개월 동안의 통계
 	public List<ReportItem> getReportDataLast6Months(ReportType reportType) {
 		return getReportDataLastXMonths(6,reportType);
 	}
 
+	// 작년 동안의 통계
 	public List<ReportItem> getReportDataLastYear(ReportType reportType) {
 		return getReportDataLastXMonths(12,reportType);
 	}
 	
+	// X개월 동안의 통계 범위를 지정하기 위한 함수
 	protected List<ReportItem> getReportDataLastXMonths(int months, ReportType reportType) {
+		// 통계 마지막 월은 현재 월
 		Date endTime = new Date();
 		Calendar cal = Calendar.getInstance();
+		// 현재를 기준으로 months-1 만큼을 기준으로 startTime
 		cal.add(Calendar.MONTH, -(months - 1));
 		Date startTime = cal.getTime();
 		

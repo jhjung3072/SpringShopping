@@ -37,11 +37,13 @@ public class OrderController {
 	@Autowired private OrderService orderService;
 	@Autowired private SettingService settingService;
 
+	// 주문 목록 첫 페이지
 	@GetMapping("/orders")
 	public String listFirstPage() {
 		return defaultRedirectURL;
 	}
 	
+	// 주문 목록 페이징
 	@GetMapping("/orders/page/{pageNum}")
 	public String listByPage(
 			@PagingAndSortingParam(listName = "listOrders", moduleURL = "/orders") PagingAndSortingHelper helper,
@@ -52,6 +54,7 @@ public class OrderController {
 		orderService.listByPage(pageNum, helper);
 		loadCurrencySetting(request);
 		
+		// 배송관리자일 경우에만 허용
 		if (!loggedUser.hasRole("운영자") && !loggedUser.hasRole("판매관리자") && loggedUser.hasRole("배송관리자")) {
 			return "orders/orders_shipper";
 		}
@@ -59,6 +62,7 @@ public class OrderController {
 		return "orders/orders";
 	}
 	
+	// 환율 설정 불러오기
 	private void loadCurrencySetting(HttpServletRequest request) {
 		List<Setting> currencySettings = settingService.getCurrencySettings();
 		
@@ -67,6 +71,7 @@ public class OrderController {
 		}	
 	}	
 	
+	// 주문 상세 페이지 GET
 	@GetMapping("/orders/detail/{id}")
 	public String viewOrderDetails(@PathVariable("id") Integer id, Model model, 
 			RedirectAttributes ra, HttpServletRequest request,
@@ -77,6 +82,7 @@ public class OrderController {
 			
 			boolean isVisibleForAdminOrSalesperson = false;
 			
+			// 운영자와 판매관리자에게만 보여짐
 			if (loggedUser.hasRole("운영자") || loggedUser.hasRole("판매관리자")) {
 				isVisibleForAdminOrSalesperson = true;
 			}
@@ -92,6 +98,7 @@ public class OrderController {
 		
 	}
 	
+	// 주문내역 삭제 GET
 	@GetMapping("/orders/delete/{id}")
 	public String deleteOrder(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
 		try {
@@ -104,6 +111,7 @@ public class OrderController {
 		return defaultRedirectURL;
 	}
 	
+	// 주문 수정 GET
 	@GetMapping("/orders/edit/{id}")
 	public String editOrder(@PathVariable("id") Integer id, Model model, RedirectAttributes ra,
 			HttpServletRequest request) {
@@ -125,6 +133,7 @@ public class OrderController {
 		
 	}	
 	
+	// 주문 저장 POST
 	@PostMapping("/order/save")
 	public String saveOrder(Order order, HttpServletRequest request, RedirectAttributes ra) {
 		String countryName = request.getParameter("countryName");
@@ -140,6 +149,8 @@ public class OrderController {
 		return defaultRedirectURL;
 	}
 
+	// 주문 페이지내 주문 추적 수정
+	// 주문 id 순서대로 상태, 날짜, 내용을 각 배열에 저장
 	private void updateOrderTracks(Order order, HttpServletRequest request) {
 		String[] trackIds = request.getParameterValues("trackId");
 		String[] trackStatuses = request.getParameterValues("trackStatus");
@@ -149,7 +160,8 @@ public class OrderController {
 		List<OrderTrack> orderTracks = order.getOrderTracks();
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
 		
-		for (int i = 0; i < trackIds.length; i++) {
+		// 주문 id 순서대로 상태, 날짜, 내용을 각 배열에 저장
+ 		for (int i = 0; i < trackIds.length; i++) {
 			OrderTrack trackRecord = new OrderTrack();
 			
 			Integer trackId = Integer.parseInt(trackIds[i]);
@@ -171,6 +183,8 @@ public class OrderController {
 		}
 	}
 
+	// 주문페이지 내 상품 상세페이지 수정
+	// 상세페이지 id 순서대로 상품ID, 비용, 수량, 가격을 각 배열에 저장
 	private void updateProductDetails(Order order, HttpServletRequest request) {
 		String[] detailIds = request.getParameterValues("detailId");
 		String[] productIds = request.getParameterValues("productId");

@@ -11,6 +11,7 @@ import com.shopme.common.entity.Review;
 
 public interface ReviewRepository extends SearchRepository<Review, Integer> {
 	
+	// 리뷰 키워드 검색 (리뷰 제목, 내용, 상품 이름, 회원 이름)
 	@Query("SELECT r FROM Review r WHERE r.headline LIKE %?1% OR "
 			+ "r.comment LIKE %?1% OR r.product.name LIKE %?1% OR "
 			+ "CONCAT(r.customer.firstName, ' ', r.customer.lastName) LIKE %?1%")

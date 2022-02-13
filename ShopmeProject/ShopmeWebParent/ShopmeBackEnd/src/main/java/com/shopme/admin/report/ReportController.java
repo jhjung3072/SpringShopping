@@ -22,6 +22,7 @@ public class ReportController {
 		return "reports/reports";
 	}
 	
+	// 통계 페이지에서 환율 세팅된 것을 로드하기 위한 함수
 	private void loadCurrencySetting(HttpServletRequest request) {
 		List<Setting> currencySettings = settingService.getCurrencySettings();
 		

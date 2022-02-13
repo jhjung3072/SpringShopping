@@ -15,9 +15,11 @@ public interface BrandRepository extends SearchRepository<Brand, Integer> {
 	
 	public Brand findByName(String name);
 	
+	//브랜드 검색
 	@Query("SELECT b FROM Brand b WHERE b.name LIKE %?1%")
 	public Page<Brand> findAll(String keyword, Pageable pageable);
 	
+	// 브랜드 id와 이름만 반환하기 위해 new사용
 	@Query("SELECT NEW Brand(b.id, b.name) FROM Brand b ORDER BY b.name ASC")
 	public List<Brand> findAll();
 }

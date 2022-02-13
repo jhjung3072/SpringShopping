@@ -17,6 +17,7 @@ import software.amazon.awssdk.services.s3.model.ListObjectsResponse;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Object;
 
+//아마존S3 파일 업로드 및 삭제 클래스
 public class AmazonS3Util {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileUploadUtil.class);
 	private static final String BUCKET_NAME;

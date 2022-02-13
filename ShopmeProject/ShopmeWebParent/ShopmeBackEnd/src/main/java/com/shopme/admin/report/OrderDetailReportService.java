@@ -15,14 +15,16 @@ public class OrderDetailReportService extends AbstractReportService {
 
 	@Autowired private OrderDetailRepository repo;
 	
+	// 통계타입별 통계 내역 세분화
 	@Override
 	protected List<ReportItem> getReportDataByDateRangeInternal(
 			Date startDate, Date endDate, ReportType reportType) {
 		List<OrderDetail> listOrderDetails = null;
 		
+		// 통계타입이 카테고리이면 해당 기간에 주문을 카테고리별로 리스트
 		if (reportType.equals(ReportType.CATEGORY)) {
 			listOrderDetails = repo.findWithCategoryAndTimeBetween(startDate, endDate);
-		} else if (reportType.equals(ReportType.PRODUCT)) {
+		} else if (reportType.equals(ReportType.PRODUCT)) { // 통계타입이 상품이면 해당 기간에 주문을 상품별로 리스트
 			listOrderDetails = repo.findWithProductAndTimeBetween(startDate, endDate);
 		}
 		
@@ -33,16 +35,17 @@ public class OrderDetailReportService extends AbstractReportService {
 		for (OrderDetail detail : listOrderDetails) {
 			String identifier = "";
 			
+			// 통계타입이 카테고리이면 카테고리 이름
 			if (reportType.equals(ReportType.CATEGORY)) {
 				identifier = detail.getProduct().getCategory().getName();
-			} else if (reportType.equals(ReportType.PRODUCT)) {
+			} else if (reportType.equals(ReportType.PRODUCT)) { // 통계타입이 상품이면 상품 이름
 				identifier = detail.getProduct().getShortName();
 			}
 			
 			ReportItem reportItem = new ReportItem(identifier);
 			
-			float grossSales = detail.getSubtotal() + detail.getShippingCost();
-			float netSales = detail.getSubtotal() - detail.getProductCost();
+			float grossSales = detail.getSubtotal() + detail.getShippingCost(); // 매출 = 판매액 + 배송비
+			float netSales = detail.getSubtotal() - detail.getProductCost(); // 순이익 = 판매액 - 비용
 			
 			int itemIndex = listReportItems.indexOf(reportItem);
 			
@@ -50,7 +53,7 @@ public class OrderDetailReportService extends AbstractReportService {
 				reportItem = listReportItems.get(itemIndex);
 				reportItem.addGrossSales(grossSales);
 				reportItem.addNetSales(netSales);
-				reportItem.increaseProductsCount(detail.getQuantity());
+				reportItem.increaseProductsCount(detail.getQuantity()); // 판매량 갯수 증가
 			} else {
 				listReportItems.add(new ReportItem(identifier, grossSales, netSales, detail.getQuantity()));
 			}

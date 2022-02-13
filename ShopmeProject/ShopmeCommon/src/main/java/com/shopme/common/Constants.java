@@ -1,5 +1,6 @@
 package com.shopme.common;
 
+// 아마존 S3 연결을 위한 환경변수 값 불러오기
 public class Constants {
 	public static final String S3_BASE_URI;
 	

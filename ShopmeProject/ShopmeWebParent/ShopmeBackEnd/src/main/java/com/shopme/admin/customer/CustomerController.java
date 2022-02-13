@@ -22,11 +22,13 @@ public class CustomerController {
 	
 	@Autowired private CustomerService service;
 	
+	// 회원 목록 GET
 	@GetMapping("/customers")
 	public String listFirstPage(Model model) {
 		return defaultRedirectURL;
 	}
-
+	
+	// 회원 목록 페이징 GET
 	@GetMapping("/customers/page/{pageNum}")
 	public String listByPage(
 			@PagingAndSortingParam(listName = "listCustomers", moduleURL = "/customers") PagingAndSortingHelper helper,
@@ -37,6 +39,8 @@ public class CustomerController {
 		return "customers/customers";
 	}
 	
+	
+	// 회원 활성화 GET
 	@GetMapping("/customers/{id}/enabled/{status}")
 	public String updateCustomerEnabledStatus(@PathVariable("id") Integer id,
 			@PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
@@ -48,6 +52,7 @@ public class CustomerController {
 		return defaultRedirectURL;
 	}	
 	
+	// 회원 상세보기 GET
 	@GetMapping("/customers/detail/{id}")
 	public String viewCustomer(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
 		try {
@@ -61,6 +66,7 @@ public class CustomerController {
 		}
 	}
 	
+	// 회원 수정 폼 GET
 	@GetMapping("/customers/edit/{id}")
 	public String editCustomer(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
 		try {
@@ -79,6 +85,7 @@ public class CustomerController {
 		}
 	}
 	
+	// 회원 저장 POST
 	@PostMapping("/customers/save")
 	public String saveCustomer(Customer customer, Model model, RedirectAttributes ra) {
 		service.save(customer);
@@ -86,6 +93,7 @@ public class CustomerController {
 		return defaultRedirectURL;
 	}
 
+	// 회원 삭제 GET
 	@GetMapping("/customers/delete/{id}")
 	public String deleteCustomer(@PathVariable Integer id, RedirectAttributes ra) {
 		try {

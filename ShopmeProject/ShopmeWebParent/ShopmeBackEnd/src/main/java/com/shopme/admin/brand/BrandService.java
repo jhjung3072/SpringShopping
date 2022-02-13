@@ -16,18 +16,22 @@ public class BrandService {
 	@Autowired
 	private BrandRepository repo;
 	
+	// 브랜드 목록 (not paged)
 	public List<Brand> listAll() {
 		return (List<Brand>) repo.findAll();
 	}
 	
+	// 브랜드 목록 (paged)
 	public void listByPage(int pageNum, PagingAndSortingHelper helper) {
 		helper.listEntities(pageNum, BRANDS_PER_PAGE, repo);
 	}
 	
+	// 브랜드 저장
 	public Brand save(Brand brand) {
 		return repo.save(brand);
 	}
 	
+	// 브랜드 get
 	public Brand get(Integer id) throws BrandNotFoundException {
 		try {
 			return repo.findById(id).get();
@@ -36,6 +40,7 @@ public class BrandService {
 		}
 	}
 	
+	// 브랜드 삭제
 	public void delete(Integer id) throws BrandNotFoundException {
 		Long countById = repo.countById(id);
 		
@@ -46,6 +51,9 @@ public class BrandService {
 		repo.deleteById(id);
 	}
 	
+	// 브랜드 이름 중복 확인
+	// Duplicate = 중복
+	// OK = 중복 아님
 	public String checkUnique(Integer id, String name) {
 		boolean isCreatingNew = (id == null || id == 0);
 		Brand brandByName = repo.findByName(name);

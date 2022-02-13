@@ -20,6 +20,7 @@ import com.lowagie.text.pdf.PdfWriter;
 import com.shopme.admin.AbstractExporter;
 import com.shopme.common.entity.User;
 
+//pdf 행과 열 매핑 클래스
 public class UserPdfExporter extends AbstractExporter {
 
 	public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
@@ -31,6 +32,7 @@ public class UserPdfExporter extends AbstractExporter {
 		
 		document.open();
 		
+		// 한글화를 위한 폰트 설정
 		BaseFont baseFont = BaseFont.createFont("C:/Windows/Fonts/malgun.ttf", BaseFont.IDENTITY_H,
                 BaseFont.EMBEDDED);
 		

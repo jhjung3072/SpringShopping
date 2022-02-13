@@ -9,6 +9,8 @@ public class CustomerRestController {
 	@Autowired
 	private CustomerService service;
 	
+	// 회원 이메일 중복 체크
+	// OK or Duplicated
 	@PostMapping("/customers/check_email")
 	public String checkDuplicateEmail(Integer id, String email) {
 		if (service.isEmailUnique(id, email)) {
