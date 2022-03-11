@@ -31,11 +31,13 @@ public class ReviewController {
 	@Autowired private ProductService productService;
 	@Autowired private ReviewVoteService voteService;
 	
+	// 회원이 작성한 리뷰 목록 GET
 	@GetMapping("/reviews")
 	public String listFirstPage(Model model) {
 		return defaultRedirectURL;
 	}
 	
+	// 회원이 작성한 리뷰 목록 페이징 GET
 	@GetMapping("/reviews/page/{pageNum}") 
 	public String listReviewsByCustomerByPage(Model model, HttpServletRequest request,
 							@PathVariable(name = "pageNum") int pageNum,
@@ -68,6 +70,7 @@ public class ReviewController {
 		return "reviews/reviews_customer";
 	}
 	
+	// 회원이 작성한 리뷰 상세 GET
 	@GetMapping("/reviews/detail/{id}")
 	public String viewReview(@PathVariable("id") Integer id, Model model, 
 			RedirectAttributes ra, HttpServletRequest request) {
@@ -83,6 +86,7 @@ public class ReviewController {
 		}
 	}
 	
+	// 상품 목록에서 리뷰 모두 보기 GET
 	@GetMapping("/ratings/{productAlias}/page/{pageNum}") 
 	public String listByProductByPage(Model model,
 				@PathVariable(name = "productAlias") String productAlias,
@@ -103,6 +107,7 @@ public class ReviewController {
 		Customer customer=controllerHelper.getAuthenticatedCustomer(request);
 		
 		if (customer != null) {
+			// 해당 회원이 상품을 추천했는지 비추천했는지 색깔 구분
 			voteService.markReviewsVotedForProductByCustomer(listReviews, product.getId(), customer.getId());
 		}
 		
@@ -130,12 +135,14 @@ public class ReviewController {
 		return "reviews/reviews_product";
 	}
 	
+	// 상품 목록에서 리뷰 모두 보기 페이징 GET
 	@GetMapping("/ratings/{productAlias}")
 	public String listByProductFirstPage(@PathVariable(name = "productAlias") String productAlias, Model model,
 				HttpServletRequest request) {
 		return listByProductByPage(model, productAlias, 1, "reviewTime", "desc",request);
 	}	
 	
+	// 리뷰 작성 폼 GET
 	@GetMapping("/write_review/product/{productId}")
 	public String showViewForm(@PathVariable("productId") Integer productId, Model model,
 			HttpServletRequest request) {
@@ -153,14 +160,14 @@ public class ReviewController {
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 		boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
 		
-		if (customerReviewed) {
+		if (customerReviewed) { // 이미 리뷰를 작성했다면,
 			model.addAttribute("customerReviewed", customerReviewed);
-		} else {
+		} else { // 리뷰를 작성하지 않았다면,
 			boolean customerCanReview = reviewService.canCustomerReviewProduct(customer, product.getId());
 			
 			if (customerCanReview) {
 				model.addAttribute("customerCanReview", customerCanReview);				
-			} else {
+			} else { // 구매를 하지 않았거나 아직 상품을 수령하지 않았다면,
 				model.addAttribute("NoReviewPermission", true);
 			}
 		}		
@@ -171,6 +178,7 @@ public class ReviewController {
 		return "reviews/review_form";
 	}
 	
+	// 리뷰 작성 POST
 	@PostMapping("/post_review")
 	public String saveReview(Model model, Review review, Integer productId, HttpServletRequest request) {
 		Customer customer = controllerHelper.getAuthenticatedCustomer(request);

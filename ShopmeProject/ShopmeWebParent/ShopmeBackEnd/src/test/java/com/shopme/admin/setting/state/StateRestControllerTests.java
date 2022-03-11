@@ -35,10 +35,11 @@ public class StateRestControllerTests {
 	
 	@Autowired StateRepository stateRepo;
 	
+	// 국가별 도시 리스트 목록
 	@Test
-	@WithMockUser(username = "nam", password = "something", roles = "Admin")
+	@WithMockUser(username="user1", password="pass1",authorities = {"운영자"})
 	public void testListByCountries() throws Exception {
-		Integer countryId = 2;
+		Integer countryId = 14; // 호주
 		String url = "/states/list_by_country/" + countryId;
 		
 		MvcResult result = mockMvc.perform(get(url))
@@ -52,13 +53,14 @@ public class StateRestControllerTests {
 		assertThat(states).hasSizeGreaterThan(1);
 	}
 	
+	// 도시 추가
 	@Test
-	@WithMockUser(username = "nam", password = "something", roles = "Admin")
+	@WithMockUser(username="user1", password="pass1",authorities = {"운영자"})
 	public void testCreateState() throws Exception {
 		String url = "/states/save";
-		Integer countryId = 2;
+		Integer countryId = 14; //호주
 		Country country = countryRepo.findById(countryId).get();
-		State state = new State("Arizona", country);
+		State state = new State("호주 신도시", country);
 		
 		MvcResult result = mockMvc.perform(post(url).contentType("application/json")
 				.content(objectMapper.writeValueAsString(state))
@@ -74,12 +76,13 @@ public class StateRestControllerTests {
 		assertThat(findById.isPresent());		
 	}
 	
+	// 도시 이름 수정
 	@Test
-	@WithMockUser(username = "nam", password = "something", roles = "Admin")
+	@WithMockUser(username="user1", password="pass1",authorities = {"운영자"})
 	public void testUpdateState() throws Exception {
 		String url = "/states/save";
 		Integer stateId = 9;
-		String stateName = "Alaska";
+		String stateName = "호주신도시2";
 		
 		State state = stateRepo.findById(stateId).get();
 		state.setName(stateName);
@@ -99,10 +102,11 @@ public class StateRestControllerTests {
 		
 	}
 	
+	// 도시 삭제
 	@Test
-	@WithMockUser(username = "nam", password = "something", roles = "Admin")
+	@WithMockUser(username="user1", password="pass1",authorities = {"운영자"})
 	public void testDeleteState() throws Exception {
-		Integer stateId = 6;
+		Integer stateId = 9; // 호주신도시2
 		String uri = "/states/delete/" + stateId;
 		
 		mockMvc.perform(get(uri)).andExpect(status().isOk());

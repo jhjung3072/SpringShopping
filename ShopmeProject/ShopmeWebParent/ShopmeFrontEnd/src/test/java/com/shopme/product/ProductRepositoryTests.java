@@ -16,9 +16,10 @@ public class ProductRepositoryTests {
 
 	@Autowired ProductRepository repo;
 	
+	// 상품 리턴 by 줄임말
 	@Test
 	public void testFindByAlias() {
-		String alias = "canon-eos-m50";
+		String alias = "canon";
 		Product product = repo.findByAlias(alias);
 		
 		assertThat(product).isNotNull();

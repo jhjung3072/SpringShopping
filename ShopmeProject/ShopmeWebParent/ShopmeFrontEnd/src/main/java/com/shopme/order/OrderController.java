@@ -26,11 +26,13 @@ public class OrderController {
 	@Autowired private CustomerService customerService;
 	@Autowired private ReviewService reviewService;
 	
+	// 주문 내역 목록 GET
 	@GetMapping("/orders")
 	public String listFirstPage(Model model, HttpServletRequest request) {
 		return listOrdersByPage(model, request, 1, "orderTime", "desc", null);
 	}
 	
+	// 주문 내역 목록 페이징 GET
 	@GetMapping("/orders/page/{pageNum}")
 	public String listOrdersByPage(Model model, HttpServletRequest request,
 						@PathVariable(name = "pageNum") int pageNum,
@@ -64,12 +66,14 @@ public class OrderController {
 		return "orders/orders_customer";		
 	}
 
+	// 주문 상세 페이지 GET
 	@GetMapping("/orders/detail/{id}")
 	public String viewOrderDetails(Model model,
 			@PathVariable(name = "id") Integer id, HttpServletRequest request) {
 		Customer customer = getAuthenticatedCustomer(request);		
 		Order order = orderService.getOrder(id, customer);
 		
+		// 주문 내역에서 리뷰를 달 수 있는 상품 설정
 		setProductReviewableStatus(customer, order);
 		
 		model.addAttribute("order", order);
@@ -77,6 +81,7 @@ public class OrderController {
 		return "orders/order_details_modal";
 	}	
 	
+	// 주문 내역에서 리뷰를 달 수 있는 상품 설정
 	private void setProductReviewableStatus(Customer customer, Order order) {
 		Iterator<OrderDetail> iterator = order.getOrderDetails().iterator();
 		
@@ -85,9 +90,11 @@ public class OrderController {
 			Product product = orderDetail.getProduct();
 			Integer productId = product.getId();
 			
+			// 이미 해당 상품에 리뷰를 작성했으면 true 설정
 			boolean didCustomerReviewProduct = reviewService.didCustomerReviewProduct(customer, productId);
 			product.setReviewedByCustomer(didCustomerReviewProduct);
 			
+			// 해당 상품에 리뷰를 작성하지 않았으면 리뷰 작성 가능 설정
 			if (!didCustomerReviewProduct) {
 				boolean canCustomerReviewProduct = reviewService.canCustomerReviewProduct(customer, productId);
 				product.setCustomerCanReview(canCustomerReviewProduct);
@@ -96,6 +103,7 @@ public class OrderController {
 		}
 	}
 
+	// 승인된 회원 객체 리턴
 	private Customer getAuthenticatedCustomer(HttpServletRequest request) {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);				
 		return customerService.getCustomerByEmail(email);

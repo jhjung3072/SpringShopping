@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerOAuth2UserService extends DefaultOAuth2UserService {
 
+	// sns 로그인, 이름 설정
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 		String clientName = userRequest.getClientRegistration().getClientName();

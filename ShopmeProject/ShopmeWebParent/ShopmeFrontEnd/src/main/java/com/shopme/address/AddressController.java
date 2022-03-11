@@ -24,11 +24,13 @@ public class AddressController {
 	@Autowired private AddressService addressService;
 	@Autowired private CustomerService customerService;	
 	
+	// 배송지 목록 GET
 	@GetMapping("/address_book")
 	public String showAddressBook(Model model, HttpServletRequest request) {
 		Customer customer = getAuthenticatedCustomer(request);
 		List<Address> listAddresses = addressService.listAddressBook(customer);
 		
+		// 기본 배송지를 제외한 배송지에 '기본 배송지로 설정' 버튼을 보여줌
 		boolean usePrimaryAddressAsDefault = true;
 		for (Address address : listAddresses) {
 			if (address.isDefaultForShipping()) {
@@ -44,6 +46,7 @@ public class AddressController {
 		return "address_book/addresses";
 	}
 	
+	// 승인된 회원의 객체 리턴
 	private Customer getAuthenticatedCustomer(HttpServletRequest request) {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);				
 		return customerService.getCustomerByEmail(email);
@@ -60,6 +63,7 @@ public class AddressController {
 		return "address_book/address_form";
 	}
 	
+	// 배송지 저장 POST
 	@PostMapping("/address_book/save")
 	public String saveAddress(Address address, HttpServletRequest request, RedirectAttributes ra) {
 		Customer customer = getAuthenticatedCustomer(request);
@@ -70,15 +74,17 @@ public class AddressController {
 		String redirectOption = request.getParameter("redirect");
 		String redirectURL = "redirect:/address_book";
 		
+		// 결제단계에서 redirect 되었으면 배송지 저장 후 결졔단계로 이동
 		if ("checkout".equals(redirectOption)) {
 			redirectURL += "?redirect=checkout";
 		}
 		
-		ra.addFlashAttribute("message", "주소가 성공적으로 저장되었습니다.");
-		
+		ra.addFlashAttribute("message", "배송지가 성공적으로 저장되었습니다.");
+		// redirect값에 checkout 이 없다면 그냥 배송지 목록으로 이동
 		return redirectURL;
 	}
 	
+	// 배송지 목록 수정 GET
 	@GetMapping("/address_book/edit/{id}")
 	public String editAddress(@PathVariable("id") Integer addressId, Model model,
 			HttpServletRequest request) {
@@ -89,22 +95,24 @@ public class AddressController {
 
 		model.addAttribute("address", address);
 		model.addAttribute("listCountries", listCountries);
-		model.addAttribute("pageTitle", "주소 수정 (ID: " + addressId + ")");
+		model.addAttribute("pageTitle", "배송지 수정 (ID: " + addressId + ")");
 		
 		return "address_book/address_form";
 	}
 	
+	// 배송지 삭제 GET
 	@GetMapping("/address_book/delete/{id}")
 	public String deleteAddress(@PathVariable("id") Integer addressId, RedirectAttributes ra,
 			HttpServletRequest request) {
 		Customer customer = getAuthenticatedCustomer(request);
 		addressService.delete(addressId, customer.getId());
 		
-		ra.addFlashAttribute("message", "주소 ID: " + addressId + " 가 삭제되었습니다");
+		ra.addFlashAttribute("message", "배송지 ID: " + addressId + " 가 삭제되었습니다");
 		
 		return "redirect:/address_book";
 	}
 	
+	// 기본 배송지로 설정 GET
 	@GetMapping("/address_book/default/{id}")
 	public String setDefaultAddress(@PathVariable("id") Integer addressId,
 			HttpServletRequest request) {
@@ -114,9 +122,10 @@ public class AddressController {
 		String redirectOption = request.getParameter("redirect");
 		String redirectURL = "redirect:/address_book";
 		
+		// 장바구니에서 redirect 되었으면 기본 배송지로 설정 후 장바구니로 이동
 		if ("cart".equals(redirectOption)) {
 			redirectURL = "redirect:/cart";
-		} else if ("checkout".equals(redirectOption)) {
+		} else if ("checkout".equals(redirectOption)) { // 결제 단계에서 redirect 되었으면 기본 배송지로 설정 후 결제 단계로 이동
 			redirectURL = "redirect:/checkout";
 		}
 		

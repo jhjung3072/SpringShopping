@@ -24,11 +24,13 @@ public class CartItemRepositoryTests {
 	@Autowired private CartItemRepository repo;
 	@Autowired private TestEntityManager entityManager;
 	
+	// 장바구니에 상품 담기
 	@Test
 	public void testSaveItem() {
 		Integer customerId = 1;
 		Integer productId = 1;
 		
+		// 회원과 상품 리턴
 		Customer customer = entityManager.find(Customer.class, customerId);
 		Product product = entityManager.find(Product.class, productId);
 		
@@ -42,6 +44,7 @@ public class CartItemRepositoryTests {
 		assertThat(savedItem.getId()).isGreaterThan(0);
 	}
 	
+	// 장바구니에 상품 2개 담기
 	@Test
 	public void testSave2Items() {
 		Integer customerId = 10;
@@ -62,9 +65,10 @@ public class CartItemRepositoryTests {
 		
 		Iterable<CartItem> iterable = repo.saveAll(List.of(item1, item2));
 		
-		assertThat(iterable).size().isGreaterThan(0);
+		assertThat(iterable).size().isGreaterThan(1);
 	}
 	
+	// 장바구니 리턴 by 회원ID
 	@Test
 	public void testFindByCustomer() {
 		Integer customerId = 10;
@@ -75,6 +79,7 @@ public class CartItemRepositoryTests {
 		assertThat(listItems.size()).isEqualTo(2);
 	}
 	
+	// 장바구니 리턴 by 회원ID, 상품ID
 	@Test
 	public void testFindByCustomerAndProduct() {
 		Integer customerId = 1;
@@ -87,6 +92,7 @@ public class CartItemRepositoryTests {
 		System.out.println(item);
 	}
 	
+	// 장바구니에 상품 수량 업데이트
 	@Test
 	public void testUpdateQuantity() {
 		Integer customerId = 1;
@@ -100,6 +106,7 @@ public class CartItemRepositoryTests {
 		assertThat(item.getQuantity()).isEqualTo(4);
 	}
 	
+	// 장바구니 삭제 by 회원ID, 상품ID
 	@Test
 	public void testDeleteByCustomerAndProduct() {
 		Integer customerId = 10;

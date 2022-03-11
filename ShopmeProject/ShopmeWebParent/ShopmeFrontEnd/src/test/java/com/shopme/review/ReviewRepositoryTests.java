@@ -22,6 +22,7 @@ public class ReviewRepositoryTests {
 	
 	@Autowired private ReviewRepository repo;
 	
+	// 해당 회원이 작성한 리뷰 목록
 	@Test
 	public void testFindByCustomerNoKeyword() {
 		Integer customerId = 5;
@@ -33,10 +34,11 @@ public class ReviewRepositoryTests {
 		assertThat(totalElements).isGreaterThan(1);		
 	}
 	
+	// 해당 회원이 작성한 리뷰 목록 키워드 검색
 	@Test
 	public void testFindByCustomerWithKeyword() {
 		Integer customerId = 5;
-		String keyword = "charger";
+		String keyword = "computer";
 		Pageable pageable = PageRequest.of(1, 5);
 		
 		Page<Review> page = repo.findByCustomer(customerId, keyword, pageable);
@@ -45,6 +47,7 @@ public class ReviewRepositoryTests {
 		assertThat(totalElements).isGreaterThan(0);		
 	}
 	
+	// 리뷰 리턴 by 리뷰ID, 회원ID
 	@Test
 	public void testFindByCustomerAndId() {
 		Integer customerId = 5;
@@ -54,6 +57,7 @@ public class ReviewRepositoryTests {
 		assertThat(review).isNotNull();
 	}
 	
+	// 해당 상품이 갖고있는 리뷰 목록 리턴
 	@Test
 	public void testFindByProduct() {
 		Product product = new Product(23);
@@ -66,6 +70,7 @@ public class ReviewRepositoryTests {
 		content.forEach(System.out::println);
 	}
 	
+	// 리뷰 개수 리턴 by 회원ID와 상품ID
 	@Test
 	public void testCountByCustomerAndProduct() {
 		Integer customerId=5;
@@ -75,6 +80,7 @@ public class ReviewRepositoryTests {
 		assertThat(count).isEqualTo(1);
 	}
 	
+	// 리뷰 추천 수 업데이트 by 리뷰ID
 	@Test
 	public void testUpadteCount() {
 		Integer reviewId=4;
@@ -84,6 +90,7 @@ public class ReviewRepositoryTests {
 		assertThat(review.getVotes()).isEqualTo(2);
 	}
 	
+	// 리뷰 추천 수 get By ID
 	@Test
 	public void testGetVoteCount() {
 		Integer reviewId=4;

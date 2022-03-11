@@ -25,6 +25,7 @@ public class CustomerRepositoryTests {
 	@Autowired private CustomerRepository repo;
 	@Autowired private TestEntityManager entityManager;
 	
+	// 회원 생성
 	@Test
 	public void testCreateCustomer1() {
 		Integer countryId = 234; // USA
@@ -32,15 +33,15 @@ public class CustomerRepositoryTests {
 		
 		Customer customer = new Customer();
 		customer.setCountry(country);
-		customer.setFirstName("David");
-		customer.setLastName("Fountaine");
+		customer.setFirstName("han");
+		customer.setLastName("pizza");
 		customer.setPassword("password123");
-		customer.setEmail("david.s.fountaine@gmail.com");
-		customer.setPhoneNumber("312-462-7518");
-		customer.setAddressLine1("1927  West Drive");
-		customer.setCity("Sacramento");
-		customer.setState("California");
-		customer.setPostalCode("95867");
+		customer.setEmail("sadadasd@gmail.com");
+		customer.setPhoneNumber("1325646");
+		customer.setAddressLine1("sadsadjalskd");
+		customer.setCity("asdasds");
+		customer.setState("asdadew");
+		customer.setPostalCode("124123");
 		customer.setCreatedTime(new Date());
 		
 		Customer savedCustomer = repo.save(customer);
@@ -49,6 +50,7 @@ public class CustomerRepositoryTests {
 		assertThat(savedCustomer.getId()).isGreaterThan(0);
 	}
 	
+	// 회원 생성
 	@Test
 	public void testCreateCustomer2() {
 		Integer countryId = 106; // India
@@ -56,16 +58,16 @@ public class CustomerRepositoryTests {
 		
 		Customer customer = new Customer();
 		customer.setCountry(country);
-		customer.setFirstName("Sanya");
-		customer.setLastName("Lad");
+		customer.setFirstName("kim");
+		customer.setLastName("ha");
 		customer.setPassword("password456");
-		customer.setEmail("sanya.lad2020@gmail.com");
-		customer.setPhoneNumber("02224928052");
-		customer.setAddressLine1("173 , A-, Shah & Nahar Indl.estate, Sunmill Road");
-		customer.setAddressLine2("Dhanraj Mill Compound, Lower Parel (west)");
-		customer.setCity("Mumbai");
-		customer.setState("Maharashtra");
-		customer.setPostalCode("400013");
+		customer.setEmail("asdgrew@gmail.com");
+		customer.setPhoneNumber("41512321");
+		customer.setAddressLine1("fdgsgasd");
+		customer.setAddressLine2("adsada");
+		customer.setCity("dsfdsfas");
+		customer.setState("fdghrtwerw");
+		customer.setPostalCode("15646");
 		customer.setCreatedTime(new Date());
 		
 		Customer savedCustomer = repo.save(customer);
@@ -74,6 +76,7 @@ public class CustomerRepositoryTests {
 		assertThat(savedCustomer.getId()).isGreaterThan(0);
 	}	
 	
+	// 회원 목록 리스트 출력
 	@Test
 	public void testListCustomers() {
 		Iterable<Customer> customers = repo.findAll();
@@ -82,10 +85,11 @@ public class CustomerRepositoryTests {
 		assertThat(customers).hasSizeGreaterThan(1);
 	}
 	
+	// 회원 정보 수정
 	@Test
 	public void testUpdateCustomer() {
 		Integer customerId = 1;
-		String lastName = "Stanfield";
+		String lastName = "kimmm";
 		
 		Customer customer = repo.findById(customerId).get();
 		customer.setLastName(lastName);
@@ -95,6 +99,7 @@ public class CustomerRepositoryTests {
 		assertThat(updatedCustomer.getLastName()).isEqualTo(lastName);
 	}
 	
+	// 회원 get By ID
 	@Test
 	public void testGetCustomer() {
 		Integer customerId = 2;
@@ -106,6 +111,7 @@ public class CustomerRepositoryTests {
 		System.out.println(customer);
 	}
 	
+	// 회원 삭제
 	@Test
 	public void testDeleteCustomer() {
 		Integer customerId = 2;
@@ -115,15 +121,17 @@ public class CustomerRepositoryTests {
 		assertThat(findById).isNotPresent();		
 	}
 	
+	// 회원 리턴 by 이메일
 	@Test
 	public void testFindByEmail() {
-		String email = "david.s.fountaine@gmail.com";
+		String email = "asdgrew@gmail.com";
 		Customer customer = repo.findByEmail(email);
 		
 		assertThat(customer).isNotNull();
 		System.out.println(customer);		
 	}
 	
+	// 회원 리턴 by 회원 인증 코드
 	@Test
 	public void testFindByVerificationCode() {
 		String code = "code_123";
@@ -133,6 +141,7 @@ public class CustomerRepositoryTests {
 		System.out.println(customer);		
 	}
 	
+	// 회원 활성화
 	@Test
 	public void testEnableCustomer() {
 		Integer customerId = 1;
@@ -142,6 +151,7 @@ public class CustomerRepositoryTests {
 		assertThat(customer.isEnabled()).isTrue();
 	}
 	
+	// 회원 인증 타입 수정
 	@Test
 	public void testUpdateAythenticationType() {
 		Integer id=1;

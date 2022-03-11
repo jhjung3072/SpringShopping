@@ -18,8 +18,9 @@ public class OrderRestControllerTests {
 	
 	@Autowired private MockMvc mockMvc;
 	
+	// 주문 내역 배송 추적 상태 업데이트
 	@Test
-	@WithMockUser(username="user1", password="pass1",authorities = {"Shipper"})
+	@WithMockUser(username="user1", password="pass1",authorities = {"배송관리자"})
 	public void testUpdateOrderStatus() throws Exception {
 		Integer orderId=1;
 		String status="DELIVERED";

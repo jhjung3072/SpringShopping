@@ -22,21 +22,22 @@ public class CurrencyRepositoryTests {
 	@Autowired
 	private CurrencyRepository repo;
 	
+	// 환율 생성
 	@Test
 	public void testCreateCurrencies() {
 		List<Currency> listCurrencies = Arrays.asList(
-			new Currency("United States Dollar", "$", "USD"),
-			new Currency("British Pound", "£", "GPB"),
-			new Currency("Japanese Yen", "¥", "JPY"),
-			new Currency("Euro", "€", "EUR"),
-			new Currency("Russian Ruble", "₽", "RUB"),
-			new Currency("South Korean Won", "₩", "KRW"),
-			new Currency("Chinese Yuan", "¥", "CNY"),
-			new Currency("Brazilian Real", "R$", "BRL"),
-			new Currency("Australian Dollar", "$", "AUD"),
-			new Currency("Canadian Dollar", "$", "CAD"),
-			new Currency("Vietnamese đồng ", "₫", "VND"),
-			new Currency("Indian Rupee", "₹", "INR")
+			new Currency("미국 달러", "$", "USD"),
+			new Currency("영국 파운드", "£", "GPB"),
+			new Currency("일본 엔", "¥", "JPY"),
+			new Currency("유로", "€", "EUR"),
+			new Currency("러시아 루블", "₽", "RUB"),
+			new Currency("대한민국 원", "₩", "KRW"),
+			new Currency("중국 위안", "¥", "CNY"),
+			new Currency("브라질 헤알", "R$", "BRL"),
+			new Currency("호주 달러", "$", "AUD"),
+			new Currency("캐나다 달러", "$", "CAD"),
+			new Currency("베트남 동 ", "₫", "VND"),
+			new Currency("인도 루피", "₹", "INR")
 		);
 		
 		repo.saveAll(listCurrencies);
@@ -46,6 +47,7 @@ public class CurrencyRepositoryTests {
 		assertThat(iterable).size().isEqualTo(12);
 	}
 	
+	// 환율 리스트 오름차순
 	@Test
 	public void testListAllOrderByNameAsc() {
 		List<Currency> currencies = repo.findAllByOrderByNameAsc();

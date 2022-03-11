@@ -5,6 +5,7 @@ import java.util.List;
 import com.shopme.common.entity.setting.Setting;
 import com.shopme.common.entity.setting.SettingBag;
 
+// 환율 단위 설정
 public class CurrencySettingBag extends SettingBag {
 
 	public CurrencySettingBag(List<Setting> listSettings) {

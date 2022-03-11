@@ -21,6 +21,7 @@ public class OrderRestControllerTests {
 	@Autowired private MockMvc mockMvc;
 	@Autowired private ObjectMapper objectMapper;
 	
+	// 주문 취소 요청 실패 - 해당 주문ID 없음
 	@Test
 	@WithUserDetails("jhjung3072@gmail.com")
 	public void testSendOrderReturnRequestFailed() throws Exception {
@@ -37,12 +38,13 @@ public class OrderRestControllerTests {
 				.andDo(print());
 	}
 	
+	// 주문 취소 요청 성공
 	@Test
 	@WithUserDetails("jhjung3072@gmail.com")
 	public void testSendOrderReturnRequestSuccessful() throws Exception {
 		Integer orderId = 3;
-		String reason = "I bought the wrong items";
-		String note = "Please return my money";
+		String reason = "잘못골랐습니다.";
+		String note = "환불해주십시오";
 		
 		OrderReturnRequest returnRequest = new OrderReturnRequest(orderId, reason, note);
 		

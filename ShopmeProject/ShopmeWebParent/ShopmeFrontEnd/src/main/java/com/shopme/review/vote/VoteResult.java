@@ -1,5 +1,6 @@
 package com.shopme.review.vote;
 
+// 추천/비추천 결과 클래스
 public class VoteResult {
 	private boolean successful;
 	private String message;

@@ -17,6 +17,7 @@ public class StateRestController {
 
 	@Autowired private StateRepository repo;
 	
+	// 설정에서 국가별로 도시 리스트
 	@GetMapping("/settings/list_states_by_country/{id}")
 	public List<StateDTO> listByCountry(@PathVariable("id") Integer countryId) {
 		List<State> listStates = repo.findByCountryOrderByNameAsc(new Country(countryId));

@@ -24,20 +24,21 @@ public class StateRepositoryTests {
 	@Autowired private StateRepository repo;
 	@Autowired private TestEntityManager entityManager;
 	
+	// 한국에 도시 목록 생성
 	@Test
-	public void testCreateStatesInIndia() {
+	public void testCreateStatesInKorea() {
 		Integer countryId = 1;
 		Country country = entityManager.find(Country.class, countryId);
 		
-		//State state = repo.save(new State("Karnataka", country));
-		//State state = repo.save(new State("Punjab", country));
-		//State state = repo.save(new State("Uttar Pradesh", country));
-		State state = repo.save(new State("West Bengal", country));
+		//State state = repo.save(new State("Seoul", country));
+		//State state = repo.save(new State("Incheon", country));
+		State state = repo.save(new State("Busan", country));
 		
 		assertThat(state).isNotNull();
 		assertThat(state.getId()).isGreaterThan(0);
 	}
 	
+	// 미국에 도시 목록 생성
 	@Test
 	public void testCreateStatesInUS() {
 		Integer countryId = 2;
@@ -63,10 +64,11 @@ public class StateRepositoryTests {
 		assertThat(listStates.size()).isGreaterThan(0);
 	}
 	
+	// 도시 이름 수정
 	@Test
 	public void testUpdateState() {
-		Integer stateId = 3;
-		String stateName = "Tamil Nadu";
+		Integer stateId = 1;
+		String stateName = "Gyeong ki do";
 		State state = repo.findById(stateId).get();
 		
 		state.setName(stateName);
@@ -75,6 +77,7 @@ public class StateRepositoryTests {
 		assertThat(updatedState.getName()).isEqualTo(stateName);
 	}
 	
+	// 도시 Get By ID
 	@Test
 	public void testGetState() {
 		Integer stateId = 1;
@@ -82,6 +85,7 @@ public class StateRepositoryTests {
 		assertThat(findById.isPresent());
 	}
 	
+	// 도시 삭제
 	@Test
 	public void testDeleteState() {
 		Integer stateId = 8;

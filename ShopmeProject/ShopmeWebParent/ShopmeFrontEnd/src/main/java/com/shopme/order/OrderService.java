@@ -29,14 +29,16 @@ public class OrderService {
 	
 	@Autowired private OrderRepository repo;
 	
+	// 주문 내역 생성
 	public Order createOrder(Customer customer, Address address, List<CartItem> cartItems,
 			PaymentMethod paymentMethod, CheckoutInfo checkoutInfo) {
 		Order newOrder = new Order();
 		newOrder.setOrderTime(new Date());
 		
+		// 결제방법이 페이팔이면 이미 결제한 것(PAID)
 		if (paymentMethod.equals(PaymentMethod.PAYPAL)) {
 			newOrder.setStatus(OrderStatus.PAID);
-		} else {
+		} else { // 그렇지 않으면 NEW
 			newOrder.setStatus(OrderStatus.NEW);
 		}
 		
@@ -50,9 +52,10 @@ public class OrderService {
 		newOrder.setDeliverDays(checkoutInfo.getDeliverDays());
 		newOrder.setDeliverDate(checkoutInfo.getDeliverDate());
 		
+		// 배송지 정보가 없으면 회원 정보에서 복사
 		if (address == null) {
 			newOrder.copyAddressFromCustomer();
-		} else {
+		} else { // 배송지 정보가 있으면 그것을 사용
 			newOrder.copyShippingAddress(address);
 		}
 		
@@ -83,6 +86,7 @@ public class OrderService {
 		return repo.save(newOrder);
 	}
 	
+	// 주문 내역 목록 페이징
 	public Page<Order> listForCustomerByPage(Customer customer, int pageNum, 
 			String sortField, String sortDir, String keyword) {
 		Sort sort = Sort.by(sortField);
@@ -97,10 +101,12 @@ public class OrderService {
 		return repo.findAll(customer.getId(), pageable);
 	}
 	
+	// 주문 객체 리턴 by ID and Customer
 	public Order getOrder(Integer id, Customer customer) {
 		return repo.findByIdAndCustomer(id, customer);
 	}	
 	
+	// 주문 취소 설정
 	public void setOrderReturnRequested(OrderReturnRequest request, Customer customer) 
 			throws OrderNotFoundException {
 		Order order = repo.findByIdAndCustomer(request.getOrderId(), customer);
@@ -108,6 +114,7 @@ public class OrderService {
 			throw new OrderNotFoundException("주문 ID: " + request.getOrderId() + " 를 찾을 수 없습니다.");
 		}
 		
+		// 이미 주문 취소가 요청되었으면 무시
 		if (order.isReturnRequested()) return;
 		
 		OrderTrack track = new OrderTrack();
@@ -115,6 +122,7 @@ public class OrderService {
 		track.setUpdatedTime(new Date());
 		track.setStatus(OrderStatus.RETURN_REQUESTED);
 		
+		// 주문 취소 사유와 내용
 		String notes = "사유: " + request.getReason();
 		if (!"".equals(request.getNote())) {
 			notes += ". " + request.getNote();

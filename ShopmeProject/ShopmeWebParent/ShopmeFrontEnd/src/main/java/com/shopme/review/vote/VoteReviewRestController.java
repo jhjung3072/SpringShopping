@@ -16,15 +16,18 @@ public class VoteReviewRestController {
 	@Autowired private ReviewVoteService service;
 	@Autowired private ControllerHelper helper;
 	
+	// 리뷰 추천/비추천 POST
 	@PostMapping("/vote_review/{id}/{type}")
 	public VoteResult voteReview(@PathVariable(name = "id") Integer reviewId,
 			@PathVariable(name = "type") String type,
 			HttpServletRequest request) {
 		
+		// 승인된 회원 객체 가져오기
 		Customer customer = helper.getAuthenticatedCustomer(request);
 		
+		// 로그인하지 않았다면, 추천/비추천 불가능
 		if (customer == null) {
-			return VoteResult.fail("추천을 누르시려면 로그인이 필요합니다.");
+			return VoteResult.fail("로그인이 필요합니다.");
 		}
 		
 		VoteType voteType = VoteType.valueOf(type.toUpperCase());

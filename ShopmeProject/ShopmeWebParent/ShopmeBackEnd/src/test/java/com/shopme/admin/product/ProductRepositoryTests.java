@@ -28,6 +28,7 @@ public class ProductRepositoryTests {
 	@Autowired
 	private TestEntityManager entityManager;
 	
+	// 상품 추가
 	@Test
 	public void testCreateProduct() {
 		Brand brand = entityManager.find(Brand.class, 37);
@@ -35,9 +36,9 @@ public class ProductRepositoryTests {
 		
 		Product product = new Product();
 		product.setName("Acer Aspire Desktop");
-		product.setAlias("acer_aspire_desktop");
-		product.setShortDescription("Short description for Acer Aspire");
-		product.setFullDescription("Full description for Acer Aspire");
+		product.setAlias("에이서");
+		product.setShortDescription("짧아요");
+		product.setFullDescription("길어요요요요요");
 		
 		product.setBrand(brand);
 		product.setCategory(category);
@@ -56,6 +57,7 @@ public class ProductRepositoryTests {
 		assertThat(savedProduct.getId()).isGreaterThan(0);
 	}
 	
+	// 상품 리스트
 	@Test
 	public void testListAllProducts() {
 		Iterable<Product> iterableProducts = repo.findAll();
@@ -63,6 +65,7 @@ public class ProductRepositoryTests {
 		iterableProducts.forEach(System.out::println);
 	}
 	
+	// 상품 Get By ID
 	@Test
 	public void testGetProduct() {
 		Integer id = 2;
@@ -72,6 +75,7 @@ public class ProductRepositoryTests {
 		assertThat(product).isNotNull();
 	}
 	
+	// 상품 업데이트
 	@Test
 	public void testUpdateProduct() {
 		Integer id = 1;
@@ -85,6 +89,7 @@ public class ProductRepositoryTests {
 		assertThat(updatedProduct.getPrice()).isEqualTo(499);
 	}
 	
+	// 상품 삭제
 	@Test
 	public void testDeleteProduct() {
 		Integer id = 3;
@@ -95,6 +100,7 @@ public class ProductRepositoryTests {
 		assertThat(!result.isPresent());
 	}
 	
+	// 상품 이미지 저장
 	@Test
 	public void testSaveProductWithImages() {
 		Integer productId = 1;
@@ -110,19 +116,21 @@ public class ProductRepositoryTests {
 		assertThat(savedProduct.getImages().size()).isEqualTo(3);
 	}
 	
+	// 상품 스펙 설명 저장
 	@Test
 	public void testSaveProductWithDetails() {
 		Integer productId = 1;
 		Product product = repo.findById(productId).get();
 		
-		product.addDetail("Device Memory", "128 GB");
-		product.addDetail("CPU Model", "MediaTek");
-		product.addDetail("OS", "Android 10");
+		product.addDetail("Memory ", "128 GB");
+		product.addDetail("CPU", "Intel");
+		product.addDetail("OS", "Android");
 		
 		Product savedProduct = repo.save(product);
 		assertThat(savedProduct.getDetails()).isNotEmpty();		
 	}
 	
+	// 해당 상품의 리뷰 개수 및 평점 업데이트
 	@Test
 	public void testUpadteReviewCountAndAverageRating() {
 		Integer productId=1;

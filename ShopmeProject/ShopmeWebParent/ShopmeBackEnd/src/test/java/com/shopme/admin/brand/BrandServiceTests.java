@@ -20,6 +20,7 @@ public class BrandServiceTests {
 	
 	@InjectMocks private BrandService service;
 	
+	// 브랜드 생성 시 이름 중복
 	@Test
 	public void testCheckUniqueInNewModeReturnDuplicate() {
 		Integer id = null;
@@ -32,6 +33,7 @@ public class BrandServiceTests {
 		assertThat(result).isEqualTo("Duplicate");
 	}
 	
+	// 브랜드 생성 시 이름 중복 아닐때
 	@Test
 	public void testCheckUniqueInNewModeReturnOK() {
 		Integer id = null;
@@ -43,6 +45,7 @@ public class BrandServiceTests {
 		assertThat(result).isEqualTo("OK");
 	}
 	
+	// 브랜드 수정 시 이름 중복
 	@Test
 	public void testCheckUniqueInEditModeReturnDuplicate() {
 		Integer id = 1;
@@ -55,6 +58,7 @@ public class BrandServiceTests {
 		assertThat(result).isEqualTo("Duplicate");
 	}
 	
+	// 브랜드 수정 시 이름 중복 아닐때
 	@Test
 	public void testCheckUniqueInEditModeReturnOK() {
 		Integer id = 1;

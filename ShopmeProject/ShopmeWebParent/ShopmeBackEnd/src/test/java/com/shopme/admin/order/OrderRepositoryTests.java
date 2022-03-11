@@ -33,6 +33,7 @@ public class OrderRepositoryTests {
 	@Autowired private OrderRepository repo;
 	@Autowired private TestEntityManager entityManager;
 	
+	// 새 주문 생성 - 1개 상품
 	@Test
 	public void testCreateNewOrderWithSingleProduct() {
 		Customer customer = entityManager.find(Customer.class, 1);
@@ -70,6 +71,7 @@ public class OrderRepositoryTests {
 		assertThat(savedOrder.getId()).isGreaterThan(0);		
 	}
 	
+	// 새 주문 생성 - 2개 상품
 	@Test
 	public void testCreateNewOrderWithMultipleProducts() {
 		Customer customer = entityManager.find(Customer.class, 10);
@@ -118,6 +120,7 @@ public class OrderRepositoryTests {
 		assertThat(savedOrder.getId()).isGreaterThan(0);		
 	}
 	
+	// 주문 내역 리스트
 	@Test
 	public void testListOrders() {
 		Iterable<Order> orders = repo.findAll();
@@ -127,6 +130,7 @@ public class OrderRepositoryTests {
 		orders.forEach(System.out::println);
 	}
 	
+	// 주문 내역 업데이트
 	@Test
 	public void testUpdateOrder() {
 		Integer orderId = 2;
@@ -142,6 +146,7 @@ public class OrderRepositoryTests {
 		assertThat(updatedOrder.getStatus()).isEqualTo(OrderStatus.SHIPPING);
 	}
 	
+	// 주문 내역 GET by ID
 	@Test
 	public void testGetOrder() {
 		Integer orderId = 3;
@@ -151,6 +156,7 @@ public class OrderRepositoryTests {
 		System.out.println(order);
 	}
 	
+	// 주문 내역 삭제
 	@Test
 	public void testDeleteOrder() {
 		Integer orderId = 3;
@@ -160,6 +166,7 @@ public class OrderRepositoryTests {
 		assertThat(result).isNotPresent();
 	}
 	
+	// 주문 추적 업데이트
 	@Test
 	public void testUpdateOrderTracks() {
 		Integer orderId=3;
@@ -186,11 +193,12 @@ public class OrderRepositoryTests {
 		assertThat(updateOrder.getOrderTracks()).hasSizeGreaterThan(1);
 	}
 	
+	// 기간 내에 주문 내역 리스트
 	@Test
 	public void testFindByOrderTimeBetween() throws ParseException {
 		DateFormat dateFormatter=new SimpleDateFormat("yyyy-MM-dd");
-		Date startTime=dateFormatter.parse("2021-08-01");
-		Date endTime=dateFormatter.parse("2021-08-31");
+		Date startTime=dateFormatter.parse("2022-01-01");
+		Date endTime=dateFormatter.parse("2022-01-31");
 		
 		List<Order> listOrders=repo.findByOrderTimeBetween(startTime, endTime);
 		

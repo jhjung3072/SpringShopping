@@ -18,6 +18,7 @@ public class ProductService {
 	
 	@Autowired private ProductRepository repo;
 	
+	// 상품 리스트 by 카테고리ID
 	public Page<Product> listByCategory(int pageNum, Integer categoryId) {
 		String categoryIdMatch = "-" + String.valueOf(categoryId) + "-";
 		Pageable pageable = PageRequest.of(pageNum - 1, PRODUCTS_PER_PAGE);
@@ -25,6 +26,7 @@ public class ProductService {
 		return repo.listByCategory(categoryId, categoryIdMatch, pageable);
 	}
 	
+	// 상품 GET by 줄임말
 	public Product getProduct(String alias) throws ProductNotFoundException {
 		Product product = repo.findByAlias(alias);
 		if (product == null) {
@@ -34,6 +36,7 @@ public class ProductService {
 		return product;
 	}
 	
+	// 상품 GET by ID
 	public Product getProduct(Integer id) throws ProductNotFoundException {
 		try {
 			Product product = repo.findById(id).get();
@@ -44,6 +47,7 @@ public class ProductService {
 		
 	}
 	
+	// 상품 키워드 검색
 	public Page<Product> search(String keyword, int pageNum) {
 		Pageable pageable = PageRequest.of(pageNum - 1, SEARCH_RESULTS_PER_PAGE);
 		return repo.search(keyword, pageable);

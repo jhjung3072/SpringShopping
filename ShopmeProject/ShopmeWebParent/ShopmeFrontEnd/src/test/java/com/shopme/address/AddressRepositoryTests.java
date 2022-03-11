@@ -22,10 +22,11 @@ public class AddressRepositoryTests {
 
 	@Autowired private AddressRepository repo;
 	
+	// 배송지 추가
 	@Test
 	public void testAddNew() {
 		Integer customerId = 40;
-		Integer countryId = 234; // USA
+		Integer countryId = 234;
 		
 		Address newAddress = new Address();
 		newAddress.setCustomer(new Customer(customerId));
@@ -33,10 +34,10 @@ public class AddressRepositoryTests {
 		newAddress.setFirstName("aaa");
 		newAddress.setLastName("sss");
 		newAddress.setPhoneNumber("5554544");
-		newAddress.setAddressLine1("jenggle Street");
-		newAddress.setAddressLine2("sexy Building");
-		newAddress.setCity("namju");
-		newAddress.setState("byeong");
+		newAddress.setAddressLine1("경기도 구리시");
+		newAddress.setAddressLine2("수택동");
+		newAddress.setState("경기도");
+		newAddress.setCity("구리시");
 		newAddress.setPostalCode("4213");
 		
 		Address savedAddress = repo.save(newAddress);
@@ -45,6 +46,7 @@ public class AddressRepositoryTests {
 		assertThat(savedAddress.getId()).isGreaterThan(0);
 	}
 	
+	// 배송지 리턴 by 회원ID
 	@Test
 	public void testFindByCustomer() {
 		Integer customerId = 5;
@@ -54,6 +56,7 @@ public class AddressRepositoryTests {
 		listAddresses.forEach(System.out::println);
 	}
 	
+	// 배송지 리턴 by 배송지ID, 회원ID
 	@Test
 	public void testFindByIdAndCustomer() {
 		Integer addressId = 1;
@@ -65,10 +68,11 @@ public class AddressRepositoryTests {
 		System.out.println(address);
 	}
 	
+	// 배송지 정보 수정
 	@Test
 	public void testUpdate() {
 		Integer addressId = 1;
-		String phoneNumber = "646-232-3932";
+		String phoneNumber = "01056546";
 		
 		Address address = repo.findById(addressId).get();
 		address.setPhoneNumber(phoneNumber);
@@ -77,6 +81,7 @@ public class AddressRepositoryTests {
 		assertThat(updatedAddress.getPhoneNumber()).isEqualTo(phoneNumber);
 	}
 	
+	// 배송지 삭제
 	@Test
 	public void testDeleteByIdAndCustomer() {
 		Integer addressId = 1;
@@ -88,6 +93,7 @@ public class AddressRepositoryTests {
 		assertThat(address).isNull();
 	}	
 	
+	// 해당 배송지 기본 배송지로 설정
 	@Test
 	public void testSetDefault() {
 		Integer addressId = 4;
@@ -97,6 +103,7 @@ public class AddressRepositoryTests {
 		assertThat(address.isDefaultForShipping()).isTrue();
 	}
 	
+	// 기본 배송지를 제외한 나머지 배송지들을 defaultForShipping = false 
 	@Test
 	public void testSetNonDefaultAddresses() {
 		Integer addressId = 8;
@@ -104,6 +111,7 @@ public class AddressRepositoryTests {
 		repo.setNonDefaultForOthers(addressId, customerId);			
 	}
 	
+	// 기본 배송지 리턴
 	@Test
 	public void testGetDefault() {
 		Integer customerId = 5;

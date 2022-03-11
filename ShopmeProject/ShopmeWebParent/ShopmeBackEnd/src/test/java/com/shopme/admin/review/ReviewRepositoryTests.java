@@ -23,6 +23,7 @@ import com.sun.el.stream.Optional;
 public class ReviewRepositoryTests {
 	@Autowired private ReviewRepository repo;
 	
+	// 리뷰 작성
 	@Test
 	public void testCreateReview() {
 		Integer productId=1;
@@ -45,6 +46,7 @@ public class ReviewRepositoryTests {
 		assertThat(savedReview.getId()).isGreaterThan(0);
 	}
 	
+	// 리뷰 목록 리스트
 	@Test
 	public void testListReview() {
 		List<Review> listReviews=repo.findAll();
@@ -52,6 +54,7 @@ public class ReviewRepositoryTests {
 		listReviews.forEach(System.out::println);
 	}
 	
+	// 리뷰 Get By ID
 	@Test
 	public void testGetReview() {
 		Integer id=1;
@@ -59,6 +62,8 @@ public class ReviewRepositoryTests {
 		assertThat(review).isNotNull();
 		System.out.println(review);
 	}
+	
+	// 리뷰 수정
 	@Test
 	public void testUpdateReview() {
 		Integer id=1;
@@ -74,7 +79,8 @@ public class ReviewRepositoryTests {
 		assertThat(updatedReview.getHeadline()).isEqualTo(headline);
 		assertThat(updatedReview.getComment()).isEqualTo(comment);
 	}
-		
+	
+	// 리뷰 삭제
 	@Test
 	public void testDeleteReview() {
 		Integer id=1;

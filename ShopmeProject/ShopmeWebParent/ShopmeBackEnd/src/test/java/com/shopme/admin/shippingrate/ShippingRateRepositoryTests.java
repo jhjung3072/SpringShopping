@@ -23,12 +23,13 @@ public class ShippingRateRepositoryTests {
 	@Autowired private ShippingRateRepository repo;
 	@Autowired private TestEntityManager entityManager;
 	
+	// 배송비 생성
 	@Test
 	public void testCreateNew() {
-		Country india = new Country(106);
+		Country korea = new Country(106);
 		ShippingRate newRate = new ShippingRate();
-		newRate.setCountry(india);
-		newRate.setState("Maharashtra");
+		newRate.setCountry(korea);
+		newRate.setState("Seoul");
 		newRate.setRate(8.25f);
 		newRate.setDays(3);
 		newRate.setCodSupported(true);
@@ -38,6 +39,7 @@ public class ShippingRateRepositoryTests {
 		assertThat(savedRate.getId()).isGreaterThan(0);
 	}
 	
+	// 배송비 수정 - 서울
 	@Test
 	public void testUpdate() {
 		Integer rateId = 1;
@@ -50,6 +52,7 @@ public class ShippingRateRepositoryTests {
 		assertThat(updatedRate.getDays()).isEqualTo(2);
 	}
 	
+	// 배송비 목록 리스트
 	@Test
 	public void testFindAll() {
 		List<ShippingRate> rates = (List<ShippingRate>) repo.findAll();
@@ -58,16 +61,18 @@ public class ShippingRateRepositoryTests {
 		rates.forEach(System.out::println);
 	}
 	
+	// 배송비 찾기 by 국가명과 도시명
 	@Test
 	public void testFindByCountryAndState() {
 		Integer countryId = 106;
-		String state = "Maharashtra";
+		String state = "Seoul";
 		ShippingRate rate = repo.findByCountryAndState(countryId, state);
 		
 		assertThat(rate).isNotNull();
 		System.out.println(rate);
 	}
 	
+	// 착불 활성화
 	@Test
 	public void testUpdateCODSupport() {
 		Integer rateId = 1;
@@ -77,9 +82,10 @@ public class ShippingRateRepositoryTests {
 		assertThat(rate.isCodSupported()).isFalse();
 	}
 	
+	// 배송비 삭제
 	@Test
 	public void testDelete() {
-		Integer rateId = 2;
+		Integer rateId = 1;
 		repo.deleteById(rateId);
 		
 		ShippingRate rate = entityManager.find(ShippingRate.class, rateId);

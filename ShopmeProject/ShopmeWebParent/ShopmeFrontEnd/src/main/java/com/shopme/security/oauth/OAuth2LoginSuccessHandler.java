@@ -20,6 +20,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 
 	@Autowired private CustomerService customerService;
 	
+	// 소셜 로그인(구글, 페이스북) 로그인 성공 후 작업
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
@@ -33,9 +34,9 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 		AuthenticationType authenticationType = getAuthenticationType(clientName);
 		
 		Customer customer = customerService.getCustomerByEmail(email);
-		if (customer == null) {
+		if (customer == null) { // 회원가입이 안된 새로운 회원일 경우
 			customerService.addNewCustomerUponOAuthLogin(name, email, countryCode, authenticationType);
-		} else {
+		} else { // 이미 회원 가입을 했지만 소셜 로그인을 한 경우
 			oauth2User.setFullName(customer.getFullName());
 			customerService.updateAuthenticationType(customer, authenticationType);
 		}

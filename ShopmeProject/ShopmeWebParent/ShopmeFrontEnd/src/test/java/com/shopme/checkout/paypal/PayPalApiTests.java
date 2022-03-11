@@ -18,9 +18,11 @@ public class PayPalApiTests {
 	private static final String CLIENT_SECRET="EC410lng_BN-j36i2nWVT5AwfDCVDg-N63eTLWQqJtyB2qo5RLR0Yy6tUks_syK2nqvDhLcmZhp3d-DN";
 	
 	
+	// 페이팔 주문ID 및 상태 get
+	// 참고 : https://developer.paypal.com/api/orders/v2/
 	@Test
 	public void testGetOrderDetails() {
-		String orderId="22D61778R1406735K";
+		String orderId="22D61778R1406735K"; // 페이팔 orderId
 		String requestURL=BASE_URL + GET_ORDER_API +orderId;
 		
 		HttpHeaders headers=new HttpHeaders();
@@ -31,6 +33,7 @@ public class PayPalApiTests {
 		HttpEntity<MultiValueMap<String, String>> reuqest=new HttpEntity<>(headers);
 		RestTemplate restTemplate = new RestTemplate();
 		
+		// requestURL, method, request Entity, Response Type
 		ResponseEntity<PayPalOrderResponse > response=restTemplate.exchange(
 				requestURL, HttpMethod.GET, reuqest, PayPalOrderResponse.class);
 		

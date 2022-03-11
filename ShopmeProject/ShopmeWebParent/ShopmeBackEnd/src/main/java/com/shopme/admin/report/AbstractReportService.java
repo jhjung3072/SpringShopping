@@ -24,7 +24,7 @@ public abstract class AbstractReportService {
 		// 통계 마지막일은 현재 일
 		Date endTime = new Date();
 		Calendar cal = Calendar.getInstance();
-		// 현재를 기준으로 days-1 만큼을 기준으로 startTime
+		// 현재를 기준으로 days-1 일 이전을 기준으로 startTime
 		cal.add(Calendar.DAY_OF_MONTH, -(days - 1));
 		Date startTime = cal.getTime();
 		
@@ -51,7 +51,7 @@ public abstract class AbstractReportService {
 		// 통계 마지막 월은 현재 월
 		Date endTime = new Date();
 		Calendar cal = Calendar.getInstance();
-		// 현재를 기준으로 months-1 만큼을 기준으로 startTime
+		// 현재를 기준으로 months-1 개월 이전 기준으로 startTime
 		cal.add(Calendar.MONTH, -(months - 1));
 		Date startTime = cal.getTime();
 		

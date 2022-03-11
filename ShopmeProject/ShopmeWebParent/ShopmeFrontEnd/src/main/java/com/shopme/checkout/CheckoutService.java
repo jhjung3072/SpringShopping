@@ -10,8 +10,9 @@ import com.shopme.common.entity.product.Product;
 
 @Service
 public class CheckoutService {
-	private static final int DIM_DIVISOR = 139;
+	private static final int DIM_DIVISOR = 139; // 해외 배송업체 Fedex 표준 dim 값
 
+	// 결제 정보 초기화
 	public CheckoutInfo prepareCheckout(List<CartItem> cartItems, ShippingRate shippingRate) {
 		CheckoutInfo checkoutInfo = new CheckoutInfo();
 		
@@ -31,6 +32,7 @@ public class CheckoutService {
 		return checkoutInfo;
 	}
 
+	// 배송비 계산
 	private float calculateShippingCost(List<CartItem> cartItems, ShippingRate shippingRate) {
 		float shippingCostTotal = 0.0f;
 		
@@ -48,6 +50,7 @@ public class CheckoutService {
 		return shippingCostTotal;
 	}
 
+	// 상품 가격 총합
 	private float calculateProductTotal(List<CartItem> cartItems) {
 		float total = 0.0f;
 		
@@ -58,6 +61,7 @@ public class CheckoutService {
 		return total;
 	}
 
+	// 상품 비용 총합
 	private float calculateProductCost(List<CartItem> cartItems) {
 		float cost = 0.0f;
 		

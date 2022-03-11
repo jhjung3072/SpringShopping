@@ -5,6 +5,7 @@ import java.util.List;
 import com.shopme.common.entity.setting.Setting;
 import com.shopme.common.entity.setting.SettingBag;
 
+// 이메일 발송 설정
 public class EmailSettingBag extends SettingBag {
 
 	public EmailSettingBag(List<Setting> listSettings) {

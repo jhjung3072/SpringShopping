@@ -16,18 +16,22 @@ import org.springframework.web.client.RestTemplate;
 import com.shopme.setting.PaymentSettingBag;
 import com.shopme.setting.SettingService;
 
+// 페이팔 모듈 설정을 위한 서비스 클래스
 @Component
 public class PayPalService {
 	private static final String GET_ORDER_API = "/v2/checkout/orders/";
 	
 	@Autowired private SettingService settingService;
 	
+	// 페이팔 onApprove
 	public boolean validateOrder(String orderId) throws PayPalApiException {
 		PayPalOrderResponse orderResponse = getOrderDetails(orderId);
 		
 		return orderResponse.validate(orderId);
 	}
 
+	// 주문 내역 GET
+	// 상태가 OK 가 아니면 예외 처리
 	private PayPalOrderResponse getOrderDetails(String orderId) throws PayPalApiException {
 		ResponseEntity<PayPalOrderResponse> response = makeRequest(orderId);
 		
@@ -40,6 +44,7 @@ public class PayPalService {
 		return response.getBody();
 	}
 
+	// 페이팔 요청 URL, ID, 비밀키  설정
 	private ResponseEntity<PayPalOrderResponse> makeRequest(String orderId) {
 		PaymentSettingBag paymentSettings = settingService.getPaymentSettings();
 		String baseURL = paymentSettings.getURL();

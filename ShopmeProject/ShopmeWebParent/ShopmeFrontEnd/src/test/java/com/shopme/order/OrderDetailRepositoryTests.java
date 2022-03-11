@@ -16,6 +16,7 @@ public class OrderDetailRepositoryTests {
 
 	@Autowired private OrderDetailRepository repo;
 	
+	// 해당 상품ID와 회원ID의 주문 추적 상태가 'DELIVERED' 상태인 OrderDetail 개수 반환 -> 1개 이상이면 리뷰 작성 가능
 	@Test
 	public void testCountByProductAndCustomerAndOrderStatus() {
 		Integer productId = 99;

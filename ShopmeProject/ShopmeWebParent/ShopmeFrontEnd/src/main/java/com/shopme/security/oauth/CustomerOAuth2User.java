@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+// 소셜 로그인 유저 매핑
 public class CustomerOAuth2User implements OAuth2User {
 	private String clientName;
 	private String fullName;

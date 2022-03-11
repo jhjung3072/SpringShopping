@@ -35,7 +35,7 @@ function updateVoteCountAndIcons(currentLink, voteResult) {
 	voteUpLink = $("#linkVoteUp-" + reviewId);
 	voteDownLink = $("#linkVoteDown-" + reviewId);
 	
-	$("#voteCount-" + reviewId).text(voteResult.voteCount + " Votes");
+	$("#voteCount-" + reviewId).text("추천 " +voteResult.voteCount + "개");
 	
 	message = voteResult.message;
 	

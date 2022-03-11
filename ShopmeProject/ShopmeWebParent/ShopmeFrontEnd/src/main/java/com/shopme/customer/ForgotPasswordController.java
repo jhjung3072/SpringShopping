@@ -25,15 +25,18 @@ public class ForgotPasswordController {
 	@Autowired private CustomerService customerService;
 	@Autowired private SettingService settingService;
 	
+	// 비밀번호 분실 폼 GET
 	@GetMapping("/forgot_password")
 	public String showRequestForm() {
 		return "customer/forgot_password_form";
 	}
 	
+	// 패스워드 초기화 요청 POST
 	@PostMapping("/forgot_password")
 	public String processRequestForm(HttpServletRequest request, Model model) {
 		String email = request.getParameter("email");
 		try {
+			// 패스워드 리셋 토큰 및 링크 생성 후 발송
 			String token = customerService.updateResetPasswordToken(email);
 			String link = Utility.getSiteURL(request) + "/reset_password?token=" + token;
 			sendEmail(link, email);
@@ -49,14 +52,15 @@ public class ForgotPasswordController {
 		return "customer/forgot_password_form";
 	}
 	
+	// 패스워드 초기화 이메일 설정
 	private void sendEmail(String link, String email) 
 			throws UnsupportedEncodingException, MessagingException {
 		EmailSettingBag emailSettings = settingService.getEmailSettings();
 		JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
-		
+		// 수신 및 제목 설정
 		String toAddress = email;
 		String subject = "패스워드 재설정 링크";
-		
+		// 이메일 내용 설정
 		String content = "<p>안녕하세요,</p>"
 				+ "<p>회원님의 패스워드 초기화 링크입니다</p>"
 				+ "아래의 링크를 눌러 회원님의 패스워드를 변경하세요:</p>"
@@ -75,6 +79,7 @@ public class ForgotPasswordController {
 		mailSender.send(message);
 	}
 	
+	// 패스워드 수정 폼 GET
 	@GetMapping("/reset_password")
 	public String showResetForm(String token, Model model) {
 		Customer customer = customerService.getByResetPasswordToken(token);
@@ -89,6 +94,7 @@ public class ForgotPasswordController {
 		return "customer/reset_password_form";
 	}
 	
+	// 패스워드 수정 POST
 	@PostMapping("/reset_password")
 	public String processResetForm(HttpServletRequest request, Model model) {
 		String token = request.getParameter("token");
@@ -102,7 +108,7 @@ public class ForgotPasswordController {
 			model.addAttribute("message", "패스워드를 재설정했습니다.");
 			
 		} catch (CustomerNotFoundException e) {
-			model.addAttribute("pageTitle", "Invalid Token");
+			model.addAttribute("pageTitle", "패스워드 토큰 에러");
 			model.addAttribute("message", e.getMessage());
 		}	
 

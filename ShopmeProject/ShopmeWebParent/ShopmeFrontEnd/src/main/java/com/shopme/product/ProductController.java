@@ -30,12 +30,14 @@ public class ProductController {
 	@Autowired private ReviewVoteService voteService;
 	@Autowired private ControllerHelper controllerHelper;
 
+	// 카테고리 목록 GET
 	@GetMapping("/c/{category_alias}")
 	public String viewCategoryFirstPage(@PathVariable("category_alias") String alias,
 			Model model) {
 		return viewCategoryByPage(alias, 1, model);
 	}
 	
+	// 카테고리별 상품 목록 페이징 GET
 	@GetMapping("/c/{category_alias}/page/{pageNum}")
 	public String viewCategoryByPage(@PathVariable("category_alias") String alias,
 			@PathVariable("pageNum") int pageNum,
@@ -70,6 +72,7 @@ public class ProductController {
 		}
 	}
 	
+	// 상품 상세 페이지 GET
 	@GetMapping("/p/{product_alias}")
 	public String viewProductDetail(@PathVariable("product_alias") String alias, Model model,
 			HttpServletRequest request) {
@@ -77,17 +80,19 @@ public class ProductController {
 		try {
 			Product product = productService.getProduct(alias);
 			List<Category> listCategoryParents = categoryService.getCategoryParents(product.getCategory());
+			// 가장 추천수가 많은 3개 상품
 			Page<Review> listReviews = reviewService.list3MostVotedReviewsByProduct(product);
 			
 			Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 			
 			if (customer != null) {
 				boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
+				// 해당 회원이 상품을 추천했는지 비추천했는지 색깔 구분 
 				voteService.markReviewsVotedForProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
 				
-				if (customerReviewed) {
+				if (customerReviewed) { // 리뷰 이미 작성
 					model.addAttribute("customerReviewed", customerReviewed);
-				} else {
+				} else { // 리뷰 작성 가능
 					boolean customerCanReview = reviewService.canCustomerReviewProduct(customer, product.getId());
 					model.addAttribute("customerCanReview", customerCanReview);
 				}
@@ -104,11 +109,13 @@ public class ProductController {
 		}
 	}
 	
+	// 키워드 검색
 	@GetMapping("/search")
 	public String searchFirstPage(String keyword, Model model) {
 		return searchByPage(keyword, 1, model);
 	}
 	
+	// 키워드 검색 페이징
 	@GetMapping("/search/page/{pageNum}")
 	public String searchByPage(String keyword,
 			@PathVariable("pageNum") int pageNum,

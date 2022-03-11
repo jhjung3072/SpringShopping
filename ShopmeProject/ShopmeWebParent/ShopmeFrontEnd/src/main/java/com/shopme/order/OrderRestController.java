@@ -21,6 +21,7 @@ public class OrderRestController {
 	@Autowired private OrderService orderService;
 	@Autowired private CustomerService customerService;
 	
+	// 주문취소 POST
 	@PostMapping("/orders/return")
 	public ResponseEntity<?> handleOrderReturnRequest(@RequestBody OrderReturnRequest returnRequest,
 			HttpServletRequest servletRequest) {
@@ -31,13 +32,13 @@ public class OrderRestController {
 		
 		Customer customer = null;
 		
-		try {
+		try { // 인증된 회원 유무 확인
 			customer = getAuthenticatedCustomer(servletRequest);
 		} catch (CustomerNotFoundException ex) {
 			return new ResponseEntity<>("로그인이 필요합니다.", HttpStatus.BAD_REQUEST);
 		}
 		
-		try {
+		try { // 주문 취소
 			orderService.setOrderReturnRequested(returnRequest, customer);
 		} catch (OrderNotFoundException ex) {
 			return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
@@ -46,6 +47,7 @@ public class OrderRestController {
 		return new ResponseEntity<>(new OrderReturnResponse(returnRequest.getOrderId()), HttpStatus.OK);
 	}
 	
+	// 인증된 회원 객체 리턴
 	private Customer getAuthenticatedCustomer(HttpServletRequest request) 
 			throws CustomerNotFoundException {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);

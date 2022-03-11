@@ -25,12 +25,12 @@ public class OrderDetailRepositoryTests {
 	@Autowired private OrderDetailRepository repo;
 	@Autowired private TestEntityManager entityManager;
 
-	
+	// 기간 내 카테고리별 주문 통계
 	@Test
 	public void testFindWithCategoryAndTimeBetween() throws ParseException {
 		DateFormat dateFormatter=new SimpleDateFormat("yyyy-MM-dd");
-		Date startTime=dateFormatter.parse("2021-08-01");
-		Date endTime=dateFormatter.parse("2021-08-31");
+		Date startTime=dateFormatter.parse("2022-01-01");
+		Date endTime=dateFormatter.parse("2022-01-31");
 		
 		List<OrderDetail>listOrderDetails=repo.findWithCategoryAndTimeBetween(startTime, endTime);
 		
@@ -44,11 +44,12 @@ public class OrderDetailRepositoryTests {
 		}
 	}
 	
+	// 기간 내 상품별 주문 통계
 	@Test
 	public void testFindWithProductAndTimeBetween() throws ParseException {
 		DateFormat dateFormatter=new SimpleDateFormat("yyyy-MM-dd");
-		Date startTime=dateFormatter.parse("2021-08-01");
-		Date endTime=dateFormatter.parse("2021-08-31");
+		Date startTime=dateFormatter.parse("2022-01-01");
+		Date endTime=dateFormatter.parse("2022-01-31");
 		
 		List<OrderDetail>listOrderDetails=repo.findWithProductAndTimeBetween(startTime, endTime);
 		

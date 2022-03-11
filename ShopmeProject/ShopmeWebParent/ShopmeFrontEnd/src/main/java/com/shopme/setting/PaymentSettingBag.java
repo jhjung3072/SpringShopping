@@ -5,6 +5,7 @@ import java.util.List;
 import com.shopme.common.entity.setting.Setting;
 import com.shopme.common.entity.setting.SettingBag;
 
+// 페이팔 API 설정
 public class PaymentSettingBag extends SettingBag {
 
 	public PaymentSettingBag(List<Setting> listSettings) {

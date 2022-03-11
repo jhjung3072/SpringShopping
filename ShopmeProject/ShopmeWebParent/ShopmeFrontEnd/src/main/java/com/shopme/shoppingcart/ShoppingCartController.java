@@ -25,6 +25,7 @@ public class ShoppingCartController {
 	@Autowired private AddressService addressService;
 	@Autowired private ShippingRateService shipService;
 	
+	// 장바구니 목록 GET
 	@GetMapping("/cart")
 	public String viewCart(Model model, HttpServletRequest request) {
 		Customer customer = getAuthenticatedCustomer(request);
@@ -36,15 +37,16 @@ public class ShoppingCartController {
 			estimatedTotal += item.getSubtotal();
 		}
 		
+		// 기본 배송지
 		Address defaultAddress = addressService.getDefaultAddress(customer);
 		ShippingRate shippingRate = null;
 		boolean usePrimaryAddressAsDefault = false;
 		
-		if (defaultAddress != null) {
-			shippingRate = shipService.getShippingRateForAddress(defaultAddress);
-		} else {
-			usePrimaryAddressAsDefault = true;
-			shippingRate = shipService.getShippingRateForCustomer(customer);
+		if (defaultAddress != null) { // 기본 배송지가 있다면
+			shippingRate = shipService.getShippingRateForAddress(defaultAddress); // 그 주소로 배송비 설정
+		} else { // 기본 배송지가 없다면
+			usePrimaryAddressAsDefault = true; // '기본 배송지로 설정' 버튼 활성화
+			shippingRate = shipService.getShippingRateForCustomer(customer); // 회원의 주소로 배송비 설정
 		}
 		
 		model.addAttribute("usePrimaryAddressAsDefault", usePrimaryAddressAsDefault);
@@ -55,6 +57,7 @@ public class ShoppingCartController {
 		return "cart/shopping_cart";
 	}
 	
+	// 인증된 회원 객체 리턴
 	private Customer getAuthenticatedCustomer(HttpServletRequest request) {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);				
 		return customerService.getCustomerByEmail(email);

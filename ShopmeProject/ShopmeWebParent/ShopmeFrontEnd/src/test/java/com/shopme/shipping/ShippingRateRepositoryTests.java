@@ -17,9 +17,10 @@ public class ShippingRateRepositoryTests {
 	
 	@Autowired private ShippingRateRepository repo;
 	
+	// 배송비 리턴 by 국가ID, 도시 이름
 	@Test
 	public void testFindByCountryAndState() {
-		Country usa = new Country(234);
+		Country usa = new Country(234); // 미국
 		String state = "New York";
 		ShippingRate shippingRate = repo.findByCountryAndState(usa, state);
 		

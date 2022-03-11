@@ -70,6 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new CustomerUserDetailsService();
 	}
 	
+	//DaoAuthenticationProvider는 요청받은 유저의 ID, Password와 저장된 ID, Password를 검증
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

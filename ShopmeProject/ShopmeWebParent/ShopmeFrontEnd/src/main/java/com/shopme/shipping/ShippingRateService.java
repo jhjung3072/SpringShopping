@@ -12,6 +12,7 @@ public class ShippingRateService {
 
 	@Autowired private ShippingRateRepository repo;
 	
+	// 회원의 국가와 도시 정보로 배송비 가져오기
 	public ShippingRate getShippingRateForCustomer(Customer customer) {
 		String state = customer.getState();
 		if (state == null || state.isEmpty()) {
@@ -21,6 +22,7 @@ public class ShippingRateService {
 		return repo.findByCountryAndState(customer.getCountry(), state);
 	}
 	
+	// 해당 주소의 배송비 가져오기
 	public ShippingRate getShippingRateForAddress(Address address) {
 		String state = address.getState();
 		if (state == null || state.isEmpty()) {

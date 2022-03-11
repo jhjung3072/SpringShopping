@@ -21,11 +21,12 @@ public class SettingRepositoryTests {
 
 	@Autowired SettingRepository repo;
 	
+	// 기본 일반 설정
 	@Test
 	public void testCreateGeneralSettings() {
-		Setting siteName = new Setting("SITE_NAME", "Shopme", SettingCategory.GENERAL);
-		Setting siteLogo = new Setting("SITE_LOGO", "Shopme.png", SettingCategory.GENERAL);
-		Setting copyright = new Setting("COPYRIGHT", "Copyright (C) 2021 Shopme Ltd.", SettingCategory.GENERAL);
+		Setting siteName = new Setting("SITE_NAME", "모두의 마켓", SettingCategory.GENERAL);
+		Setting siteLogo = new Setting("SITE_LOGO", "market.png", SettingCategory.GENERAL);
+		Setting copyright = new Setting("COPYRIGHT", "Copyright (C) 2021 모두의마켓", SettingCategory.GENERAL);
 		
 		repo.saveAll(List.of(siteName, siteLogo, copyright));
 		
@@ -34,6 +35,7 @@ public class SettingRepositoryTests {
 		assertThat(iterable).size().isGreaterThan(0);
 	}
 	
+	// 화폐 단위 설정
 	@Test
 	public void testCreateCurrencySettings() {
 		Setting currencyId = new Setting("CURRENCY_ID", "1", SettingCategory.CURRENCY);
@@ -48,6 +50,7 @@ public class SettingRepositoryTests {
 		
 	}
 	
+	// 일반 설정 리스트 (key= , value= )
 	@Test
 	public void testListSettingsByCategory() {
 		List<Setting> settings = repo.findByCategory(SettingCategory.GENERAL);

@@ -23,26 +23,29 @@ public class CategoryRepositoryTests {
 	@Autowired
 	private CategoryRepository repo;
 	
+	// 최상위 카테고리 생성
 	@Test
 	public void testCreateRootCategory() {
-		Category category = new Category("Electronics");
+		Category category = new Category("전자기기");
 		Category savedCategory=repo.save(category);
 		
 		assertThat(savedCategory.getId()).isGreaterThan(0);
 	}
 	
+	// 하위 카테고리 생성
 	@Test
 	public void testCreateSubCategory() {
 		Category parent=new Category(7);
-		Category subCategory=new Category("iphone",parent);
+		Category subCategory=new Category("아이폰",parent);
 		
 		Category savedCategory=repo.save(subCategory);
 		assertThat(savedCategory.getId()).isGreaterThan(0);
 	}
 	
+	// 특정 카테고리 목록 출력 - 하위 카테고리 포함
 	@Test
 	public void testGetCategory() {
-		Category category=repo.findById(2).get();
+		Category category=repo.findById(3).get();
 		System.out.println(category.getName());
 		
 		Set<Category> children=category.getChildren();
@@ -54,6 +57,7 @@ public class CategoryRepositoryTests {
 
 	}
 	
+	// 모든 카테고리 목록 출력 - 하위 카테고리 포함
 	@Test
 	public void testPrintHierarchicalCategory() {
 		Iterable<Category>categories=repo.findAll();
@@ -71,6 +75,7 @@ public class CategoryRepositoryTests {
 		}
 	}
 	
+	// 하위 카테고리 구분자("--") 반복
 	private void printChildren(Category parent, int subLevel) {
 		int newSubLevel=subLevel+1;
 		Set<Category>children=parent.getChildren();
@@ -83,12 +88,14 @@ public class CategoryRepositoryTests {
 		}
 	}
 	
+	// 최상위 카테고리 리스트 오름차순
 	@Test
 	public void testListRootCategories() {
 		List<Category> rootCategories=repo.findRootCategories(Sort.by("name").ascending());
 		rootCategories.forEach(cat -> System.out.println(cat.getName()));
 	}
 	
+	// 카테고리 이름으로 검색
 	@Test
 	public void testFindByName() {
 		String name="Computers1";
@@ -98,6 +105,7 @@ public class CategoryRepositoryTests {
 		assertThat(category.getName()).isEqualTo(name);
 	}
 	
+	// 카테고리 줄임말로 검색
 	@Test
 	public void testFindByAlias() {
 		String alias="Electronics2";

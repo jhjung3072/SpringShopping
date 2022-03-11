@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
+	// 메인페이지 GET
 	@GetMapping("")
 	public String viewHomePage() {
 		return "index";
 	}
 	
+	// 인증받지 않은 사용자(비로그인 사용자)일 경우에 로그인 페이지 GET
 	@GetMapping("/login")
 	public String viewLoginPage() {
-		//사용자 인증정보가 null 이거나 비로그인 사용자
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
 			return "login";

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.shopme.common.entity.Customer;
 import com.shopme.customer.CustomerService;
 
+// 로그인한 회원의 이메일을 이용하여 회원 객체 리턴
 @Component
 public class ControllerHelper {
 	@Autowired private CustomerService customerService;

@@ -19,16 +19,10 @@ public class CategoryRepositoryTests {
 	@Autowired
 	private CategoryRepository repo;
 	
-	/*
-	 * @Test public void testListEnabledCategories() {
-	 * List<Category>categories=repo.findAllEnabed(); categories.forEach(category ->
-	 * { System.out.println(category.getName()+ " (" + category.isEnabled() + ")");
-	 * }); }
-	 */
-	
+	// 활성화된 카테고리 리턴 by 줄임말
 	@Test
 	public void testFindCategoryByAlias() {
-		String alias="electronics";
+		String alias="전자기기";
 		Category category=repo.findByAliasEnabled(alias);
 		
 		assertThat(category).isNotNull();

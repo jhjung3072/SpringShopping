@@ -18,13 +18,14 @@ public class ShoppingCartRestController {
 	@Autowired private ShoppingCartService cartService;
 	@Autowired private CustomerService customerService;
 	
+	// 해당 상품
 	@PostMapping("/cart/add/{productId}/{quantity}")
 	public String addProductToCart(@PathVariable("productId") Integer productId,
 			@PathVariable("quantity") Integer quantity, HttpServletRequest request) {
 		
-		try {
+		try { 
 			Customer customer = getAuthenticatedCustomer(request);
-			Integer updatedQuantity = cartService.addProduct(productId, quantity, customer);
+			Integer updatedQuantity = cartService.addProduct(productId, quantity, customer); // 수량 추가
 			
 			return updatedQuantity + " 해당 상품이 장바구니에 담겼습니다.";
 		} catch (CustomerNotFoundException ex) {
@@ -35,6 +36,7 @@ public class ShoppingCartRestController {
 		
 	}
 	
+	// 승인된 회원 객체 리턴
 	private Customer getAuthenticatedCustomer(HttpServletRequest request) 
 			throws CustomerNotFoundException {
 		String email = Utility.getEmailOfAuthenticatedCustomer(request);
@@ -45,6 +47,7 @@ public class ShoppingCartRestController {
 		return customerService.getCustomerByEmail(email);
 	}
 	
+	// 장바구니에서 상품 수량 업데이트 POST
 	@PostMapping("/cart/update/{productId}/{quantity}")
 	public String updateQuantity(@PathVariable("productId") Integer productId,
 			@PathVariable("quantity") Integer quantity, HttpServletRequest request) {
@@ -58,6 +61,7 @@ public class ShoppingCartRestController {
 		}	
 	}
 	
+	// 장바구니에서 상품 삭제 DELETE
 	@DeleteMapping("/cart/remove/{productId}")
 	public String removeProduct(@PathVariable("productId") Integer productId,
 			HttpServletRequest request) {

@@ -22,6 +22,7 @@ public class ReviewVoteRepositoryTests {
 	
 	@Autowired private ReviewVoteRepository repo;
 	
+	// 해당 리뷰 추천 by 리뷰ID와 회원ID
 	@Test
 	public void testSaveVote() {
 		Integer customerId = 1;
@@ -36,6 +37,7 @@ public class ReviewVoteRepositoryTests {
 		assertThat(savedVote.getId()).isGreaterThan(0);		
 	}
 	
+	// 추천 객체 리턴 by 리뷰ID 와 회원ID
 	@Test
 	public void testFindByReviewAndCustomer() {
 		Integer customerId = 1;
@@ -47,6 +49,7 @@ public class ReviewVoteRepositoryTests {
 		System.out.println(vote);
 	}
 	
+	// 추천 리스트 리턴 by 상퓸ID 와 회원ID, 해당 상품에 추천/비추천을 여러개 한 경우
 	@Test
 	public void testFindByProductAndCustomer() {
 		Integer customerId = 1;

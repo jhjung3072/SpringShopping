@@ -190,7 +190,7 @@ public class CategoryService {
 		
 		Category categoryByName = repo.findByName(name);
 		
-		if (isCreatingNew) {
+		if (isCreatingNew) { // 새로운 카테고리 생성 시
 			if (categoryByName != null) {
 				return "DuplicateName";
 			} else {
@@ -199,7 +199,7 @@ public class CategoryService {
 					return "DuplicateAlias";	
 				}
 			}
-		} else {
+		} else { // 카테고리 수정 시
 			if (categoryByName != null && categoryByName.getId() != id) {
 				return "DuplicateName";
 			}

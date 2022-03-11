@@ -38,8 +38,9 @@ public class CountryRestControllerTests {
 	@Autowired
 	CountryRepository repo;
 	
+	// 국가 리스트 불러오기
 	@Test
-	@WithMockUser(username = "nam@codejava.net", password = "something", roles = "ADMIN")
+	@WithMockUser(username="user1", password="pass1",authorities = {"운영자"})
 	public void testListCountries() throws Exception {
 		String url = "/countries/list";
 		MvcResult result=mockMvc.perform(get(url))
@@ -53,11 +54,12 @@ public class CountryRestControllerTests {
 		assertThat(countries).hasSizeGreaterThan(0);
 	}
 	
+	// 국가 추가하기
 	@Test
-	@WithMockUser(username = "nam@codejava.net", password = "something", roles = "ADMIN")
+	@WithMockUser(username="user1", password="pass1",authorities = {"배송관리자"})
 	public void testCreateCountry() throws JsonProcessingException, Exception {
 		String url = "/countries/save";
-		String countryName = "Germany";
+		String countryName = "독일";
 		String countryCode = "DE";
 		Country country = new Country(countryName, countryCode);
 		
@@ -79,12 +81,13 @@ public class CountryRestControllerTests {
 		assertThat(savedCountry.getName()).isEqualTo(countryName);
 	}
 	
+	// 국가 수정
 	@Test
-	@WithMockUser(username = "nam@codejava.net", password = "something", roles = "ADMIN")
+	@WithMockUser(username="user1", password="pass1",authorities = {"배송관리자"})
 	public void testUpdateCountry() throws JsonProcessingException, Exception {
 		String url = "/countries/save";
 		Integer countryId=8;
-		String countryName = "China";
+		String countryName = "중국";
 		String countryCode = "CN";
 		Country country = new Country(countryId,countryName, countryCode);
 		
@@ -104,10 +107,11 @@ public class CountryRestControllerTests {
 		assertThat(savedCountry.getName()).isEqualTo(countryName);
 	}
 	
+	// 국가 삭제
 	@Test
-	@WithMockUser(username = "nam@codejava.net", password = "something", roles = "ADMIN")
+	@WithMockUser(username="user1", password="pass1",authorities = {"배송관리자"})
 	public void testDeleteCountry() throws Exception {
-		Integer countryId = 9;
+		Integer countryId = 8;
 		String url = "/countries/delete/" + countryId;
 		mockMvc.perform(get(url)).andExpect(status().isOk());
 		

@@ -26,6 +26,7 @@ public class AmazonS3Util {
 		BUCKET_NAME=System.getenv("AWS_BUCKET_NAME");
 	}
 	
+	// 폴더 내 파일 리스트
 	public static List<String> listFolder(String folderName) {
 		S3Client client=S3Client.builder().build();
 		ListObjectsRequest listRequest=ListObjectsRequest.builder()
@@ -45,11 +46,12 @@ public class AmazonS3Util {
 		return listKeys;
 	}
 	
+	// 파일 업로드
 	public static void uploadFile(String folderName, String fileName,InputStream inputStream) {
 		S3Client client=S3Client.builder().build();
 		
 		PutObjectRequest request=PutObjectRequest.builder().bucket(BUCKET_NAME)
-				.key(folderName+"/"+fileName).acl("public-read").build();
+				.key(folderName+"/"+fileName).acl("public-read").build(); // 경로 및 public 설정
 		
 		try(inputStream){
 			int contentLength=inputStream.available();
@@ -59,6 +61,7 @@ public class AmazonS3Util {
 		}
 	}
 	
+	// 파일 삭제
 	public static void deleteFile(String fileName) {
 		S3Client client=S3Client.builder().build();
 		
@@ -68,6 +71,7 @@ public class AmazonS3Util {
 		client.deleteObject(request);
 	}
 	
+	// 폴더 삭제
 	public static void removeFolder(String folderName) {
 		S3Client client=S3Client.builder().build();
 		ListObjectsRequest listRequest=ListObjectsRequest.builder()

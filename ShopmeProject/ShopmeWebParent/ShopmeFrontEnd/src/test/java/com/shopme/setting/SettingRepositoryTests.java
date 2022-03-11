@@ -19,6 +19,7 @@ public class SettingRepositoryTests {
 	
 	@Autowired SettingRepository repo;
 	
+	// 일반 설정과 화폐 설정 리스트
 	@Test
 	public void testFindByTwoCategories() {
 		List<Setting> settings = repo.findByTwoCategories(SettingCategory.GENERAL, SettingCategory.CURRENCY);

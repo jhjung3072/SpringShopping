@@ -21,13 +21,15 @@ public class CountryRepositoryTests {
 	
 	@Autowired private CountryRepository repo;
 	
+	// 국가 생성
 	@Test
 	public void testCreateCountry() {
-		Country country = repo.save(new Country("Vietnam2", "VN2"));
+		Country country = repo.save(new Country("한국", "KOR"));
 		assertThat(country).isNotNull();
 		assertThat(country.getId()).isGreaterThan(0);
 	}
 	
+	// 국가 리스트 오름차순
 	@Test
 	public void testListCountries() {
 		List<Country> listCountries = repo.findAllByOrderByNameAsc();
@@ -36,10 +38,11 @@ public class CountryRepositoryTests {
 		assertThat(listCountries.size()).isGreaterThan(0);
 	}
 
+	// 국가 이름 수정
 	@Test
 	public void testUpdateCountry() {
 		Integer id = 1;
-		String name = "Republic of India";
+		String name = "대한민국";
 		
 		Country country = repo.findById(id).get();
 		country.setName(name);
@@ -49,16 +52,18 @@ public class CountryRepositoryTests {
 		assertThat(updatedCountry.getName()).isEqualTo(name);
 	}
 	
+	// 국가 Get By ID
 	@Test
 	public void testGetCountry() {
-		Integer id = 3;		
+		Integer id = 1;		
 		Country country = repo.findById(id).get();
 		assertThat(country).isNotNull();
 	}
 	
+	// 국가 삭제
 	@Test
 	public void testDeleteCountry() {
-		Integer id = 5;
+		Integer id = 1;
 		repo.deleteById(id);
 		
 		Optional<Country> findById = repo.findById(id);

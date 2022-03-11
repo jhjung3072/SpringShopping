@@ -20,12 +20,14 @@ public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthentication
 	
 	@Autowired private CustomerService customerService;
 
+	// DB 로그인 성공 후 작업
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
 		CustomerUserDetails userDetails = (CustomerUserDetails) authentication.getPrincipal();
 		Customer customer = userDetails.getCustomer();
 		
+		// 사용자 인증 타입 DATABASE
 		customerService.updateAuthenticationType(customer, AuthenticationType.DATABASE);
 		
 		super.onAuthenticationSuccess(request, response, authentication);

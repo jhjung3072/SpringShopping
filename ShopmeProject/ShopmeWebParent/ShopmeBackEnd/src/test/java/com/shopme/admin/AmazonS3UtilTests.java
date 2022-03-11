@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class AmazonS3UtilTests {
 
+	// S3 폴더 내 파일 리스트 리턴
 	@Test
 	public void testLIstFolder() {
 		String folderName="product-images/10/";
@@ -16,6 +17,7 @@ public class AmazonS3UtilTests {
 		listKeys.forEach(System.out::println);
 	}
 	
+	// S3 파일 업로드
 	@Test
 	public void testUploadFile() throws FileNotFoundException {
 		String folderName="test-upload";
@@ -27,12 +29,14 @@ public class AmazonS3UtilTests {
 		AmazonS3Util.uploadFile(folderName, fileName, inputStream);
 	}
 	
+	// S3 파일 삭제
 	@Test
 	public void testDeleteFile() {
 		String fileName="test-upload/Capture001.png";
 		AmazonS3Util.deleteFile(fileName);
 	}
 	
+	// S3 폴더 삭제
 	@Test
 	public void testRemoveFolder() {
 		String folderName="test-upload";

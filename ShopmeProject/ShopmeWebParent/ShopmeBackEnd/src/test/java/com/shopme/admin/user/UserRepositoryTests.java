@@ -29,6 +29,7 @@ public class UserRepositoryTests {
 	@Autowired
 	private TestEntityManager entityManager;
 	
+	// 직원 생성 - 역할 1개(운영자)
 	@Test
 	public void testCreateNewUserWithOneRole() {
 		Role roleAdmin=entityManager.find(Role.class, 1);
@@ -39,6 +40,8 @@ public class UserRepositoryTests {
 		assertThat(savedUser.getId()).isGreaterThan(0);
 		
 	}
+	
+	// 유저 생성 - 역할 1개(편집자, Q/A담당자)
 	@Test
 	public void testCreateNewUserWithTwoRoles() {
 		User user2 = new User("user2@gmail.com","user3072","hoo","hee");
@@ -52,12 +55,14 @@ public class UserRepositoryTests {
 		
 	}
 	
+	// 직원 목록 리스트
 	@Test
 	public void testListAllUsers() {
 		Iterable<User> listUsers=repo.findAll();
 		listUsers.forEach(user -> System.out.println(user));
 	}
 	
+	// 직원 Get By ID
 	@Test
 	public void testGetUserById() {
 		User user=repo.findById(1).get();
@@ -65,6 +70,7 @@ public class UserRepositoryTests {
 		assertThat(user).isNotNull();
 	}
 	
+	// 직원 활성화 및 이메일 수정
 	@Test
 	public void testUpdateUserDetails() {
 		User user=repo.findById(1).get();
@@ -75,6 +81,7 @@ public class UserRepositoryTests {
 		
 	}
 	
+	// 직원 역할 수정
 	@Test
 	public void testUpdateUserRoles() {
 		User user=repo.findById(2).get();
@@ -86,12 +93,14 @@ public class UserRepositoryTests {
 		repo.save(user);
 	}
 	
+	// 직원 삭제
 	@Test
 	public void testDeleteUser() {
 		Integer userId=2;
 		repo.deleteById(userId);
 	}
 	
+	// 직원 Get By 이메일
 	@Test
 	public void testGetUserByEmail() {
 		String email = "test@gmail.com";
@@ -99,6 +108,7 @@ public class UserRepositoryTests {
 		assertThat(user).isNotNull();
 	}
 	
+	// 직원 찾기 Get By ID
 	@Test
 	public void testCountById() {
 		Integer id = 1;
@@ -106,6 +116,7 @@ public class UserRepositoryTests {
 		assertThat(countById).isNotNull().isGreaterThan(0);
 	}
 	
+	// 직원 비활성화
 	@Test
 	public void testDisableUser() {
 		Integer id=1;
@@ -113,6 +124,7 @@ public class UserRepositoryTests {
 		
 	}
 	
+	// 직원 활성화
 	@Test
 	public void testEnableUser() {
 		Integer id=3;
@@ -120,6 +132,7 @@ public class UserRepositoryTests {
 		
 	}
 	
+	// 직원 목록 페이징
 	@Test
 	public void testListFirstPage() {
 		int pageNumber=2;
@@ -134,9 +147,10 @@ public class UserRepositoryTests {
 		assertThat(listUsers.size()).isEqualTo(pageSize);
 	}
 	
+	// 직원 키워드 검색 및 페이징
 	@Test
 	public void testSearchUsers() {
-		String keyword = "bruce";
+		String keyword = "jaeho";
 		
 		int pageNumber=0;
 		int pageSize=4;

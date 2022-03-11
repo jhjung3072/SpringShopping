@@ -28,12 +28,14 @@ public class ShippingRateServiceTests {
 	@InjectMocks
 	private ShippingRateService shipService;
 	
+	//  배송비 계산 예외 처리 - 등록되지 않은 도시
 	@Test
 	public void testCalculateShippingCost_NoRateFound() {
 		Integer productId = 1;
-		Integer countryId = 234;
-		String state = "ABCDE";
+		Integer countryId = 14;
+		String state = "ABCD"; // 등록되지 않은 도시
 		
+		// calculateShippingCost 에서 shipRepo.findByCountryAndState 가 실행될때 null
 		Mockito.when(shipRepo.findByCountryAndState(countryId, state)).thenReturn(null);
 		
 		assertThrows(ShippingRateNotFoundException.class, new Executable() {
@@ -45,6 +47,7 @@ public class ShippingRateServiceTests {
 		});
 	}
 	
+	// 배송비 계산 - 등록된 도시
 	@Test
 	public void testCalculateShippingCost_RateFound() throws ShippingRateNotFoundException {
 		Integer productId = 1;
@@ -54,14 +57,16 @@ public class ShippingRateServiceTests {
 		ShippingRate shippingRate = new ShippingRate();
 		shippingRate.setRate(10);
 		
+		// calculateShippingCost 에서 shipRepo.findByCountryAndState 가 실행될 때 ShippingRate 리턴
 		Mockito.when(shipRepo.findByCountryAndState(countryId, state)).thenReturn(shippingRate);
 		
 		Product product = new Product();
 		product.setWeight(5);
 		product.setWidth(4);
 		product.setHeight(3);
-		product.setLength(8);		
+		product.setLength(8); // 총 배송비 50
 		
+		// calculateShippingCost 에서 productRepo.findById 가 실행될 때 product 객체 리턴
 		Mockito.when(productRepo.findById(productId)).thenReturn(Optional.of(product));
 	
 		float shippingCost = shipService.calculateShippingCost(productId, countryId, state);

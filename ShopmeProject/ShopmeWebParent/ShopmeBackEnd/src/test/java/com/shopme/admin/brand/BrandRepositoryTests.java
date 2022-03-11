@@ -21,6 +21,7 @@ public class BrandRepositoryTests {
 	@Autowired
 	private BrandRepository repo;
 	
+	// 브랜드 생성 - 카테고리1개에 추가
 	@Test
 	public void testCreateBrand1() {
 		Category laptops=new Category(6);
@@ -33,6 +34,7 @@ public class BrandRepositoryTests {
 		assertThat(savedBrand.getId()).isGreaterThan(0);
 	}
 	
+	// 브랜드 생성 - 카테고리2개에 추가
 	@Test
 	public void testCreateBrand2() {
 		Category cellphones=new Category(4);
@@ -48,6 +50,7 @@ public class BrandRepositoryTests {
 		assertThat(savedBrand.getId()).isGreaterThan(0);
 	}
 	
+	// 브랜드 생성 - 카테고리 2개에 추가(인자있는 생성자)
 	@Test
 	public void testCreateBrand3() {
 		Brand samsung=new Brand("Samsung");
@@ -61,6 +64,7 @@ public class BrandRepositoryTests {
 		assertThat(savedBrand.getId()).isGreaterThan(0);
 	}
 	
+	// 브랜드 목록 리스트
 	@Test
 	public void testFindAll() {
 		Iterable<Brand> brands=repo.findAll();
@@ -68,6 +72,7 @@ public class BrandRepositoryTests {
 		assertThat(brands).isNotEmpty();
 	}
 	
+	// ID로 브랜드 찾기
 	@Test
 	public void testGetById() {
 		Brand brand = repo.findById(1).get();
@@ -75,6 +80,7 @@ public class BrandRepositoryTests {
 		assertThat(brand.getName()).isEqualTo("Acer");
 	}
 	
+	// 브랜드 이름 업데이트
 	@Test
 	public void testUpdateName() {
 		String newName = "Samsung Electronics";
@@ -85,6 +91,7 @@ public class BrandRepositoryTests {
 		assertThat(savedBrand.getName()).isEqualTo(newName);
 	}
 	
+	// 브랜드 삭제
 	@Test
 	public void testDelete() {
 		Integer id = 2;
