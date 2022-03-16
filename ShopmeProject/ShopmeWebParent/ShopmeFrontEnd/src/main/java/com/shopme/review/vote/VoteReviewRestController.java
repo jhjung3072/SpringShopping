@@ -1,7 +1,5 @@
 package com.shopme.review.vote;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shopme.ControllerHelper;
 import com.shopme.common.entity.Customer;
+import com.shopme.vote.VoteResult;
+import com.shopme.vote.VoteType;
 
 @RestController
 public class VoteReviewRestController {

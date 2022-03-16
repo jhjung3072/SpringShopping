@@ -1,17 +1,15 @@
 package com.shopme.review.vote;
-
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.shopme.common.entity.Customer;
 import com.shopme.common.entity.Review;
 import com.shopme.common.entity.ReviewVote;
 import com.shopme.review.ReviewRepository;
+import com.shopme.vote.VoteResult;
+import com.shopme.vote.VoteType;
 
 @Service
 @Transactional
@@ -26,7 +24,7 @@ public class ReviewVoteService {
 		reviewRepo.updateVoteCount(reviewId);
 		Integer voteCount = reviewRepo.getVoteCount(reviewId);
 		
-		return VoteResult.success(voteType + "을 취소했습니다.", voteCount);
+		return VoteResult.success( voteType + "를 취소했습니다.", voteCount);
 	}
 	
 	// 해당 리뷰 추천하기
@@ -66,7 +64,7 @@ public class ReviewVoteService {
 		reviewRepo.updateVoteCount(reviewId);
 		Integer voteCount = reviewRepo.getVoteCount(reviewId);
 		
-		return VoteResult.success(voteType + "했습니다.", voteCount);
+		return VoteResult.success(voteType + "를 눌렀습니다.", voteCount);
 	}
 	
 	// 해당 회원이 상품을 추천했는지 비추천했는지 색깔 구분

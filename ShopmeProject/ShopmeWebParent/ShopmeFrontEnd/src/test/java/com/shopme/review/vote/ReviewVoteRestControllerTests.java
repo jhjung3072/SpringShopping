@@ -1,5 +1,4 @@
 package com.shopme.review.vote;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,24 +7,17 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
-
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shopme.common.entity.Review;
 import com.shopme.review.ReviewRepository;
+import com.shopme.vote.VoteResult;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -53,6 +45,7 @@ public class ReviewVoteRestControllerTests {
 		assertThat(voteResult.getMessage()).contains("로그인이 필요합니다.");
 	}
 	
+	// 존재하지 않은 ID의 리뷰를 추천할 경우
 	@Test
 	@WithMockUser(username = "jaehooo@gmail.com", password = "q2648519")
 	public void testVoteNonExistReview() throws Exception {
@@ -70,6 +63,7 @@ public class ReviewVoteRestControllerTests {
 		assertThat(voteResult.getMessage()).contains("존재하지");
 	}	
 	
+	// 추천
 	@Test
 	@WithMockUser(username = "jaehooo@gmail.com", password = "q2648519")
 	public void testVoteUp() throws Exception {
@@ -95,6 +89,7 @@ public class ReviewVoteRestControllerTests {
 		
 	}
 	
+	// 추천한거 취소
 	@Test
 	@WithMockUser(username = "jaehooo@gmail.com", password = "q2648519")
 	public void testUndoVoteUp() throws Exception {

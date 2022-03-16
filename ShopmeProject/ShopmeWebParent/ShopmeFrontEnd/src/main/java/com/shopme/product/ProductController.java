@@ -3,18 +3,19 @@ package com.shopme.product;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import com.shopme.question.QuestionService;
+import com.shopme.question.vote.QuestionVoteService;
 import com.shopme.ControllerHelper;
 import com.shopme.category.CategoryService;
 import com.shopme.common.entity.Category;
 import com.shopme.common.entity.Customer;
+import com.shopme.common.entity.Question;
 import com.shopme.common.entity.Review;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.CategoryNotFoundException;
@@ -27,9 +28,10 @@ public class ProductController {
 	@Autowired private ProductService productService;
 	@Autowired private CategoryService categoryService;
 	@Autowired private ReviewService reviewService;	
-	@Autowired private ReviewVoteService voteService;
 	@Autowired private ControllerHelper controllerHelper;
-
+	@Autowired private ReviewVoteService reviewVoteService;
+	@Autowired private QuestionVoteService questionVoteService;
+	@Autowired private QuestionService questionService;
 	// 카테고리 목록 GET
 	@GetMapping("/c/{category_alias}")
 	public String viewCategoryFirstPage(@PathVariable("category_alias") String alias,
@@ -80,16 +82,19 @@ public class ProductController {
 		try {
 			Product product = productService.getProduct(alias);
 			List<Category> listCategoryParents = categoryService.getCategoryParents(product.getCategory());
-			// 가장 추천수가 많은 3개 상품
+			// 질문중 추천수가 가장 많은 3개
+			List<Question> listQuestions = questionService.getTop3VotedQuestions(product.getId());
+			// 리뷰중 가장 추천수가 많은 3개 상품
 			Page<Review> listReviews = reviewService.list3MostVotedReviewsByProduct(product);
 			
 			Customer customer = controllerHelper.getAuthenticatedCustomer(request);
 			
 			if (customer != null) {
 				boolean customerReviewed = reviewService.didCustomerReviewProduct(customer, product.getId());
-				// 해당 회원이 상품을 추천했는지 비추천했는지 색깔 구분 
-				voteService.markReviewsVotedForProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
-				
+				// 해당 회원이 리뷰를 추천했는지 비추천했는지 색깔 구분 
+				reviewVoteService.markReviewsVotedForProductByCustomer(listReviews.getContent(), product.getId(), customer.getId());
+				// 해당 회원이 질문을 추천했는지 비추천했는지 색깔 구분
+				questionVoteService.markQuestionsVotedForProductByCustomer(listQuestions, product.getId(), customer.getId());
 				if (customerReviewed) { // 리뷰 이미 작성
 					model.addAttribute("customerReviewed", customerReviewed);
 				} else { // 리뷰 작성 가능
@@ -97,7 +102,13 @@ public class ProductController {
 					model.addAttribute("customerCanReview", customerCanReview);
 				}
 			}
-			
+			// 질문 개수와 답변이 달린 질문 개수
+			int numberOfQuestions = questionService.getNumberOfQuestions(product.getId());
+			int numberOfAnsweredQuestions = questionService.getNumberOfAnsweredQuestions(product.getId());
+
+			model.addAttribute("listQuestions", listQuestions);			
+			model.addAttribute("numberOfQuestions", numberOfQuestions);
+			model.addAttribute("numberOfAnsweredQuestions", numberOfAnsweredQuestions);
 			model.addAttribute("listCategoryParents", listCategoryParents);
 			model.addAttribute("product", product);
 			model.addAttribute("listReviews", listReviews);

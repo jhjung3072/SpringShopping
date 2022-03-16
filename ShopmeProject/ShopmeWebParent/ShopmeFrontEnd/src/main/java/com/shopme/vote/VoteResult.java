@@ -1,6 +1,5 @@
-package com.shopme.review.vote;
+package com.shopme.vote;
 
-// 추천/비추천 결과 클래스
 public class VoteResult {
 	private boolean successful;
 	private String message;
@@ -43,5 +42,4 @@ public class VoteResult {
 	public void setVoteCount(int voteCount) {
 		this.voteCount = voteCount;
 	}
-
 }

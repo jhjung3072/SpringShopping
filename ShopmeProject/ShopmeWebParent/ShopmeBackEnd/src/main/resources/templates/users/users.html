@@ -92,13 +92,7 @@
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
 	moduleURL = "[[@{/users}]]";
-
-	$(document).ready(function() {
-		$(".link-delete").on("click", function(e) {
-			e.preventDefault();
-			showDeleteConfirmModal($(this), 'user');
-		});
-	});
+	entityName = "user";
 </script>
 </body>
 </html>

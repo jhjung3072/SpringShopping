@@ -75,13 +75,8 @@
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
 	moduleURL = "[[@{/shipping_rates}]]";
+	entityName = "shipping rate";
 
-	$(document).ready(function() {
-		$(".link-delete").on("click", function(e) {
-			e.preventDefault();
-			showDeleteConfirmModal($(this), 'shipping rate');
-		});
-	});
 </script>
 </body>
 </html>
