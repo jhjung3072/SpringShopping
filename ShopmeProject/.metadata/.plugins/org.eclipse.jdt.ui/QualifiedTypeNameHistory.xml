@@ -11,4 +11,8 @@
     <fullyQualifiedTypeName name="org.springframework.web.filter.CharacterEncodingFilter"/>
     <fullyQualifiedTypeName name="org.springframework.context.annotation.Import"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.shopme.product.ProductService"/>
+    <fullyQualifiedTypeName name="com.shopme.common.entity.product.Product"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
 </qualifiedTypeNameHistroy>

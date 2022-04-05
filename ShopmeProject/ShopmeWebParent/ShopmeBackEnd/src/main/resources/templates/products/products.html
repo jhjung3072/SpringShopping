@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head th:replace="fragments :: page_head('모두의 마켓-상품', 'none')" />
+<head th:replace="fragments :: page_head('직구 패션몰-상품', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
@@ -161,6 +161,7 @@
 <script type="text/javascript">
 	moduleURL = "[[@{/products}]]";
 	entityName = "product";
+
 	$(document).ready(function() {
 		handleDefaultDetailLinkClick();
 		

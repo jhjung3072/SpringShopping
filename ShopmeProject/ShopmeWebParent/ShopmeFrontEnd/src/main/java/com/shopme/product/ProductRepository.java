@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import com.shopme.common.entity.Question;
 import com.shopme.common.entity.product.Product;
 
 public interface ProductRepository extends PagingAndSortingRepository<Product, Integer> {
@@ -23,7 +24,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
 	// JPA에서 MATCH AGAINST 사용 불가능, nativeQuery 사용
 	// 참고 : https://geek-techiela.blogspot.com/2016/02/springboot-jpa-fulltextsearchnativequer.html
 	@Query(value = "SELECT * FROM products WHERE enabled = true AND "
-			+ "MATCH(name, short_description, full_description) AGAINST (?1)", 
+			+ "MATCH(name, alias, short_description, full_description) AGAINST (?1 IN BOOLEAN MODE )", 
 			nativeQuery = true)
 	public Page<Product> search(String keyword, Pageable pageable);
 	
@@ -33,4 +34,6 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, I
 			+ "WHERE p.id = ?1")
 	@Modifying
 	public void updateReviewCountAndAverageRating(Integer productId);
+	
+	public Page<Product> findAll(Pageable pageable);
 }

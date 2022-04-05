@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('모두의 마켓-주문', 'none')" />
+<head th:replace="fragments :: page_head('직구 패션몰-주문', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
@@ -62,7 +62,7 @@
 		</th:block>
 	</div>	
 	
-	<div th:replace="fragments :: pagination('orders')"></div>
+	<div th:replace="fragments :: pagination('주문')"></div>
 
 	<div class="modal fade text-center" id="confirmModal">
 		<div class="modal-dialog">

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('모두의 마켓-회원', 'none')" />
+<head th:replace="fragments :: page_head('직구 패션몰-회원', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: menu"></div>
@@ -17,32 +17,32 @@
 					<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
 					<th th:replace="fragments :: column_link('lastName', '성', 'none')" />
 					<th th:replace="fragments :: column_link('firstName', '이름', 'none')" />
-					
+
 					<th class="hideable-column">
 					<th th:replace="fragments :: column_link('email', '이메일', 'tag')" />
 					</th>
-					
-					<th class="hideable-column">
-
-					<th th:replace="fragments :: column_link('state', '도', 'tag')" />
-					
-					<th th:replace="fragments :: column_link('city', '시', 'tag')" />
-
-					</th>
 					<th th:replace="fragments :: column_link('country', '국가', 'none')" />
-					<th th:replace="fragments :: column_link('enabled', '활성화', 'none')" />
+					<th class="hideable-column">
+					<th th:replace="fragments :: column_link('state', '도', 'tag')" />
+					</th>
+					<th class="hideable-column">
+					<th th:replace="fragments :: column_link('city', '시', 'tag')" />
+					</th>
+					
+					<th th:replace="fragments :: column_link('enabled', 'Enabled', 'none')" />
 					<th></th>
 				</tr>								
 			</thead>
 			<tbody>
 				<tr th:each="customer : ${listCustomers}">
 					<td>[[${customer.id}]]</td>
-					<td>[[${customer.lastName}]]</td>
 					<td>[[${customer.firstName}]]</td>
+					<td>[[${customer.lastName}]]</td>
 					<td class="hideable-column">[[${customer.email}]]</td>
+					<td>[[${customer.country.name}]]</td>
 					<td class="hideable-column">[[${customer.state}]]</td>
 					<td class="hideable-column">[[${customer.city}]]</td>
-					<td>[[${customer.country.name}]]</td>
+					
 					<td>
 						<div th:replace="fragments :: status(${customer.enabled}, 'customer', '/customers/' + ${customer.id})" />
 					</td>

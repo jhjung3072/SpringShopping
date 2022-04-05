@@ -24,7 +24,7 @@ public class PagingAndSortingHelper {
 		this.keyword = keyword;
 	}
 	
-	// 페이징 addtribute
+	// 페이징 attribute
 	public void updateModelAttributes(int pageNum, Page<?> page) {
 		List<?> listItems = page.getContent();
 		int pageSize = page.getSize();

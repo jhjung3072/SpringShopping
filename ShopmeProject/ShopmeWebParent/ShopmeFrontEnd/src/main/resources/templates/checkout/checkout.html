@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Shopping Cart', 'none')" />
+<head th:replace="fragments :: page_head('직구 패션몰', 'none')" />
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: header_menu"></div>
-	<div th:replace="navigation :: search_nav"></div>
 
 	<div class="text-center">
 		<h2>결제</h2>
@@ -65,7 +64,7 @@
 									[[${product.shortName}]]
 								</a>
 								<br/>
-								<small>Ship: <div th:replace="fragments :: format_currency(${item.shippingCost})"></div></small>
+								<small>배송비: <div th:replace="fragments :: format_currency(${item.shippingCost})"></div></small>
 							</td>
 							<td>
 								<div th:replace="fragments :: format_currency(${item.subtotal})">

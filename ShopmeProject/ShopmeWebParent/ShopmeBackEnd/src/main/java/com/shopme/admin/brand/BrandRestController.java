@@ -24,7 +24,7 @@ public class BrandRestController {
 		return service.checkUnique(id, name);
 	}
 	
-	//브랜드 별 목록
+	//브랜드 별 카테고리목록
 	@GetMapping("/brands/{id}/categories")
 	public List<CategoryDTO> listCategoriesByBrand(@PathVariable(name = "id") Integer brandId) throws BrandNotFoundRestException {
 		List<CategoryDTO> listCategories = new ArrayList<>(); 

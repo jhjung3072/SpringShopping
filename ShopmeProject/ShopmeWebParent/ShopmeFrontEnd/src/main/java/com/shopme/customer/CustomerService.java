@@ -64,7 +64,7 @@ public class CustomerService {
 		customer.setPassword(encodedPassword);
 	}
 	
-	// 인증 여부
+	// 회원 인증 활성화 by 인증 코드
 	public boolean verify(String verificationCode) {
 		// 해당 인증 코드로 회원 객체 리턴
 		Customer customer = customerRepo.findByVerificationCode(verificationCode);
@@ -134,7 +134,7 @@ public class CustomerService {
 			} else { // 폼에 패스워드가 채워져있지 않으면 기존의 패스워드 사용
 				customerInForm.setPassword(customerInDB.getPassword());
 			}		
-		} else { // 회원 유형이 소셜 회훤이면 패스워드 그대로 사용
+		} else { // 회원 유형이 소셜 회원이면 패스워드 그대로 사용
 			customerInForm.setPassword(customerInDB.getPassword());
 		}
 		

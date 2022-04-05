@@ -67,7 +67,7 @@
 			<th:block th:unless="${isReadOnlyForSalesperson}">
 		  	<div th:replace="products/product_details :: content"></div>
 		  	<div>
-		  		<input type="button" class="btn btn-secondary" value="Add More Detail"
+		  		<input type="button" class="btn btn-secondary" value="추가"
 		  			onclick="addNextDetailSection()" />
 		  	</div>
 		  	</th:block>
@@ -85,8 +85,8 @@
 		</div>	
 	</div>
 	<div class="text-center">
-		<input type="submit" value="Save" class="btn btn-primary m-3" />
-		<input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+		<input type="submit" value="저장" class="btn btn-primary m-3" />
+		<input type="button" value="취소" class="btn btn-secondary" id="buttonCancel" />
 	</div>
 	</form>
 	

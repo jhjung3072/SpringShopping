@@ -14,7 +14,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 	@Query("SELECT q FROM Question q WHERE q.approved = true AND q.product.id = ?1")
 	Page<Question> findAll(Integer productId, Pageable pageable);
 
-	// 상품 줄일말과 승인된 질문 불러오기
+	// 상품 줄일말로 승인된 질문 불러오기
 	@Query("SELECT q FROM Question q WHERE q.approved = true AND q.product.alias = ?1")
 	Page<Question> findByAlias(String alias, Pageable pageable);
 
@@ -36,11 +36,11 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 	@Query("SELECT q.votes FROM Question q WHERE q.id = ?1")
 	public Integer getVoteCount(Integer questionId);	
 
-	// 해당 질문의 질문자 리턴
+	// 해당 회원의 질문 목록 리턴
 	@Query("SELECT q FROM Question q WHERE q.asker.id = ?1")
 	Page<Question> findByCustomer(Integer customerId, Pageable pageable);
 
-	// 질문자와 키워드 검색
+	// 해당 회원의 질문 목록 키워드 검색
 	@Query("SELECT q FROM Question q WHERE q.asker.id = ?1 AND ("
 			+ "q.questionContent LIKE %?2% OR "
 			+ "q.answer LIKE %?2% OR q.product.name LIKE %?2%)")

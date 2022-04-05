@@ -18,7 +18,7 @@ public class ShoppingCartRestController {
 	@Autowired private ShoppingCartService cartService;
 	@Autowired private CustomerService customerService;
 	
-	// 해당 상품
+	// 해당 상품 장바구니에 추가(장바구니에 해당 상품이 있다면 거기에 더하기)
 	@PostMapping("/cart/add/{productId}/{quantity}")
 	public String addProductToCart(@PathVariable("productId") Integer productId,
 			@PathVariable("quantity") Integer quantity, HttpServletRequest request) {
@@ -27,7 +27,7 @@ public class ShoppingCartRestController {
 			Customer customer = getAuthenticatedCustomer(request);
 			Integer updatedQuantity = cartService.addProduct(productId, quantity, customer); // 수량 추가
 			
-			return updatedQuantity + " 해당 상품이 장바구니에 담겼습니다.";
+			return updatedQuantity + "개의 상품이 장바구니에 담겼습니다.";
 		} catch (CustomerNotFoundException ex) {
 			return "장바구니에 담기위해서 로그인이 필요합니다.";
 		} catch (ShoppingCartException ex) {

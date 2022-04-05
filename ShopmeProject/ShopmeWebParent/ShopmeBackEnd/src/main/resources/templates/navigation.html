@@ -5,19 +5,19 @@
 	<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
 		<input type="submit" />
 	</form>
-	<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+	<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd; color:black; margin-bottom:50px">
 		<a class="navbar-brand" th:href="@{/}">
-			<img th:src="@{/images/ShopmeAdminSmall.png}" />
+			<img th:src="@{/images/logo_blue.png}" />
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="topNavbar">
-			<ul class="navbar-nav">
+			<ul class="navbar-nav" >
 				
 				<th:block sec:authorize="hasAuthority('운영자')">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+				<li class="nav-item dropdown" style="color: black;" >
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: black;" 
 						th:href="@{/users}">직원</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" th:href="@{/users/new}">추가하기</a>
@@ -28,7 +28,7 @@
 				
 				<th:block sec:authorize="hasAnyAuthority('운영자', '편집자')">
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: black;" 
 						th:href="@{/categories}">카테고리</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" th:href="@{/categories/new}">추가하기</a>
@@ -36,7 +36,7 @@
 					</div>						
 				</li>		
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: black;" 
 						 th:href="@{/brands}">브랜드</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" th:href="@{/brands/new}">추가하기</a>
@@ -47,7 +47,7 @@
 				
 				<th:block sec:authorize="hasAnyAuthority('운영자', '판매관리자', '편집자', '배송관리자')">
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: black;" 
 						th:href="@{/products}">상품</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" th:href="@{/products/new}" 
@@ -62,49 +62,39 @@
 				</li>
 				</th:block>
 
-				<th:block sec:authorize="hasAuthority('Q/A담당자')">
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/questions}">질문</a>
+				<th:block sec:authorize="hasAuthority('Q/A담당자')" >
+				<li class="nav-item" >
+					<a class="nav-link"  style="color: black;"  th:href="@{/questions}">질문</a>
 				</li>	
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/reviews}">리뷰</a>
+					<a class="nav-link"  style="color: black;"  th:href="@{/reviews}">리뷰</a>
 				</li>
 				</th:block>
 								
 				<th:block sec:authorize="hasAnyAuthority('운영자', '판매관리자')">
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/customers}">회원</a>
+					<a class="nav-link"style="color: black;"  th:href="@{/customers}">회원</a>
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/shipping_rates}">배송비</a>
+					<a class="nav-link" style="color: black;"  th:href="@{/shipping_rates}">배송비</a>
 				</li>
 				</th:block>
 				
 				<th:block sec:authorize="hasAnyAuthority('운영자', '판매관리자', '배송관리자')">
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/orders}">주문내역</a>
+					<a class="nav-link" style="color: black;"  th:href="@{/orders}">주문내역</a>
 				</li>
 				</th:block>
 				
 				<th:block sec:authorize="hasAnyAuthority('운영자', '판매관리자')">
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/reports}">판매량 통계</a>
+					<a class="nav-link" style="color: black;"  th:href="@{/reports}">판매량 통계</a>
 				</li>	
 				</th:block>
 				
-				<th:block sec:authorize="hasAnyAuthority('운영자', '편집자')">
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/articles}">기사</a>
-				</li>
-				
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/menus}">메뉴</a>
-				</li>
-				</th:block>
-				
 				<li class="nav-item dropdown" sec:authorize="hasAuthority('운영자')">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" 
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown"  style="color: black;" 
 						th:href="@{/settings}">설정</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" th:href="@{/settings#general}">일반</a>
@@ -116,10 +106,10 @@
 					</div>
 				</li>		
 				<li>
-					<span class="fas fa-user fa-2x icon-silver"></span>
+					<span class="fas fa-user fa-2x icon-silver" style="color: black;" ></span>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown"
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" style="color: black;" 
 						th:href="@{/account}" 
 						sec:authentication="principal.fullname"></a>
 					<div class="dropdown-menu">

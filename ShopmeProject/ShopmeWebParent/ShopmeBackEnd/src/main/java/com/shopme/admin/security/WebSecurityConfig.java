@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new ShopmeUserDetailsService();
 	}
 	
-	// 패스워드 인코딩
+	// PasswordEncoder를 선언할때 자동으로 클래스가 바인딩
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

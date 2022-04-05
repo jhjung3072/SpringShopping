@@ -24,7 +24,7 @@ public class AccountController {
 	@Autowired
 	private UserService service;
 	
-	// 회원 계정 정보 폼 GET
+	// 직원이 자신의 계정 정보 폼 GET
 	@GetMapping("/account")
 	public String viewDetails(@AuthenticationPrincipal ShopmeUserDetails loggedUser,
 			Model model) {
@@ -36,7 +36,7 @@ public class AccountController {
 		
 	}
 	
-	// 회원 계정 정보 수정 POST
+	// 직원이 자신의 계정 정보 수정 POST
 	@PostMapping("/account/update")
 	public String saveDetails(User user, RedirectAttributes redirectAttributes,
 			@AuthenticationPrincipal ShopmeUserDetails loggedUser,

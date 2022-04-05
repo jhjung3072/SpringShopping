@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head('직구 패션몰', 'none')" />
+
+<body>
+	<div class="container-fluid">
+		<div th:replace="navigation :: header_menu"></div>
+		<div class="container">
+			<h2 style="text-align: center; color: rgb(0, 0, 0); margin: 50px;">세일을 가장 많이 하는 상품!</h2>
+			<div class="row  wow fadeInLeft">
+				<div class="col-md-3 " th:each="pro : ${listProducts}">
+					<div class="food-gallery-box" style="text-align: center;">
+						<img th:src="@{${pro.mainImagePath}}" th:href="@{'/p/' + ${pro.alias}}">
+					</div>
+					<a th:href="@{'/p/' + ${pro.alias}}">[[${pro.name}]]</a>
+					<div>
+						상품 가격:
+						<del th:if="${pro.discountPercent > 0}"><span>
+								<div th:replace="product/product_fragment :: price_fragment(${pro.price})"></div>
+							</span></del>
+					</div>
+					<div th:if="${pro.discountPercent > 0}">
+						할인된 가격:
+						<span style="font-size: larger; color: darkred">
+							<div th:replace="product/product_fragment :: price_fragment(${pro.discountPrice})"></div>
+						</span>
+						([[${#numbers.formatDecimal(pro.discountPercent, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]] % 할인)
+			</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<h2 style="text-align: center; color: rgb(0, 0, 0); margin: 50px;">카테고리</h2>
+				<div class="row  wow fadeInLeft">
+					<div class="col-md-3 " th:each="cat : ${listCategories}">
+						<div class="food-gallery-box card" style="text-align: center;">
+							<img th:src="@{${cat.imagePath}}" th:href="@{'/c/' + ${cat.alias}}">
+							<a th:href="@{'/c/' + ${cat.alias}}">[[${cat.name}]]</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<div th:replace="navigation :: footer_menu"></div>
+	</div>
+</body>
+
+</html>

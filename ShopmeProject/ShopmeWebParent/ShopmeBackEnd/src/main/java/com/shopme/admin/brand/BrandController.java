@@ -28,13 +28,13 @@ public class BrandController {
 	@Autowired private BrandService brandService;	
 	@Autowired private CategoryService categoryService;
 	
-	//브랜드 목록
+	//브랜드 목록 GET
 	@GetMapping("/brands")
 	public String listFirstPage() {
 		return defaultRedirectURL;
 	}
 	
-	//브랜드 목록
+	//브랜드 목록 페이징 GET
 	@GetMapping("/brands/page/{pageNum}")
 	public String listByPage(
 			@PagingAndSortingParam(listName = "listBrands", moduleURL = "/brands") PagingAndSortingHelper helper,
@@ -44,7 +44,7 @@ public class BrandController {
 		return "brands/brands";		
 	}
 	
-	//브랜드 생성 폼
+	//브랜드 생성 폼 GET
 	@GetMapping("/brands/new")
 	public String newBrand(Model model) {
 		List<Category> listCategories = categoryService.listCategoriesUsedInForm();
@@ -56,7 +56,7 @@ public class BrandController {
 		return "brands/brand_form";		
 	}
 	
-	//브랜드 저장
+	//브랜드 저장 POST
 	@PostMapping("/brands/save")
 	public String saveBrand(Brand brand, @RequestParam("fileImage") MultipartFile multipartFile,
 			RedirectAttributes ra) throws IOException {

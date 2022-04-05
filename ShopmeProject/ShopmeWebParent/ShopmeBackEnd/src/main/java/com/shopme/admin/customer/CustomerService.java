@@ -72,7 +72,7 @@ public class CustomerService {
 			String encodedPassword = passwordEncoder.encode(customerInForm.getPassword());
 			customerInForm.setPassword(encodedPassword);			
 		} else {
-			// 패스워드 칸이 비어져있다면 -> 회원 수정 시
+			// 패스워드 칸이 비어져있다면(회원 수정 시)
 			customerInForm.setPassword(customerInDB.getPassword());
 		}		
 		

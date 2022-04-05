@@ -107,7 +107,7 @@ public class ReviewController {
 		Customer customer=controllerHelper.getAuthenticatedCustomer(request);
 		
 		if (customer != null) {
-			// 해당 회원이 상품을 추천했는지 비추천했는지 색깔 구분
+			// 해당 회원이 상품의 리뷰를 추천했는지 비추천했는지 색깔 구분
 			voteService.markReviewsVotedForProductByCustomer(listReviews, product.getId(), customer.getId());
 		}
 		

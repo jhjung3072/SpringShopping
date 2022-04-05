@@ -14,9 +14,9 @@ function addNextDetailSection() {
 	htmlDetailSection = `
 		<div class="form-inline" id="divDetail${divDetailsCount}">
 			<input type="hidden" name="detailIDs" value="0" />
-			<label class="m-3">Name:</label>
+			<label class="m-3">상품 설명:</label>
 			<input type="text" class="form-control w-25" name="detailNames" maxlength="255" />
-			<label class="m-3">Value:</label>
+			<label class="m-3">내용:</label>
 			<input type="text" class="form-control w-25" name="detailValues" maxlength="255" />
 		</div>	
 	`;
@@ -29,7 +29,7 @@ function addNextDetailSection() {
 	htmlLinkRemove = `
 		<a class="btn fas fa-times-circle fa-2x icon-dark"
 			href="javascript:removeDetailSectionById('${previousDivDetailID}')"
-			title="Remove this detail"></a>
+			title="지우기"></a>
 	`;
 	
 	previousDivDetailSection.append(htmlLinkRemove);

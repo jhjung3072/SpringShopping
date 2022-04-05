@@ -1,5 +1,6 @@
 package com.shopme.admin.brand;
 
+// 브랜드별 카테고리 목록을 보여줄 떄 사용
 public class CategoryDTO {
 	private Integer id;
 	private String name;

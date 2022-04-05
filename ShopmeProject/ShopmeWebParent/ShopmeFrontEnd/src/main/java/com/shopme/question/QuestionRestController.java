@@ -42,14 +42,4 @@ public class QuestionRestController {
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
-	@PostMapping("/getquestionvote/{questionId}")
-	public ResponseEntity<?> getVotesForQuestion(@PathVariable(name = "questionId") Integer questionId,
-			@AuthenticationPrincipal Authentication auth) {
-		if (auth == null || auth instanceof AnonymousAuthenticationToken) {
-			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-		}		
-		int votes = questionService.getVotesForQuestion(questionId);
-		return new ResponseEntity<String>(String.valueOf(votes), HttpStatus.OK);
-	}	
 }

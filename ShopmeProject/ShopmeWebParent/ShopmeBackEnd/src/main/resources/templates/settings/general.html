@@ -22,7 +22,7 @@
 	<div class="form-group row">
 		<label class="col-sm-4 col-form-label">로고:</label>
 		<div class="col-sm-8">
-			<img id="thumbnail" alt="Site Logo thumbnail" th:src="@{${S3_BASE_URL+SITE_LOGO}}"
+			<img id="thumbnail" alt="사이트 로고" th:src="@{${S3_BASE_URL+SITE_LOGO}}"
 				width="150" height="70"/>
 			<input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg" />
 			
@@ -45,8 +45,8 @@
 		<label class="col-sm-4 col-form-label">환율 표시 위치:</label>
 		<div class="col-sm-8">
 			<select name="CURRENCY_SYMBOL_POSITION" class="form-control">
-				<option value="Before price" th:selected="(${CURRENCY_SYMBOL_POSITION} == 'Before price')">Before price</option>
-				<option value="After price" th:selected="(${CURRENCY_SYMBOL_POSITION} == 'After price')">After price</option>
+				<option value="Before price" th:selected="(${CURRENCY_SYMBOL_POSITION} == 'Before price')">숫자 앞에 표시</option>
+				<option value="After price" th:selected="(${CURRENCY_SYMBOL_POSITION} == 'After price')">숫자 뒤에 표시</option>
 			</select>			
 		</div>
 	</div>
@@ -55,8 +55,8 @@
 		<label class="col-sm-4 col-form-label">소수점 타입:</label>
 		<div class="col-sm-8">
 			<select name="DECIMAL_POINT_TYPE" class="form-control">
-				<option value="POINT" th:selected="(${DECIMAL_POINT_TYPE} == 'POINT')">Point (.)</option>
-				<option value="COMMA" th:selected="(${DECIMAL_POINT_TYPE} == 'COMMA')">Comma (,)</option>
+				<option value="POINT" th:selected="(${DECIMAL_POINT_TYPE} == 'POINT')">점 (.)</option>
+				<option value="COMMA" th:selected="(${DECIMAL_POINT_TYPE} == 'COMMA')">콤마 (,)</option>
 			</select>			
 		</div>
 	</div>
@@ -78,8 +78,8 @@
 		<label class="col-sm-4 col-form-label">천 단위 점 타입:</label>
 		<div class="col-sm-8">
 			<select name="THOUSANDS_POINT_TYPE" class="form-control">
-				<option value="POINT" th:selected="(${THOUSANDS_POINT_TYPE} == 'POINT')">Point (.)</option>
-				<option value="COMMA" th:selected="(${THOUSANDS_POINT_TYPE} == 'COMMA')">Comma (,)</option>
+				<option value="POINT" th:selected="(${THOUSANDS_POINT_TYPE} == 'POINT')">점 (.)</option>
+				<option value="COMMA" th:selected="(${THOUSANDS_POINT_TYPE} == 'COMMA')">콤마 (,)</option>
 			</select>			
 		</div>
 	</div>

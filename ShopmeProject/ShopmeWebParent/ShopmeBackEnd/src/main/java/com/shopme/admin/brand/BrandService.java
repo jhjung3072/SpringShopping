@@ -58,10 +58,10 @@ public class BrandService {
 		boolean isCreatingNew = (id == null || id == 0);
 		Brand brandByName = repo.findByName(name);
 		
-		if (isCreatingNew) {
-			if (brandByName != null) return "Duplicate";
-		} else {
-			if (brandByName != null && brandByName.getId() != id) {
+		if (isCreatingNew) { // 새로 생성중이라면
+			if (brandByName != null) return "Duplicate"; // 이름이 같다면 중복
+		} else { // 새로 생성중이 아니라면(수정중)
+			if (brandByName != null && brandByName.getId() != id) { // 이름이 같고, 수정중인 브랜드id가 아니라면 중복
 				return "Duplicate";
 			}
 		}

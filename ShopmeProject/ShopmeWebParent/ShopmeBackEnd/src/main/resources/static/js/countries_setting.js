@@ -26,7 +26,7 @@ $(document).ready(function() {
 	});
 	
 	buttonAddCountry.click(function() {
-		if (buttonAddCountry.val() == "Add") {
+		if (buttonAddCountry.val() == "추가") {
 			addCountry();
 		} else {
 			changeFormStateToNewCountry();

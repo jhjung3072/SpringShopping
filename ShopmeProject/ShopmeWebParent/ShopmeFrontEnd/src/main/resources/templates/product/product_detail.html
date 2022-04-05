@@ -10,7 +10,6 @@
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: header_menu"></div>
-	<div th:replace="navigation :: search_nav"></div>
 	<div th:replace="breadcrumb :: content"></div>
 
 	<div class="row">
@@ -55,9 +54,9 @@
 				<del th:if="${product.discountPercent > 0}"><span><div th:replace="product/product_fragment :: price_fragment(${product.price})"></div></span></del>
 			</div>
 			<div th:if="${product.discountPercent > 0}">
-				Price:
+				할인된 가격:
 				<span style="font-size: larger; color: darkred"><div th:replace="product/product_fragment :: price_fragment(${product.discountPrice})"></div></span>
-				([[${#numbers.formatDecimal(product.discountPercent, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]] % off)
+				([[${#numbers.formatDecimal(product.discountPercent, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]] % 할인)
 			</div>
 			<div>&nbsp;</div>
 			<div th:utext="${product.shortDescription}"></div>			

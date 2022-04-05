@@ -27,25 +27,25 @@
 		</div>
 		
 		<div class="form-group row">
-			<label class="col-sm-4 col-form-label">이름:</label>
-			<div class="col-sm-8">
-				<input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="45"  />
-			</div>
-		</div>		
-		
-		<div class="form-group row">
 			<label class="col-sm-4 col-form-label">성:</label>
 			<div class="col-sm-8">
-				<input type="text" class="form-control" th:field="*{lastName}" required minlength="2" maxlength="45"  />
+				<input type="text" class="form-control" th:field="*{lastName}" required minlength="1" maxlength="45"  />
+			</div>
+		</div>	
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">이름:</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" th:field="*{firstName}" required minlength="1" maxlength="45"  />
 			</div>
 		</div>		
-		
+
 		<div class="form-group row">
 			<label class="col-sm-4 col-form-label">패스워드:</label>
 			<div class="col-sm-8">
 				<input type="password" th:field="*{password}" class="form-control"
-					placeholder="패스워드를 수정하지 않으시면 칸을 비우세요"
-					minlength="8" maxlength="20"
+					placeholder="패스워드를 수정하지 않으시면 칸을 비워두세요"
+					minlength="4" maxlength="20"
 					oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"
 				  />
 			</div>
@@ -54,7 +54,7 @@
 			<label class="col-sm-4 col-form-label">패스워드 확인:</label>
 			<div class="col-sm-8">
 				<input type="password" id="confirmPassword" class="form-control"
-					minlength="8" maxlength="20"
+					minlength="4" maxlength="20"
 					oninput="checkPasswordMatch(this)"			
 				  />
 			</div>

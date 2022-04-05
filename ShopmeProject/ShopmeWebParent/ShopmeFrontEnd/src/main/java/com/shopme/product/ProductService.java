@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.shopme.common.entity.Review;
 import com.shopme.common.entity.product.Product;
 import com.shopme.common.exception.ProductNotFoundException;
 
@@ -52,5 +54,13 @@ public class ProductService {
 		Pageable pageable = PageRequest.of(pageNum - 1, SEARCH_RESULTS_PER_PAGE);
 		return repo.search(keyword, pageable);
 		
+	}
+	
+	// 가장 할인을 많이 하는 상품 4개
+	public Page<Product> list4MostDiscountedProduct() {
+		Sort sort = Sort.by("discountPercent").descending();
+		Pageable pageable = PageRequest.of(0, 4, sort);
+			
+		return repo.findAll(pageable);		
 	}
 }

@@ -82,7 +82,7 @@ public class QuestionController {
 		model.addAttribute("endCount", endCount);
 
 		if (page.getTotalPages() > 1) {
-			model.addAttribute("pageTitle", "Page " + pageNum + " | 질문 ");
+			model.addAttribute("pageTitle", "질문 | " + pageNum);
 		} else {
 			model.addAttribute("pageTitle",  product.getName() + "에 대한 질문");
 		}		

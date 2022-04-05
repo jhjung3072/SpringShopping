@@ -57,7 +57,7 @@ public class UserService {
 			User existingUser = userRepo.findById(user.getId()).get();
 			
 			if (user.getPassword().isEmpty()) { // 패스워드 칸이 비어져있다면
-				user.setPassword(existingUser.getPassword()); // 기존의 패스워드를 그대로 사
+				user.setPassword(existingUser.getPassword()); // 기존의 패스워드를 그대로 사용
 			} else { // 패스워드 칸이 채워져있다면(수정)
 				encodePassword(user); // 암호화
 			}

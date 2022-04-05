@@ -105,7 +105,7 @@ public class QuestionController {
 		try {
 			service.delete(id);
 
-			ra.addFlashAttribute("message", String.format("질문 ID %d 이 삭제되었습니다.", id));
+			ra.addFlashAttribute("message", String.format("질문 ID %d을 삭제했습니다.", id));
 		} catch (QuestionNotFoundException ex) {
 			ra.addFlashAttribute("message", ex.getMessage());
 		}

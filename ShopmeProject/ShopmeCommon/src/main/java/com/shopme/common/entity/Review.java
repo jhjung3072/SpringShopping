@@ -44,7 +44,9 @@ public class Review extends IdBasedEntity {
 
 	public Review() { }
 	
-	public Review(Integer id) { this.id = id; }
+	public Review(Integer id) { 
+		this.id = id; 
+	}
 	
 	public String getHeadline() {
 		return headline;

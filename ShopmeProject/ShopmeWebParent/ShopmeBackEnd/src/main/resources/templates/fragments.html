@@ -16,7 +16,7 @@
 <body>
 
 	<div th:fragment="footer" class="text-center m-3">
-		<p>© 2022 모두의 마켓 All rights reserved.</p>
+		<p>[[${COPYRIGHT}]]</p>
 	</div>
 	
 	<th th:fragment="column_link(fieldName, columnLabel, removeTag)" th:remove="${removeTag}">
@@ -66,7 +66,7 @@
 	
 	<div th:fragment="pagination(entityName)" th:remove="tag">
 	<div class="text-center m-1" th:if="${totalItems > 0}">
-		<span>전체 [[${entityName}]] [[${totalItems}]] 개 중 [[${startCount}]] ~ [[${endCount}]]  </span>
+		<span>전체 [[${entityName}]] [[${totalItems}]]개 중 [[${startCount}]] ~ [[${endCount}]]  </span>
 	</div>
 	<div class="text-center m-1" th:unless="${totalItems > 0}">
 		<span>[[${entityName}]]을 찾을 수 없습니다.</span>

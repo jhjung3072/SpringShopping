@@ -30,7 +30,7 @@ $(document).ready(function() {
 	});
 		
 	buttonAddState.click(function() {
-		if (buttonAddState.val() == "Add") {
+		if (buttonAddState.val() == "추가") {
 			addState();
 		} else {
 			changeFormStateToNew();
