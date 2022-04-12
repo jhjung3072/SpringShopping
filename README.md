@@ -51,4 +51,5 @@
 - [Usecase](https://github.com/jhjung3072/SpringShopping/wiki/Usecase)
 
 ## 🗺️ 문제를 해결한 경험
-- [Usecase]https://github.com/jhjung3072/SpringShopping/wiki/%EB%AC%B8%EC%A0%9C%EB%A5%BC-%ED%95%B4%EA%B2%B0%ED%95%9C-%EA%B2%BD%ED%97%98
+- [살펴보기](https://github.com/jhjung3072/SpringShopping/wiki/%EB%AC%B8%EC%A0%9C%EB%A5%BC-%ED%95%B4%EA%B2%B0%ED%95%9C-%EA%B2%BD%ED%97%98)
+
