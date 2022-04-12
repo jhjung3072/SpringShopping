@@ -12,8 +12,8 @@
 - 나 : Backend + HTML,   팀원 : JavaScript
 
 
-- [회원페이지 데모링크](https://jaeho-frontend.herokuapp.com/) (테스트용 계정- id:customer1@gmail.com  pw:1234)
-- [관리자페이지 데모링크](https://jaeho-admin.herokuapp.com/)  (테스트용 계정- id:admin@admin.com      pw:1234)
+- [회원페이지 데모링크](https://jaeho-frontend.herokuapp.com/) (테스트용 계정- id: customer1@gmail.com  pw: 1234)
+- [관리자페이지 데모링크](https://jaeho-admin.herokuapp.com/)  (테스트용 계정- id: admin@admin.com      pw:1234)
    - 30분 이상 트래픽이 없을 시 wake 시간이 필요합니다.
 
 ## 🗺️ 사용기술
