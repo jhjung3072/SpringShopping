@@ -19,6 +19,16 @@
 - [Amazon S3](https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/userguide/Welcome.html)
 - [Heroku](https://devcenter.heroku.com/categories/deployment)
 
+## 🗺️ 중점과제
+✔️ 테스트 코드 작성에 충실하기
+   * Mockito 프레임워크를 사용하여 테스트 진행을 하여 의존 객체의 영향을 줄이고 행위 검증을 했습니다.
+
+✔️ 유연하고 확장성이 좋은 코드 작성
+   * 객체지향 원리에 충실한 코드로 유연하고 확장성이 좋은 깔끔한 코드를 작성하는 것을 목표로 했습니다.
+
+✔️ 중복 코드 줄이기
+   * 반복적으로 사용되는 코드를 줄여 효율적인 유지보수를 하는 것을 목표로 했습니다.
+
 ## 🗺️ 프로젝트 전체 구성도
 ![구성도](https://user-images.githubusercontent.com/61670291/162710275-95311500-1fa1-45ba-97dd-7e64c7f9f507.PNG)
 
